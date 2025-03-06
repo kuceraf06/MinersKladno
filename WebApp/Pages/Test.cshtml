@@ -1,0 +1,515 @@
+﻿@page
+@model Miners.Web.WebApp.Pages.Test
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <style>
+        .wireframe {
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .wireframe .div {
+            background-color: #ffffff;
+            height: 1024px;
+            position: relative;
+            width: 1440px;
+        }
+
+        .wireframe .frame {
+            background-color: #a7a7a7;
+            height: 134px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 1440px;
+        }
+
+        .wireframe .frame-2 {
+            background-color: #ffffff;
+            height: 84px;
+            left: 30px;
+            position: absolute;
+            top: 26px;
+            width: 84px;
+        }
+
+        .wireframe .text-wrapper {
+            color: #000000;
+            font-family: "Inter-Regular", Helvetica;
+            font-size: 30px;
+            font-weight: 400;
+            left: 181px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 49px;
+            white-space: nowrap;
+        }
+
+        .wireframe .text-wrapper-2 {
+            color: #000000;
+            font-family: "Inter-Regular", Helvetica;
+            font-size: 30px;
+            font-weight: 400;
+            left: 335px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 49px;
+            white-space: nowrap;
+        }
+
+        .wireframe .text-wrapper-3 {
+            color: #000000;
+            font-family: "Inter-Regular", Helvetica;
+            font-size: 30px;
+            font-weight: 400;
+            left: 493px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 49px;
+            white-space: nowrap;
+        }
+
+        .wireframe .text-wrapper-4 {
+            color: #000000;
+            font-family: "Inter-Regular", Helvetica;
+            font-size: 30px;
+            font-weight: 400;
+            left: 652px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 49px;
+            white-space: nowrap;
+        }
+
+        .wireframe .text-wrapper-5 {
+            color: #000000;
+            font-family: "Inter-Regular", Helvetica;
+            font-size: 30px;
+            font-weight: 400;
+            left: 811px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 49px;
+            white-space: nowrap;
+        }
+
+        .wireframe .text-wrapper-6 {
+            color: #000000;
+            font-family: "Inter-Regular", Helvetica;
+            font-size: 30px;
+            font-weight: 400;
+            left: 969px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 49px;
+            white-space: nowrap;
+        }
+
+        .wireframe .text-wrapper-7 {
+            color: #000000;
+            font-family: "Inter-Regular", Helvetica;
+            font-size: 30px;
+            font-weight: 400;
+            left: 1128px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 49px;
+            white-space: nowrap;
+        }
+
+        .wireframe .overlap {
+            height: 496px;
+            left: 29px;
+            position: absolute;
+            top: 180px;
+            width: 879px;
+        }
+
+        .wireframe .frame-3 {
+            border: 1px solid;
+            border-color: #000000;
+            height: 494px;
+            left: 2px;
+            position: absolute;
+            top: 1px;
+            width: 877px;
+        }
+
+        .wireframe .line {
+            height: 495px;
+            left: 0;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            width: 879px;
+        }
+
+        .wireframe .img {
+            height: 495px;
+            left: 2px;
+            object-fit: cover;
+            position: absolute;
+            top: 1px;
+            width: 877px;
+        }
+
+        .wireframe .text-wrapper-8 {
+            color: #000000;
+            font-family: "Inter-Black", Helvetica;
+            font-size: 30px;
+            font-weight: 900;
+            left: 930px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 180px;
+            white-space: nowrap;
+        }
+
+        .wireframe .text-wrapper-9 {
+            color: #000000;
+            font-family: "Inter-Black", Helvetica;
+            font-size: 30px;
+            font-weight: 900;
+            left: 32px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 698px;
+            white-space: nowrap;
+        }
+
+        .wireframe .text-wrapper-10 {
+            color: #000000;
+            font-family: "Inter-Black", Helvetica;
+            font-size: 30px;
+            font-weight: 900;
+            left: 931px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 698px;
+            white-space: nowrap;
+        }
+
+        .wireframe .frame-4 {
+            border: 1px solid;
+            border-color: #000000;
+            height: 123px;
+            left: 931px;
+            position: absolute;
+            top: 742px;
+            width: 493px;
+        }
+
+        .wireframe .text-wrapper-11 {
+            color: #000000;
+            font-family: "Inter-Bold", Helvetica;
+            font-size: 25px;
+            font-weight: 700;
+            left: 18px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 16px;
+            white-space: nowrap;
+        }
+
+        .wireframe .lorem-ipsum-dolor {
+            color: #000000;
+            font-family: "Inter-Light", Helvetica;
+            font-size: 15px;
+            font-weight: 300;
+            left: 18px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 58px;
+        }
+
+        .wireframe .frame-5 {
+            border: 1px solid;
+            border-color: #000000;
+            height: 123px;
+            left: 30px;
+            position: absolute;
+            top: 888px;
+            width: 878px;
+        }
+
+        .wireframe .text-wrapper-12 {
+            color: #000000;
+            font-family: "Inter-Bold", Helvetica;
+            font-size: 25px;
+            font-weight: 700;
+            left: 93px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 13px;
+            white-space: nowrap;
+        }
+
+        .wireframe .p {
+            color: #000000;
+            font-family: "Inter-Light", Helvetica;
+            font-size: 15px;
+            font-weight: 300;
+            left: 93px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 52px;
+        }
+
+        .wireframe .overlap-group {
+            height: 97px;
+            left: 13px;
+            position: absolute;
+            top: 13px;
+            width: 66px;
+        }
+
+        .wireframe .frame-6 {
+            border: 1px solid;
+            border-color: #000000;
+            height: 95px;
+            left: 0;
+            position: absolute;
+            top: 1px;
+            width: 66px;
+        }
+
+        .wireframe .line-2 {
+            height: 96px;
+            left: 0;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            width: 66px;
+        }
+
+        .wireframe .line-3 {
+            height: 96px;
+            left: 0;
+            object-fit: cover;
+            position: absolute;
+            top: 1px;
+            width: 66px;
+        }
+
+        .wireframe .frame-7 {
+            border: 1px solid;
+            border-color: #000000;
+            height: 123px;
+            left: 30px;
+            position: absolute;
+            top: 742px;
+            width: 878px;
+        }
+
+        .wireframe .text-wrapper-13 {
+            color: #000000;
+            font-family: "Inter-Bold", Helvetica;
+            font-size: 25px;
+            font-weight: 700;
+            left: 97px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 15px;
+            white-space: nowrap;
+        }
+
+        .wireframe .lorem-ipsum-dolor-2 {
+            color: #000000;
+            font-family: "Inter-Light", Helvetica;
+            font-size: 15px;
+            font-weight: 300;
+            left: 97px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 61px;
+        }
+
+        .wireframe .overlap-2 {
+            height: 97px;
+            left: 12px;
+            position: absolute;
+            top: 16px;
+            width: 66px;
+        }
+
+        .wireframe .frame-8 {
+            border: 1px solid;
+            border-color: #000000;
+            height: 123px;
+            left: 931px;
+            position: absolute;
+            top: 888px;
+            width: 493px;
+        }
+
+        .wireframe .text-wrapper-14 {
+            color: #000000;
+            font-family: "Inter-Bold", Helvetica;
+            font-size: 25px;
+            font-weight: 700;
+            left: 15px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 11px;
+            white-space: nowrap;
+        }
+
+        .wireframe .lorem-ipsum-dolor-3 {
+            color: #000000;
+            font-family: "Inter-Light", Helvetica;
+            font-size: 15px;
+            font-weight: 300;
+            left: 16px;
+            letter-spacing: 0;
+            line-height: normal;
+            position: absolute;
+            top: 47px;
+        }
+
+        .wireframe .overlap-3 {
+            height: 453px;
+            left: 930px;
+            position: absolute;
+            top: 223px;
+            width: 494px;
+        }
+
+        .wireframe .frame-9 {
+            border: 1px solid;
+            border-color: #000000;
+            height: 451px;
+            left: 0;
+            position: absolute;
+            top: 1px;
+            width: 494px;
+        }
+
+        .wireframe .line-4 {
+            height: 452px;
+            left: 0;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            width: 494px;
+        }
+
+        .wireframe .line-5 {
+            height: 452px;
+            left: 1px;
+            object-fit: cover;
+            position: absolute;
+            top: 1px;
+            width: 493px;
+        }
+    </style>
+</head>
+<body>
+<div class="wireframe">
+    <div class="div">
+        <div class="frame">
+            <div class="frame-2" />
+            <div class="text-wrapper">Menu 1</div>
+            <div class="text-wrapper-2">Menu 2</div>
+            <div class="text-wrapper-3">Menu 3</div>
+            <div class="text-wrapper-4">Menu 4</div>
+            <div class="text-wrapper-5">Menu 5</div>
+            <div class="text-wrapper-6">Menu 6</div>
+            <div class="text-wrapper-7">Menu 7</div>
+        </div>
+        <div class="overlap">
+            <div class="frame-3" />
+            <img class="line" alt="Line" :src="require('./line-1.svg')" />
+            <img class="img" alt="Line" :src="require('./line-2.svg')" />
+        </div>
+        <div class="text-wrapper-8">Nadpis 1</div>
+        <div class="text-wrapper-9">Nadpis 1</div>
+        <div class="text-wrapper-10">Nadpis 1</div>
+        <div class="frame-4">
+            <div class="text-wrapper-11">Nadpis 2</div>
+            <p class="lorem-ipsum-dolor">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                <br />
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                <br />
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris ...
+            </p>
+        </div>
+        <div class="frame-5">
+            <div class="text-wrapper-12">Nadpis 2</div>
+            <p class="p">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore <br />
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea <br />
+                commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat ...
+            </p>
+            <div class="overlap-group">
+                <div class="frame-6" />
+                <img class="line-2" alt="Line" :src="require('./line-7.svg')" />
+                <img class="line-3" alt="Line" :src="require('./line-8.svg')" />
+            </div>
+        </div>
+        <div class="frame-7">
+            <div class="text-wrapper-13">Nadpis 2</div>
+            <p class="lorem-ipsum-dolor-2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore <br />
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut aliquip ex ea <br />
+                commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat ...
+            </p>
+            <div class="overlap-2">
+                <div class="frame-6" />
+                <img class="line-2" alt="Line" :src="require('./line-5.svg')" />
+                <img class="line-3" alt="Line" :src="require('./line-6.svg')" />
+            </div>
+        </div>
+        <div class="frame-8">
+            <div class="text-wrapper-14">Nadpis 2</div>
+            <p class="lorem-ipsum-dolor-3">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                <br />
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                <br />
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris ...
+            </p>
+        </div>
+        <div class="overlap-3">
+            <div class="frame-9" />
+            <img class="line-4" alt="Line" :src="require('./line-3.svg')" />
+            <img class="line-5" alt="Line" :src="require('./line-4.svg')" />
+        </div>
+    </div>
+</div>
+</body>
+</html>
