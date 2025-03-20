@@ -31,7 +31,13 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" publish/ github-deploy@172.205.192.35:/var/www/myapp/
+        rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" publish/ github-deploy@172.205.192.35:/var/www/tm.stilip.cz/
+    - name: Restart .NET Service
+      run: |
+        ssh github-deploy@172.205.192.35 << 'EOF'
+        sudo systemctl restart tm.stilip.cz.service
+        sudo systemctl status tm.stilip.cz.service --no-pager
+        EOF
 
     - name: List published files
       run: ls -R publish
