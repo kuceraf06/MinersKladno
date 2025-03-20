@@ -20,6 +20,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+    - name: Allow legacy SSL renegotiation
+      run: echo 'openssl_conf = default_conf' >> ~/.openssl.cnf && echo '[default_conf]' >> ~/.openssl.cnf && echo 'ssl_conf = ssl_sect' >> ~/.openssl.cnf && echo '[ssl_sect]' >> ~/.openssl.cnf && echo 'system_default = crypto_policy' >> ~/.openssl.cnf && export OPENSSL_CONF=~/.openssl.cnf
     - name: Restore dependencies
       run: dotnet restore --configfile nuget.config
     - name: Publish
