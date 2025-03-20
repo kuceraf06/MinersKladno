@@ -1,16 +1,9 @@
-﻿using RepoDb.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BusinessLayer.Entities
+namespace BusinessLayer.Entities;
+
+[Table("tbl_file")]
+public class File : GuidEntityBase
 {
-    [Map("sch_miners.tbl_file")]
-    public class File : GuidEntityBase
-    {
-        [Map("filename")]
-        public string Filename { get; set; }
-        [Map("size")]
-        public int Size { get; set; }
-    }
+    public string Filename { get; set; }
 }

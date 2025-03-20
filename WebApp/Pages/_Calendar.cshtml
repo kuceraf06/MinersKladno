@@ -1,0 +1,53 @@
+﻿@model Miners.Web.WebApp.Models.CalendarModel
+
+<table class="calendar">
+    <thead>
+    <tr>
+        <th colspan="7">
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <a class="month-control" href="" data-month="@Model.PrevMonth">
+                        <span class="fa-stack">
+                            <i class="fas fa-circle fa-stack-2x" style="color:#94c11f"></i>
+                            <i class="fas fa-chevron-left fa-stack-1x fa-inverse" style="color:#000;"></i>
+                        </span>
+                    </a>
+                </div>
+                <span class="month-title">@Model.Month</span>
+                <div>
+                    <a class="month-control" href="" data-month="@Model.NextMonth">
+                        <span class="fa-stack">
+                            <i class="fas fa-circle fa-stack-2x" style="color:#94c11f"></i>
+                            <i class="fas fa-chevron-right fa-stack-1x fa-inverse" style="color:#000;"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </th>
+    </tr>
+    <tr>
+        <th>PO</th>
+        <th>ÚT</th>
+        <th>ST</th>
+        <th>ČT</th>
+        <th>PÁ</th>
+        <th>SO</th>
+        <th>NE</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var week in Model.Weeks)
+    {
+        <tr>
+            @foreach (var day in week.Days)
+            {
+                <td class="@day.CssClass">
+                    <a href="#" class="calendar-day" data-day="@day.Date.ToString("yyyy-MM-dd")">@day.Date.Day</a>
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+

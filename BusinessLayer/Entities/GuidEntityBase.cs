@@ -1,14 +1,9 @@
-﻿using RepoDb.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BusinessLayer.Entities
+namespace BusinessLayer.Entities;
+
+public class GuidEntityBase
 {
-    public abstract class GuidEntityBase
-    {
-        [Map("guid")]
-        [Primary]
-        public Guid Guid { get; set; }
-    }
+    [Column("guid")]
+    public Guid Id { get; set; }
 }

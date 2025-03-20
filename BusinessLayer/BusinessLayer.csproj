@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="RepoDb.PostgreSql" Version="1.13.1" />
+      <PackageReference Include="TSoft.Framework4.EfEntities" Version="0.7.18" />
     </ItemGroup>
 
 </Project>

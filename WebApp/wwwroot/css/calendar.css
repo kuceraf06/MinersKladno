@@ -1,0 +1,20 @@
+.calendar{
+    width:100%;
+    text-align:center;
+}
+
+.calendar thead tr:first-child th{
+    font-family: 'Bowlby One SC', cursive;
+    background-color: #93C11F;
+    font-size: 1.4rem;
+}
+
+.calendar tbody td{
+    line-height: 45px;
+    height:45px;
+}
+
+.calendar-day{
+    color:black;
+    text-decoration: none;
+}
