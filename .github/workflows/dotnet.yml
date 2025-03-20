@@ -35,8 +35,8 @@ jobs:
     - name: Restart .NET Service
       run: |
         ssh github-deploy@172.205.192.35 << 'EOF'
-        sudo systemctl restart tm.stilip.cz.service
-        sudo systemctl status tm.stilip.cz.service --no-pager
+          sudo -n systemctl restart tm.stilip.cz.service
+          sudo systemctl status tm.stilip.cz.service --no-pager
         EOF
 
     - name: List published files
