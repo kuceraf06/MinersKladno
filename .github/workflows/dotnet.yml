@@ -29,9 +29,9 @@ jobs:
     - name: Deploy via SSH
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" publish/ user@yourserver.com:/var/www/myapp/
+        rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" publish/ github-deploy@172.205.192.35:/var/www/myapp/
 
     - name: List published files
       run: ls -R publish
