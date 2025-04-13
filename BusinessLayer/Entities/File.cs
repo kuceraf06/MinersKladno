@@ -6,4 +6,6 @@ namespace BusinessLayer.Entities;
 public class File : GuidEntityBase
 {
     public string Filename { get; set; }
+    public int Size { get; set; }
+    public byte[]? Data { get; set; }
 }
