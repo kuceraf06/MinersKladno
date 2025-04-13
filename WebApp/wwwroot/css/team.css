@@ -1,0 +1,41 @@
+.team-container{
+    width: 1000px;
+    margin:auto;
+}
+
+.team-description, .team-fee{
+    background:white;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.team-training{
+    background-color: #93C11F;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.training-days td, .training-days tr{
+    border:0;
+}
+
+.team-league{
+    background-color: #E3F1C1;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.team-coaches{
+    background-color: #464545;
+    border-radius: 10px;
+    color: #fff;
+    padding: 1rem;
+}
+
+.team-coaches tr{
+    border-bottom: 1px solid rgba(192, 203, 167, 0.7);
+}
+
+.team-coaches tr:last-child{
+    border-bottom: 0;
+}

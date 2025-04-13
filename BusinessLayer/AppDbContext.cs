@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Entities;
 using Microsoft.EntityFrameworkCore;
+using Miners.Web.BusinessLayer.Entities;
 using TSoft.Framework4.EfEntities;
 using File = BusinessLayer.Entities.File;
 
@@ -15,4 +16,6 @@ public class AppDbContext : TsfwDbContext
 
     public DbSet<Article> Articles { get; set; }
     public DbSet<File> Files { get; set; }
+    public DbSet<Team> Teams { get; set; }
+    public DbSet<Person> Persons { get; set; }
 }
