@@ -14,8 +14,14 @@ public class AppDbContext : TsfwDbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Scoreboard>().HasNoKey();
+    }
+
     public DbSet<Article> Articles { get; set; }
     public DbSet<File> Files { get; set; }
     public DbSet<Team> Teams { get; set; }
     public DbSet<Person> Persons { get; set; }
+    public DbSet<Scoreboard> Scores { get; set; }
 }
