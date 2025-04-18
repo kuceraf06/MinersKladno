@@ -1,0 +1,9 @@
+﻿.historie-container{
+    width: 1000px;
+    margin:auto;
+}
+
+.historie-box{
+    background-color: #fff;
+    padding: 1rem;
+}
