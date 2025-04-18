@@ -1,0 +1,21 @@
+.page-container{
+    width: 1000px;
+    margin:auto;
+}
+
+.box{
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.box-bordered {
+    border-radius: 10px;
+}
+    
+.box-white{
+    background-color: #fff;
+}
+
+.box-green{
+    background-color: #93C11F;
+}
