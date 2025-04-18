@@ -3,7 +3,7 @@ using BusinessLayer.Entities;
 
 namespace Miners.Web.BusinessLayer.Entities;
 
-[Table("tbl_team")]
+[Table("tbl_team", Schema = "sch_miners")]
 public class Team : GuidEntityBase
 {
     public string Id { get; set; }

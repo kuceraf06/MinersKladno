@@ -16,6 +16,7 @@ public class AppDbContext : TsfwDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Scoreboard>().HasNoKey();
     }
 

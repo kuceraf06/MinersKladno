@@ -4,7 +4,7 @@ using RepoDb.Attributes;
 
 namespace Miners.Web.BusinessLayer.Entities
 {
-    [Table("tbl_person")]
+    [Table("tbl_person", Schema = "sch_miners")]
     public class Person : GuidEntityBase
     {
         public string Jmeno { get; set; }
