@@ -1,0 +1,60 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Miners.Web.WebApp.Pages.Clanky
+
+@section Head{
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <link href="~/css/clanky.css" rel="stylesheet"/>
+}
+
+<div class="page-container">
+    <h4>ČLÁNKY</h4>
+    <div id="list">
+        <partial name="_ClankyList" model="Model.Articles" />
+    </div>
+    @if (Model.HasMoreArticles)
+    {
+        <div class="text-center" id="load-more-container">
+            <button class="btn btn-primary" id="btnMore" data-current-page="@Model.CurrentPage" onclick="LoadNext()">Načti další...</button>
+        </div>
+    }
+</div>
+
+<script>
+        async function LoadNext() {
+            const btn = document.getElementById("btnMore");
+            const currentPage = parseInt(btn.dataset.currentPage);
+            const nextPage = currentPage + 1;
+            const loadMoreContainer = document.getElementById('load-more-container');
+            try {
+                btn.disabled = true;
+                btn.textContent = 'Načítání...';
+
+                const response = await fetch(`?page=${nextPage}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const html = await response.text();
+
+                if (html.trim()) {
+                    const articlesContainer = document.getElementById('list');
+                    articlesContainer.insertAdjacentHTML('beforeend', html);
+                    btn.dataset.currentPage = nextPage;
+                    btn.disabled = false;
+                    btn.textContent = 'Načíst další';
+                } else {
+                    // No more articles to load
+                    loadMoreContainer.remove();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                btn.textContent = 'Chyba při načítání';
+                btn.disabled = false;
+            }
+        }
+
+    </script>
