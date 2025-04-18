@@ -1,7 +1,15 @@
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
 using Miners.Web.BusinessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var czechCulture = new CultureInfo("cs-CZ");
+
+// Set it as default culture for the entire application
+CultureInfo.DefaultThreadCurrentCulture = czechCulture;
+CultureInfo.DefaultThreadCurrentUICulture = czechCulture;
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
