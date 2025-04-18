@@ -29,5 +29,8 @@ public class Team : GuidEntityBase
     public Guid? Coach3Id { get; set; }
     [Column("guid_coach4")]
     public Guid? Coach4Id { get; set; }
+    
     public Guid? TeamPhoto { get; set; }
+    public int Order { get; set; }
+    public string TreneriKategorie { get; set; }
 }

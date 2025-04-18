@@ -1,0 +1,26 @@
+.box-kategorie{
+    width: 20%;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Bowlby One SC', cursive;
+}
+
+.box-pripravka{
+    background-color: #464545;
+    color: #fff;
+}
+
+.box-baseball{
+    background-color: #000000;
+    color: #fff;
+}
+
+.box-softball{
+    background-color: #93C11F;
+}
+
+.box-atletika{
+    background-color: #D9D9D9;
+}
