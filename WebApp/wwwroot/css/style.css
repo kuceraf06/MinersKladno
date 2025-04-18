@@ -7,7 +7,8 @@ body{
 }
 
 h4{
-    font-family: 'Bowlby One SC', cursive;
+    font-family: 'Lato', sans-serif;
+font-weight: 900;
 }
 
 .container{
@@ -30,6 +31,11 @@ h4{
     justify-content: space-between;
     align-items: center;
     padding: 4px 10px;
+}
+
+.nav-link.lato{
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
 }
 
 .navbar{
