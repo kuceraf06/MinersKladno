@@ -6,7 +6,10 @@
     <meta http-equiv="content-language" content="cs">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>MINERS TEST</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" integrity="sha512-rSWTr6dChYCbhpHaT1hg2tf4re2jUxBWTuZbujxKg96+T87KQJriMzBzW5aqcb8jmzBhhNSx4XYGA6/Y+ok1vQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="~/css/style.css" rel="stylesheet"/>
     <link href="~/css/calendar.css" rel="stylesheet"/>
@@ -45,15 +48,15 @@
                     <li class="nav-item">
                         <div class="dropdown">
                             <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                KLUB >
+                                KLUB>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="~/kontakty">KONTAKTY</a></li>
-                                <li><a class="dropdown-item" href="~/treneri">TRENÉŘI</a></li>
-                                <li><a class="dropdown-item" href="~/hriste">HŘIŠTĚ</a></li>
-                                <li><a class="dropdown-item" href="~/historie">HISTORIE</a></li>
-                                <li><a class="dropdown-item" href="~/kestazeni">KE STAŽENÍ</a></li>
-                                <li><a class="dropdown-item" href="~/stream">STREAM</a></li>
+                                <li><a class="dropdown-item" href="#">KONTAKTY</a></li>
+                                <li><a class="dropdown-item" href="#">TRENÉŘI</a></li>
+                                <li><a class="dropdown-item" href="#">HŘIŠTĚ</a></li>
+                                <li><a class="dropdown-item" href="#">HISTORIE</a></li>
+                                <li><a class="dropdown-item" href="#">KE STAŽENÍ</a></li>
+                                <li><a class="dropdown-item" href="#">STREAM</a></li>
                             </ul>
                         </div>
                     </li>
@@ -91,13 +94,13 @@
                         <a class="nav-link" aria-current="page" href="#">Partneři</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link lato" aria-current="page" href="#">SCM</a>
+                        <a class="nav-link" aria-current="page" href="#">SCM</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link lato" aria-current="page" href="~/clanky">Články</a>
+                        <a class="nav-link" aria-current="page" href="#">Články</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link lato" aria-current="page" href="https://merch.minerskladno.cz" target="_blank">E-Shop</a>
+                        <a class="nav-link" aria-current="page" href="#">E-Shop</a>
                     </li>
 
                 </ul>
@@ -108,9 +111,51 @@
     <div class="mt-2 flex-grow-1">
         @RenderBody()
     </div>
-    <footer>
-        Patička
-    </footer>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                <img src="images/Miners.png">
+                </div>
+                <div class="footer-col">
+                    <h4>DALŠÍ WEBY</h4>
+                    <ul>
+                        <li><a href="#" target="_blank">SCM</a></li>
+                        <li><a href="#">SAFE</a></li>
+                        <li><a href="#">KIWI&nbsp;LEAGUE</a></li>
+                        <li><a href="#">E&minus;SHOP</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>SLEDUJTE NÁS</h4>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.youtube.com/" target="_blank"><i class="fa-brands fa-flickr"></i></a><br class="none">
+                        <a href="https://www.facebook.com/minerskladno" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/minerskladno/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>KONTAKTUJTE NÁS</h4>
+                    <div class="contact-footer">
+                        <p><a href="mailto:miners@minerkladno.cz">miners@minerskladno.cz</a></p>
+                        <br>
+                        <p>Miners Kladno, z.s.
+                            <br>
+                            U Trati 3489
+                            <br>
+                            272 01 Kladno 1
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <a href="mailto:miners@minerkladno.cz">Miners Kladno 2025 &copy; Všechna práva vyhrazena</a>
+    </div>
+</footer>
 </div>
 
 
