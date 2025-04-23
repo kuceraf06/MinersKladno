@@ -4,6 +4,7 @@ body{
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #F8F4F4;
 }
 
 h4{
@@ -11,16 +12,9 @@ h4{
 }
 
 .container{
-    background-color: #F8F4F4;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-
-@media (min-width: 1400px){
-    .container{
-        max-width: 1440px !important;
-    }
 }
 
 .topheader{
@@ -229,11 +223,16 @@ h4{
 }
 
 footer {
+    margin-top: 70px;
+    font-family: "Inter", sans-serif !important; 
+}
+
+footer h4 {
     font-family: "Inter", sans-serif !important; 
 }
 
  .footer-content {
-    background-image: url('images/hriste.jpg'); /* cesta k tvému obrázku */
+    background-image: url('../img/footer/hriste.jpg'); /* cesta k tvému obrázku */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -253,7 +252,7 @@ footer {
     z-index: 1;
 }
 
-.container {
+.footer-container {
     max-width: 1440px;
     width: 90%;
     margin: 0 auto;
