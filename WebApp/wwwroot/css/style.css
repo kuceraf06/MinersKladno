@@ -232,7 +232,7 @@ footer h4 {
 }
 
  .footer-content {
-    background-image: url('../img/footer/hriste.jpg'); /* cesta k tvému obrázku */
+    background-image: url('../img/footer/hriste.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -248,7 +248,7 @@ footer h4 {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* průhledná černá = ztmavení */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
@@ -258,7 +258,7 @@ footer h4 {
     margin: 0 auto;
     padding: 10px 1.5rem;
     position: relative;
-    z-index: 2; /* aby byl text nad overlayem */
+    z-index: 2;
 }
 
 .row {
