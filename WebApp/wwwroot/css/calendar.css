@@ -1,6 +1,7 @@
 .calendar{
     width:100%;
     text-align:center;
+    background-color: white;
 }
 
 .calendar thead tr:first-child th{

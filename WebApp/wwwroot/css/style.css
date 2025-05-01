@@ -129,43 +129,76 @@ h4{
     background-color: #D0CFCF;
 }
 
+.link-box.kalendar img {
+    margin-right: 1rem;
+}
+
+.link-box.kalendar i {
+    font-size: 60px;
+    margin-right: 30px;
+}
+
 .link-box.fotogalerie{
     background-color: #fff;
 }
 
+.row:nth-child(2) {
+    margin-top: 2rem;
+}
+
 .article{
     display: flex;
-    max-height: 80px;
+    height: 123px;
     overflow: hidden;
     font-size: 0.8rem;
     background-color: #fff;
-    margin-bottom:0.5rem;
+    margin-bottom:1.5rem;
+    box-shadow: 0 4px 11px #00000040;
 }
 
 .article img{
-    width: 80px;
-    height: 60px;
+    width: 30%;
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+}
+
+.article div {
+    margin-top: auto;
 }
 
 .actuality{
-    max-height: 80px;
     overflow: hidden;
+    height: 123px;
     font-size: 0.8rem;
     background-color: #fff;
-    margin-bottom:0.5rem;
+    margin-bottom:1.5rem;
+    box-shadow: 0 4px 11px #00000040;
+}
+
+.actuality h5, .actuality p {
+    padding: 5px 10px;
+    margin-bottom: auto;
 }
 
 .main-green{
     background-color: #93C11F;
     display: flex;
+    padding: 30px;
     margin-left:-12px;
     margin-right:-12px;
+    margin-top: 2rem;
 }
 
 .main-green-row{
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.main-green-row:not(:first-child){
+    margin-top: 1.5rem;
 }
 
 .main-green-text{
@@ -224,6 +257,11 @@ h4{
 .partners{
     background-color: #fff;
     text-align: center;
+    box-shadow: 0 4px 11px #00000040;
+}
+
+.partners-header {
+    margin-top: 2rem;
 }
 
 .partners .row{
@@ -240,10 +278,6 @@ footer h4 {
 }
 
  .footer-content {
-    background-image: url('../img/footer/hriste.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     padding: 2% 0 0 0;
     width: 100%;
     margin-top: auto;
@@ -256,8 +290,20 @@ footer h4 {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    background-image: url('../img/footer/hriste.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: blur(4px);
+    z-index: -2;
+}
+
+.footer-content::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* ztmavení */
+    z-index: -1;
 }
 
 .footer-container {
@@ -269,7 +315,7 @@ footer h4 {
     z-index: 2;
 }
 
-.row {
+.row-footer {
     display: flex;
     flex-wrap: wrap;
 }
