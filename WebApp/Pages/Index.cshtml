@@ -3,7 +3,7 @@
 @model Miners.Web.WebApp.Pages.IndexModel
 
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-xl-9">
         <div class="row mb-3">
             <div class="col-md-8">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
@@ -37,21 +37,21 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-4 d-flex flex-column justify-content-between">
+            <div class="col-lg-4 d-flex flex-column justify-content-between  link-box-container">
                 <div class="link-box nabory">
-                    NÁBORY <img src="img/linkbox/nabory.png"/>
+                    NÁBORY <img class="img-fluid" src="img/linkbox/nabory.png"/>
                     @* <img src="img/linkbox/nabory.png"> *@
                 </div>
                 <div class="link-box kalendar">
-                    ROZPIS ZÁPASŮ <img src="img/linkbox/kalendar.png"/>
+                    ROZPIS ZÁPASŮ <img class="img-fluid" src="img/linkbox/kalendar.png"/>
                 </div>
                 <div class="link-box fotogalerie">
-                    FOTOGALERIE <img src="img/linkbox/nabory.png"/>
+                    FOTOGALERIE <img class="img-fluid" src="img/linkbox/nabory.png"/>
                 </div>        
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-sm-8">
                 <h4>ČLÁNKY</h4>
                 <div class="article">
                     <img src="img/articletest.png"/>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 <h4>AKTUALITY</h4>
                 <div class="actuality">
                     <h5 class="fw-bold">Kučera, Kuklík a Vostatek na Pro5</h5>
@@ -92,7 +92,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-xl-3">
         <partial name="_Calendar.cshtml" model="Model.Calendar" />
     </div>
 </div>
@@ -116,7 +116,7 @@
         </div>
         <div class="main-green-row">
             <div class="main-green-text">
-                Buď vidět! Nakup oblečení a další merch na našem e-shopu
+                Buď vidět! Nakup merch na našem e-shopu
             </div>
             <div class="main-green-button">
                 MINERS MERCH
@@ -132,7 +132,7 @@
         </div>
     </div>
     <div class="main-green-image text-center" style="width:33%">
-        <img src="img/linkbox/nabory.png" style="height:250px"/>
+        <img class="img-fluid w-100" src="img/linkbox/nabory.png"/>
     </div>
 </div>
 <!--<h4>ROZPIS NADCHÁZEJÍCÍCH ZÁPASŮ</h4>
