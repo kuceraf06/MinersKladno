@@ -40,9 +40,6 @@
                 <a class="logo" href="#">
                     <img src="~/img/header/Logo35c.png"/>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -51,12 +48,12 @@
                                     KLUB <i class="fa-solid fa-angle-right"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">KONTAKTY</a></li>
-                                    <li><a class="dropdown-item" href="#">TRENÉŘI</a></li>
-                                    <li><a class="dropdown-item" href="#">HŘIŠTĚ</a></li>
-                                    <li><a class="dropdown-item" href="#">HISTORIE</a></li>
-                                    <li><a class="dropdown-item" href="#">KE STAŽENÍ</a></li>
-                                    <li><a class="dropdown-item" href="#">STREAM</a></li>
+                                    <li><a class="dropdown-item" href="~/kontakty">KONTAKTY</a></li>
+                                    <li><a class="dropdown-item" href="~/treneri">TRENÉŘI</a></li>
+                                    <li><a class="dropdown-item" href="~/hriste">HŘIŠTĚ</a></li>
+                                    <li><a class="dropdown-item" href="~/historie">HISTORIE</a></li>
+                                    <li><a class="dropdown-item" href="~/kestazeni">KE STAŽENÍ</a></li>
+                                    <li><a class="dropdown-item" href="~/stream">STREAM</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -88,7 +85,16 @@
                             <a class="nav-link" aria-current="page" href="#">Nábory</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Akce</a>
+                            <div class="dropdown">
+                                <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Akce <i class="fa-solid fa-angle-right"></i>   
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">SOUSTŘEDĚNÍ</a></li>
+                                    <li><a class="dropdown-item" href="https://safe.minerskladno.cz" target="_blank">SAFE</a></li>
+                                    <li><a class="dropdown-item" href="#">KIWI LEAGUE</a></li>
+                                </ul> 
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="#">Partneři</a>
@@ -97,12 +103,69 @@
                             <a class="nav-link" aria-current="page" href="#">SCM</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Články</a>
+                            <a class="nav-link" aria-current="page" href="~/clanky">Články</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="#">E-Shop</a>
                         </li>
-
+                    </ul>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div id="mobileMenu" class="mobile-menu">
+                    <button class="close-btn" id="closeMenuBtn" aria-label="Zavřít menu"><i class="fa-solid fa-xmark"></i></button>
+                    <ul>
+                        <li><a data-submenu="submenu-klub">KLUB <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a data-submenu="submenu-tymy">TÝMY <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a href="#">NÁBORY</a></li>
+                        <li><a data-submenu="submenu-akce">AKCE <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a href="#">PARTNEŘI</a></li>
+                        <li><a href="#">SCM</a></li>
+                        <li><a href="~/clanky">ČLÁNKY</a></li>
+                        <li><a href="#">E-SHOP</a></li>
+                    </ul>
+                </div>
+                <div class="submenu-screen" id="submenu-klub">
+                    <button class="back-btn" data-back><i class="fa-solid fa-angle-left"></i></button>
+                    <button class="close-btn" id="closeSubmenuBtn1"><i class="fa-solid fa-xmark"></i></button>
+                    <ul>
+                        <li><a href="~/kontakty">KONTAKTY</a></li>
+                        <li><a href="~/treneri">TRENÉŘI</a></li>
+                        <li><a href="~/hriste">HŘIŠTĚ</a></li>
+                        <li><a href="~/hriste">HISTORIE</a></li>
+                        <li><a href="~/kestazeni">KE STAŽENÍ</a></li>
+                        <li><a href="~/stream">STREAM</a></li>
+                    </ul>
+                </div>
+                <div class="submenu-screen" id="submenu-tymy">
+                    <button class="back-btn" data-back><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="close-btn" id="closeSubmenuBtn2"><i class="fa-solid fa-xmark"></i></button>
+                    <ul>
+                        <li class="dropdown-item-group">PŘÍPRAVKA</li>
+                        <li><a href="~/team/u5">U5</a></li>
+                        <li><a href="~/team/u6">U6</a></li>
+                        <li><a href="~/team/u7">U7</a></li>
+                        <li><a href="~/team/u9">U9</a></li>
+                        <li class="dropdown-item-group">BASEBALL</li>
+                        <li><a href="~/team/u11">U11</a></li>
+                        <li><a href="~/team/u13">U13</a></li>
+                        <li><a href="~/team/u15">U15</a></li>
+                        <li><a href="~/team/muzi">MUŽI</a></li>
+                        <li class="dropdown-item-group">SOFTBALL</li>
+                        <li><a href="~/team/u11-soft">U11S</a></li>
+                        <li><a href="~/team/u13-soft">U13S</a></li>
+                        <li><a href="~/team/u16-soft">U16S</a></li>
+                        <li><a href="~/team/zenya">ŽENY</a></li>
+                    </ul>
+                </div>
+                <div class="submenu-screen" id="submenu-akce">
+                    <button class="back-btn" data-back><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="close-btn" id="closeSubmenuBtn3"><i class="fa-solid fa-xmark"></i></button>
+                    <ul>
+                        <li><a href="#">SOUSTŘEDĚNÍ</a></li>
+                        <li><a href="#">SAFE</a></li>
+                        <li><a href="#">KIWI LEAGUE</a></li>
                     </ul>
                 </div>
             </div>
@@ -159,7 +222,57 @@
     </div>
 </footer>
 
+<script>
+document.querySelectorAll('#mobileMenu a[data-submenu]').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const submenuId = this.getAttribute('data-submenu');
+        document.getElementById('mobileMenu').style.display = 'none';
+        document.getElementById(submenuId).style.display = 'flex';
+    });
+});
 
+document.querySelectorAll('[data-back]').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();  // zabrání "kliknutí mimo" eventu, aby menu nezavřelo celé
+        const submenu = this.closest('.submenu-screen');
+        submenu.style.display = 'none';
+        const mainMenu = document.getElementById('mobileMenu');
+        mainMenu.style.display = 'flex';
+    });
+});
+
+document.querySelectorAll('.submenu-screen .close-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        this.parentElement.style.display = 'none';
+        document.getElementById('mobileMenu').style.display = 'none';
+    });
+});
+</script>
+<script>
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    hamburgerBtn.addEventListener("click", function () {
+        mobileMenu.style.display = mobileMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Zavřít při kliknutí mimo menu
+    document.addEventListener("click", function (e) {
+        if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+            mobileMenu.style.display = "none";
+        }
+    });
+</script>
+<script>
+    document.getElementById('hamburgerBtn').addEventListener('click', function () {
+        document.getElementById('mobileMenu').style.display = 'block';
+    });
+
+    document.getElementById('closeMenuBtn').addEventListener('click', function () {
+        document.getElementById('mobileMenu').style.display = 'none';
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 @RenderSection("Scripts", required: false)
 </body>
