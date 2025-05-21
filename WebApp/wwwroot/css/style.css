@@ -225,7 +225,7 @@ h4{
 
 .logo img{
     width: 122px;
-    height: 104px;
+    height: auto;
 }
 
 .carousel-article{
@@ -251,9 +251,16 @@ h4{
     justify-content: space-between;
     align-items: center;
     padding-left:1rem;
-    font-size:30px;
+    font-size:25px;
     height: 155px;
+    text-decoration: none;
+    color: #000;
     box-shadow: 0 4px 11px #00000040;
+}
+
+.link-box:hover {
+    cursor: pointer;
+    color: black;
 }
 
 .link-box.nabory{
@@ -277,6 +284,11 @@ h4{
     background-color: #fff;
 }
 
+.link-box.fotogalerie img{
+    width: 150px;
+    overflow: hidden;
+}
+
 .img-fluid {
     overflow: hidden;
 }
@@ -287,7 +299,7 @@ h4{
 
 .article{
     display: flex;
-    height: 123px;
+    height: 128px;
     overflow: hidden;
     font-size: 0.8rem;
     background-color: #fff;
@@ -307,9 +319,13 @@ h4{
     margin-top: auto;
 }
 
+.article p {
+    padding-right: 10px;
+}
+
 .actuality{
     overflow: hidden;
-    height: 123px;
+    height: 128px;
     font-size: 0.8rem;
     background-color: #fff;
     margin-bottom:1.5rem;
@@ -321,13 +337,22 @@ h4{
     margin-bottom: auto;
 }
 
-.main-green{
+.actuality h5 {
+    padding-top: 10px;
+}
+
+.main-green {
     background-color: #93C11F;
     display: flex;
-    padding: 30px;
+    padding: 10px 30px 0px 30px;
     margin-left:-12px;
     margin-right:-12px;
-    margin-top: 2rem;
+    margin-top: 1rem;
+}
+
+.main-green img {
+    width: 200px;
+    margin-right: 100px;
 }
 
 .main-green-row{
@@ -353,10 +378,20 @@ h4{
     color: #93C11F;
     font-weight: bold;
     font-size: 1.4rem;
+    text-decoration: none;
     width: 270px;
     border-radius: 15px;
     padding: 10px;
     text-align: center;
+}
+
+.buttonWimg {
+    padding: 2.5px !important;
+}
+
+.main-green-button img {
+    width: 75px;
+    margin-right: auto;
 }
 
 .matches{
@@ -696,7 +731,7 @@ footer h4 {
     }
 }
 
-@media (max-width: 1331px) {
+@media (max-width: 1336px) {
     .main-green-text {
         font-size: 1rem;
     }
@@ -707,9 +742,17 @@ footer h4 {
         border-radius: 12px;
         padding: 10px;
     }
+
+    .main-green-button img {
+        width: 65px;
+    }
+
+    .main-green-image img {
+        width: 187px;
+    }
 }
 
-@media (max-width: 1265px) {
+@media (max-width: 1283px) {
     .navbar .nav-item {
         margin-left: 0;
     }
@@ -752,7 +795,7 @@ footer h4 {
       }
   }
   
-@media (max-width: 1063px) {
+@media (max-width: 1144px) {
     .main-green-text {
         font-size: 0.9rem;
     }
@@ -762,6 +805,14 @@ footer h4 {
         width: 180px;
         border-radius: 10px;
         padding: 10px;
+    }
+
+    .main-green-button img {
+        width: 55px;
+    }
+
+    .main-green-image img {
+        width: 168px;
     }
 }
 @media (min-width: 741px) and (max-width: 991px) {
@@ -836,6 +887,7 @@ footer h4 {
 
     .link-box-container {
         flex-direction: column !important;
+
     }
     
     .link-box-container .link-box {
@@ -844,10 +896,15 @@ footer h4 {
         padding-top: 10px;
         padding-bottom: 10px;
         margin-bottom: 1rem;
+        font-size: 18px;
     }
     
     .link-box img {
         height: auto;
+    }
+
+    .link-box.fotogalerie img {
+        width: 150px;
     }
 }
 
@@ -883,34 +940,117 @@ footer h4 {
     }
 
     .topheader div {
-        font-size: .7rem;
+        font-size: .9rem;
+    }
+
+    .hamburger {
+        font-size: 26px;
+    }
+
+    .logo img{
+        aspect-ratio: 117 / 100;
+        width: 102px;
+        height: auto;
+    }
+
+    .link-box-container .link-box {
+        font-size: 17px;
+    }
+
+    .carousel-article-title p {
+        font-size: .9rem;
+    }
+
+    .carousel-article-title span {
+        font-size: .9rem;
+    }
+
+    .carousel-article-title h5 {
+        font-size: 1.1rem;
+    }
+
+    .article h5 {
+        font-size: 1.1rem;
+    }
+
+    .actuality h5 {
+        font-size: 1.1rem;
     }
 }
 
+@media (max-width: 567px) {
+    .topheader div {
+        font-size: .8rem;
+    }
+    
+    .link-box-container .link-box {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 531px) {
+    .topheader div {
+        font-size: .7rem;
+    }
+
+    .link-box-container .link-box {
+        font-size: 15px;
+    }
+}
+
+
 @media (max-width: 500px) {
-    .topheader img:first-child {
+    .topheader .header-icons a:first-child img {
         width: 39.33px;
         height: 20px;
     }
 
-    .topheader img:nth-child(2) {
+    .topheader .header-icons a:nth-child(2) img {
         width: 22px;
         height: 20px;
     }
 
-    .topheader img:nth-child(3) {
+    .topheader .header-icons a:nth-child(3) img {
         width: 20.67px;
         height: 20px;
     }
 
-    .topheader img:nth-child(4) {
+    .topheader .header-icons a:nth-child(4) img {
         width: 29.33px;
         height: 20px;
     }
 
-    .topheader img:nth-child(5), .topheader img:nth-child(6) {
+    .topheader .header-icons a:nth-child(5) img, .topheader .header-icons a:nth-child(6) img {
         width: 20px;
         height: 20px;
+    }
+
+    .hamburger {
+        font-size: 24px;
+    }
+
+    .logo img{
+        width: 92px;
+    }
+
+    .carousel-article-title p {
+        font-size: .8rem;
+    }
+
+    .carousel-article-title span {
+        font-size: .8rem;
+    }
+
+    .carousel-article-title h5 {
+        font-size: 1rem;
+    }
+
+    .article h5 {
+        font-size: 1rem;
+    }
+
+    .actuality h5 {
+        font-size: 1rem;
     }
 }
 
@@ -934,27 +1074,27 @@ footer h4 {
 }
 
 @media (max-width: 420px) {
-    .topheader img:first-child {
+    .topheader .header-icons a:first-child img {
         width: 29.5px;
         height: 15px;
     }
 
-    .topheader img:nth-child(2) {
+    .topheader .header-icons a:nth-child(2) img {
         width: 16.5px;
         height: 15px;
     }
 
-    .topheader img:nth-child(3) {
+    .topheader .header-icons a:nth-child(3) img {
         width: 15.5025px;
         height: 15px;
     }
 
-    .topheader img:nth-child(4) {
+    .topheader .header-icons a:nth-child(4) img {
         width: 21.9975px;
         height: 15px;
     }
 
-    .topheader img:nth-child(5), .topheader img:nth-child(6) {
+    .topheader .header-icons a:nth-child(5) img, .topheader .header-icons a:nth-child(6) img {
         width: 15px;
         height: 15px;
     }
