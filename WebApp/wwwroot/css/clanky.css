@@ -5,6 +5,15 @@
     object-fit: cover;
 }
 
+.btn {
+    background-color: #93C11F;
+    border: none;
+}
+
+.btn:hover {
+    background-color: black;
+}
+
 a{
     color:black;
     text-decoration: none;
