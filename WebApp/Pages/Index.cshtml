@@ -21,7 +21,7 @@
                                     <div class="carousel-article-title">
                                         <h5 class="fw-bold">@item.Title</h5>
                                         <p>@item.Teaser</p>
-                                        <span class="fw-bold">15.2.2025</span>
+                                        <span class="fw-bold">@item.DateCreated</span>
                                     </div>
                                 </div>
                             </div>
@@ -38,16 +38,16 @@
                 </div>
             </div>
             <div class="col-lg-4 d-flex flex-column justify-content-between  link-box-container">
-                <div class="link-box nabory">
+                <a class="link-box nabory">
                     NÁBORY <img class="img-fluid" src="img/linkbox/nabory.png"/>
                     @* <img src="img/linkbox/nabory.png"> *@
-                </div>
-                <div class="link-box kalendar">
+                </a>
+                <a class="link-box kalendar">
                     ROZPIS ZÁPASŮ <img class="img-fluid" src="img/linkbox/kalendar.png"/>
-                </div>
-                <div class="link-box fotogalerie">
-                    FOTOGALERIE <img class="img-fluid" src="img/linkbox/nabory.png"/>
-                </div>        
+                </a>
+                <a class="link-box fotogalerie">
+                    FOTOGALERIE <img class="img-fluid" src="img/linkbox/ondra.png"/>
+                </a>        
             </div>
         </div>
         <div class="row">
@@ -93,46 +93,47 @@
         </div>
     </div>
     <div class="col-xl-3">
+        <h4>KALENDÁŘ</h4>
         <partial name="_Calendar.cshtml" model="Model.Calendar" />
     </div>
 </div>
 <div class="main-green">
-    <div class="flex-grow-1 d-flex flex-column justify-content-between p-2">
+    <div class="flex-grow-1 d-flex flex-column p-2">
         <div class="main-green-row">
             <div class="main-green-text">
                 Staň se součástí Miners!
             </div>
-            <div class="main-green-button">
+            <a class="main-green-button">
                 NÁBOR HRÁČŮ
-            </div>
+            </a>
         </div>
         <div class="main-green-row">
             <div class="main-green-text">
                 Staň se součástí třetího týmu na hřišti!
             </div>
-            <div class="main-green-button">
+            <a class="main-green-button">
                 NÁBOR ROZHODČÍCH
-            </div>
+            </a>
         </div>
         <div class="main-green-row">
             <div class="main-green-text">
                 Buď vidět! Nakup merch na našem e-shopu
             </div>
-            <div class="main-green-button">
+            <a class="main-green-button">
                 MINERS MERCH
-            </div>
+            </a>
         </div>
         <div class="main-green-row">
             <div class="main-green-text">
                 Livestreamy a další videa uvidíš na našem YT kanále
             </div>
-            <div class="main-green-button">
-                MTV
-            </div>
+            <a class="main-green-button buttonWimg">
+                <img class="img-fluid" src="img/greenbox/MTVb.png"/>
+            </a>
         </div>
     </div>
-    <div class="main-green-image text-center" style="width:33%">
-        <img class="img-fluid w-100" src="img/linkbox/nabory.png"/>
+    <div class="main-green-image text-center" style="width:38%">
+        <img class="img-fluid" src="img/greenbox/rozhodci.png"/>
     </div>
 </div>
 <!--<h4>ROZPIS NADCHÁZEJÍCÍCH ZÁPASŮ</h4>
