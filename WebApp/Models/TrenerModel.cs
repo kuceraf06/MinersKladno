@@ -9,4 +9,5 @@ public class TrenerModel(Person person)
     public string Email { get; set; } = person.Email;
     public string Mobile { get; set; } = person.Telefon;
     public string Licence { get; set; } = person.Licence;
+    public string? Foto { get; set; }
 }

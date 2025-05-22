@@ -26,6 +26,17 @@ public class Treneri(AppDbContext dbContext) : PageModel
             Teams.Add(teamModel);
         }
     }
+
+public string GetPersonFotoBase64(Guid personId)
+{
+    var person = dbContext.Persons.SingleOrDefault(p => p.Id == personId);
+    if (person?.Foto != null)
+    {
+        var base64String = Convert.ToBase64String(person.Foto);
+        return $"data:image/jpeg;base64,{base64String}";
+    }
+    return "/img/default-profile.png"; // Path to a default image if no photo exists
+}
     
     private static void Trener(IEnumerable<Person> persons, Guid? guidCoach, TreneriTeamModel teamModel)
     {
@@ -34,7 +45,16 @@ public class Treneri(AppDbContext dbContext) : PageModel
             var person = persons.SingleOrDefault(x => x.Id == guidCoach);
             if (person != null)
             {
-                teamModel.Treneri.Add(new TrenerModel(person));
+                var model = new TrenerModel(person);
+                if (person.Foto != null)
+                {
+                    model.Foto = $"data:image/png;base64,{Convert.ToBase64String(person.Foto)}";
+                }
+                else
+                {
+                    model.Foto = "/img/hriste/minersfield.png";
+                }
+                teamModel.Treneri.Add(model);
             }
         }
     }

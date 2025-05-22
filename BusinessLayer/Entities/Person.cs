@@ -14,6 +14,7 @@ namespace Miners.Web.BusinessLayer.Entities
         public string? PoziceTym { get; set; }
         public string? Licence { get; set; }
         public string? Poznamka { get; set; }
+        public byte[]? Foto { get; set; }
 
         // public string PopisekTym
         // {
