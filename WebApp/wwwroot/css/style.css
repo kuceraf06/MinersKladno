@@ -925,10 +925,6 @@ footer h4 {
         padding: 0;
     }
 
-    #toTopBtn:hover {
-        background-color: inherit;
-    }
-
     .footer-col .social-links a:hover{
         color: black;
         background-color: white;
