@@ -263,6 +263,7 @@ h4{
 
 #toTopBtn:hover {
     background-color: rgb(209, 209, 209);
+    cursor: default;
 }
 
 
@@ -915,6 +916,10 @@ footer h4 {
         font-size: 31px;
         cursor: pointer;
         padding: 0;
+    }
+
+    #toTopBtn:hover {
+        background-color: inherit;
     }
 
     .footer-col .social-links a:hover{
