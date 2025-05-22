@@ -8,7 +8,7 @@
 
 <div class="page-container">
     <h4>TRENÉŘI</h4>
-    <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex main-kategorie justify-content-between mb-3">
         <div class="box-kategorie box-pripravka">PŘÍPRAVKA</div>
         <div class="box-kategorie box-baseball">BASEBALL</div>
         <div class="box-kategorie box-softball">SOFTBALL</div>
@@ -19,26 +19,32 @@
         <h4 class="box box-green box-bordered box-@team.Kategorie" style="text-transform: uppercase">@team.Title</h4>
         @foreach (var trener in team.Treneri)
         {
-            <div class="box box-white d-flex justify-content-between">
-                <div>
+        <div class="box box-white d-flex justify-content-between">
+            <div class="profile">
+                <img src="~/img/hriste/minersfield.png" alt="profile" class="profile-pic"/>
+                <div class="profile-text">
                     <b>@trener.FullName</b><br/>
                     @trener.Function
                 </div>
-                <div class="text-end">
-                    @trener.Mobile<br/>
-                    <a href="mailto:@trener.Email">@trener.Email</a>
-                </div>
             </div>
+            <div class="text-end">
+                @trener.Mobile<br/>
+                <a href="mailto:@trener.Email">@trener.Email</a>
+            </div>
+        </div>
         }
     }
     <h4 class="box box-green box-bordered box-atletika" style="text-transform: uppercase">Atletika</h4>
     <div class="box box-white d-flex justify-content-between">
-        <div>
-            <b>Karel Kuklík</b><br/>
-            hlavní trenér
+        <div class="profile">
+            <img src="~/img/hriste/minersfield.png" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Karel Kuklík</b><br/>
+                hlavní trenér
+            </div>
         </div>
         <div class="text-end">
-            722 470 911<br/>
+            722470911<br/>
             <a href="mailto:kuklik@minerskladno.cz">kuklik@minerskladno.cz</a>
         </div>
     </div>
