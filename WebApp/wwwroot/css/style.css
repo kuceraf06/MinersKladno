@@ -260,6 +260,10 @@ h4{
     left:20px;
 }
 
+.row h4, .upcomingMatches h4, .results h4 {
+    font-size: 1.3rem;
+}
+
 .link-box{
     font-family: 'Bowlby One SC', cursive;
     display: flex;
@@ -1017,10 +1021,6 @@ footer h4 {
     .col-md-8 {
         flex: 0 0 auto;
         width: 100% !important;
-    }
-
-    .row h4, .upcomingMatches h4, .results h4 {
-        font-size: 1.3rem;
     }
 }
 
