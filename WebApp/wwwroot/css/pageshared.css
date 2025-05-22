@@ -1,11 +1,29 @@
 .page-container{
-    width: 1000px;
+    max-width: 1000px;
     margin:auto;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-text {
+    font-size: 0.9rem;
+    line-height: 1.2;
 }
 
 .box{
     padding: 1rem;
     margin-bottom: 1rem;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .box-bordered {
@@ -18,4 +36,90 @@
 
 .box-green{
     background-color: #93C11F;
+}
+
+.second-box {
+    width: 100%;
+    max-width: 400px;
+}
+
+@media (max-width: 740px) {
+    .page-container > .box-white:first-of-type {
+        flex-direction: column !important;
+        gap: 1rem;
+    }
+
+    .page-container > .box-white:first-of-type > .box-green {
+        order: 2;
+    }
+
+    .page-container > .box-white:first-of-type > div:first-child {
+        order: 1;
+    }
+    
+    .main-box {
+        padding: 0;
+        padding-bottom: 1rem;
+    }
+
+    .main-box div:nth-child(1) {
+        padding: 1rem;
+    }
+
+    .second-box {
+        max-width: none;
+        width: calc(100% - 1rem); /* místo pro margin-left */
+        margin: 0.5rem;
+        padding: .5rem;
+    }
+}
+
+@media (max-width: 460px) {
+    .profile-text {
+        font-size: 0.8rem;
+    }
+
+    .text-end {
+        font-size: 0.8rem;
+    }
+
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+    }
+
+    h4.box {
+        font-size: 1.2rem;
+    }
+
+    .main-box div {
+        font-size: .89rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-box,
+    .box-white.d-flex {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.5rem;
+    }
+
+    .text-end {
+        text-align: left !important;
+    }
+
+    .profile,
+    .profile-text,
+    .text-end {
+        width: 100%;
+    }
+
+    .box-white {
+        padding: 1rem;
+    }
+
+    .profile-pic {
+        margin-bottom: 0.5rem;
+  }
 }

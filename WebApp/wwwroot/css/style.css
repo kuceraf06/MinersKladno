@@ -853,6 +853,18 @@ footer h4 {
     }
 }
 
+@media (max-width: 345px) {
+    .social-links {
+        width: 40%;
+    }
+
+    .footer-col .social-links a:not(:first-child) {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+
+}
+
 
 @media (max-width: 1586px) {
     .match {
