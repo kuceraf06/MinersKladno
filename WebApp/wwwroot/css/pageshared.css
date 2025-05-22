@@ -15,6 +15,12 @@
     line-height: 1.2;
 }
 
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .box{
     padding: 1rem;
     margin-bottom: 1rem;
@@ -68,7 +74,7 @@
 
     .second-box {
         max-width: none;
-        width: calc(100% - 1rem); /* místo pro margin-left */
+        width: calc(100% - 1rem);
         margin: 0.5rem;
         padding: .5rem;
     }
