@@ -519,7 +519,7 @@ h4{
 }
 
 .match-info .match-result.win {
-    color: green;
+    color: #0BDA51;
 }
 
 .match-info .match-result.lose {
