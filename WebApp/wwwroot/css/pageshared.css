@@ -80,7 +80,7 @@
     }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 474px) {
     .profile-text {
         font-size: 0.8rem;
     }
@@ -103,7 +103,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 406px) {
     .main-box,
     .box-white.d-flex {
         flex-direction: column !important;
