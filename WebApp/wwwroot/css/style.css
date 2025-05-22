@@ -466,6 +466,7 @@ h4{
     padding:5px 7.5px;
     font-size: 20px;
     font-weight: 900;
+    color: #000;
 }
 
 .matches-container {
@@ -510,6 +511,15 @@ h4{
 
 .match-info div {
     font-size: .8rem;
+    font-weight: 600;
+}
+
+.match-info .match-result.win {
+    color: green;
+}
+
+.match-info .match-result.lose {
+    color: red;
 }
 
 .partners{
