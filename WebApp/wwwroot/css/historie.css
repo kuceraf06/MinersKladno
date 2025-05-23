@@ -1,9 +1,27 @@
 ﻿.historie-container{
-    width: 1000px;
+    max-width: 1000px;
     margin:auto;
 }
 
 .historie-box{
     background-color: #fff;
     padding: 1rem;
+}
+
+@media (max-width: 619px) {
+    p {
+        font-size: 0.8rem;
+    }
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    .first-img {
+        width: 100%;
+    }
 }
