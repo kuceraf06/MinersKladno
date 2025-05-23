@@ -1,0 +1,9 @@
+@media (max-width: 619px) {
+    .box h4 {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: .8rem;
+    }
+}

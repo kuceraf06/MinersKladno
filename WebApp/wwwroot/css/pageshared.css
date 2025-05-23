@@ -3,6 +3,10 @@
     margin:auto;
 }
 
+.container {
+    min-height: auto !important;
+}
+
 .profile-pic {
     width: 50px;
     height: 50px;
@@ -80,6 +84,16 @@
     }
 }
 
+@media (max-width: 619px) {
+    h5 {
+        font-size: 1rem;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+}
+
 @media (max-width: 474px) {
     .profile-text {
         font-size: 0.8rem;
@@ -92,10 +106,6 @@
     .profile-pic {
         width: 40px;
         height: 40px;
-    }
-
-    h4.box {
-        font-size: 1.2rem;
     }
 
     .main-box div {
