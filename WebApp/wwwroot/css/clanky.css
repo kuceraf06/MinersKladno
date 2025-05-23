@@ -18,3 +18,9 @@ a{
     color:black;
     text-decoration: none;
 }
+
+@media (max-width: 619px) {
+    div, span, p, b {
+        font-size: .8rem !important;
+    }
+}
