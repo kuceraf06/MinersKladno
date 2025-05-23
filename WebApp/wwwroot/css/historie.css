@@ -8,7 +8,7 @@
     padding: 1rem;
 }
 
-h5 {
+h5:not(.first-block) {
     font-weight: bold;
     margin-top: 2rem;
 }
