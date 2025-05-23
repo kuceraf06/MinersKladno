@@ -1,5 +1,5 @@
 .team-container{
-    width: 1000px;
+    max-width: 1000px;
     margin:auto;
 }
 
@@ -19,6 +19,19 @@
     border:0;
 }
 
+.summer {
+    margin-top: 1rem;
+}
+
+.price {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+h5 {
+    font-weight: 600;
+}
+
 .team-league{
     background-color: #E3F1C1;
     border-radius: 10px;
@@ -33,9 +46,80 @@
 }
 
 .team-coaches tr{
-    border-bottom: 1px solid rgba(192, 203, 167, 0.7);
+    border-bottom: 1px solid rgba(121, 121, 121, 0.7);
 }
 
 .team-coaches tr:last-child{
     border-bottom: 0;
+}
+
+.team-coaches td{
+    padding: .5rem 0;
+}
+
+.team-league div {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 619px) {
+    td, th, div  {
+        font-size: .8rem;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .training-days th {
+        width: 65px !important;
+    }
+
+    .training-days .time {
+        width: 90px !important;
+    }
+}
+
+@media (max-width: 510px) {
+    .team-container .row > [class^="col-"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    .team-container .me-2 {
+        margin-right: 0 !important;
+    }
+
+    .team-coaches {
+        margin-top: 1.5rem;
+        height: 215px !important;
+    }
+
+    .team-fee {
+        margin-top: 1rem;
+    }
+
+    .team-league {
+        margin-top: .5rem;
+    }
+
+    .training-days th {
+        width: 60px !important;
+    }
+
+    .training-days .time {
+        width: 85px !important;
+    }
+
+    td, th, div  {
+        font-size: .75rem;
+    }
+
+    .team-league div {
+        margin-bottom: 0rem;
+}
 }
