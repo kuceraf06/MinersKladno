@@ -8,6 +8,11 @@
     padding: 1rem;
 }
 
+h5 {
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
 @media (max-width: 619px) {
     p {
         font-size: 0.8rem;
