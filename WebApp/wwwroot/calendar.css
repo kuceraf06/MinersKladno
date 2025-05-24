@@ -1,0 +1,48 @@
+.calendar{
+    width:100%;
+    text-align:center;
+    background-color: white;
+}
+
+.calendar thead tr:first-child th{
+    font-family: 'Bowlby One SC', cursive;
+    background-color: #93C11F;
+    font-size: 1.4rem;
+}
+
+.calendar tbody td{
+    line-height: 45px;
+    height:45px;
+}
+
+.calendar-day{
+    color:black;
+    text-decoration: none;
+}
+
+.month-title {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.arrow {
+    color: black;
+}
+
+.calendar-day {
+    
+}
+
+@media (max-width: 740px) {
+    .calendar{
+        font-size: 0.8rem;
+    }
+    .calendar-day{
+        line-height: 30px;
+        height:30px;
+    }
+
+    .calendar thead tr:first-child th{
+        font-size: 1.1rem;
+}
+}
