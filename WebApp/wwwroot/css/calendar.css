@@ -20,6 +20,15 @@
     text-decoration: none;
 }
 
+.month-title {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.arrow {
+    color: black;
+}
+
 @media (max-width: 740px) {
     .calendar{
         font-size: 0.8rem;
