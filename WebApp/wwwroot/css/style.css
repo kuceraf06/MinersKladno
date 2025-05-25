@@ -361,10 +361,12 @@ h4{
 
 .article img{
     width: 30%;
+    height: 110px;
     margin-left: 10px;
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
+    object-fit: cover; 
 }
 
 .article div {
@@ -850,6 +852,21 @@ footer h4 {
     .footer-col .social-links a:not(:first-child) {
         margin-left: 20px;
         margin-top: 0px;
+    }
+
+    .footer-col:last-child {
+        margin-top: 15px;
+    }
+
+    .footer-col:first-child {
+        text-align: center;
+    }
+
+    .footer-col img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
     }
 }
 
