@@ -4,6 +4,20 @@
     border-radius: 10px;
     text-align: center;
     font-family: 'Bowlby One SC', cursive;
+    text-decoration: none;
+}
+
+.box-kategorie:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.box-pripravka:hover, .box-baseball:hover {
+    color: white;
+}
+
+.box-softball:hover, .box-atletika:hover {
+    color: black;
 }
 
 .box-pripravka{
@@ -18,15 +32,23 @@
 
 .box-softball{
     background-color: #93C11F;
+    color: black;
 }
 
 .box-atletika{
     background-color: #D9D9D9;
+    color: black;
+}
+
+@media (max-width: 1200px) {
+    .box-kategorie:hover {
+        transform: scale(1);
+    }
 }
 
 @media (max-width: 685px) {
     h4.box {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .main-kategorie {
@@ -39,11 +61,5 @@
         flex: 0 0 calc(50% - 0.5rem); 
         text-align: center;
         font-size: .9rem;
-    }
-}
-
-@media (max-width: 593px) {
-    h4.box {
-        font-size: 1.09rem;
     }
 }
