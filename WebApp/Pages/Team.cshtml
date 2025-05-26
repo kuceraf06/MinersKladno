@@ -68,6 +68,16 @@
                                 <b>@coach.FullName</b> - @coach.Function<br/>
                                 @coach.Licence
                             </td>
+                            <td class="contact-coaches">
+                                @if (!string.IsNullOrWhiteSpace(coach.Email))
+                                {
+                                    <a href="mailto:@coach.Email" target="_blank" class="email"><i class="fa-solid fa-envelope"></i></a>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(coach.Mobile))
+                                {
+                                    <a href="tel:@coach.Mobile" target="_blank" class="phone"><i class="fa-solid fa-phone"></i></a>
+                                }
+                            </td>
                         </tr>
                     }
                 </table>
