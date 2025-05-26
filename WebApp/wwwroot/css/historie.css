@@ -9,8 +9,11 @@
 }
 
 h5:not(.first-block) {
-    font-weight: bold;
     margin-top: 2rem;
+}
+
+h5 {
+    font-weight: bold;
 }
 
 @media (max-width: 619px) {
