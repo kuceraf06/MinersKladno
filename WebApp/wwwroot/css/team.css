@@ -43,6 +43,7 @@ h5 {
     border-radius: 10px;
     color: #fff;
     padding: 1rem;
+    height: auto !important;
 }
 
 .team-coaches tr{
@@ -96,7 +97,6 @@ h5 {
 
     .team-coaches {
         margin-top: 1.5rem;
-        height: 215px !important;
     }
 
     .team-fee {
