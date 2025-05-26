@@ -555,8 +555,8 @@ header {
 
 .matches button i {
     border-radius: 100%;
-    background-color: #dad8d8;
-    padding:5px 7.5px;
+    background-color: rgb(211, 211, 211);
+    padding:5px 9px;
     font-size: 20px;
     font-weight: 900;
     color: #000;
@@ -568,6 +568,8 @@ header {
     gap: 0.5rem;
     flex-grow: 1;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
 }
 
 .match{
@@ -576,6 +578,7 @@ header {
     padding: 1rem 2rem;
     flex-shrink: 0; 
     box-sizing: border-box;
+    scroll-snap-align: start;
     flex: 0 0 275px;
 }
 
@@ -1328,6 +1331,36 @@ footer h4 {
 
     .actuality h5 {
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .matches {
+        padding: 1rem .2rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .matches button i {
+        border-radius: 100%;
+        background-color: rgb(211, 211, 211);
+        padding:5px 8px;
+        font-size: 15px;
+        font-weight: 900;
+        color: #000;
+    }
+
+    .match-category > div{
+        font-size: 1.2rem;
+        padding: 8px;
+        width: 50px;
+        height:50px;
+        border-radius: 50%;
+    }
+
+    .match-info div {
+        font-size: .65rem;
+        font-weight: 600;
     }
 }
 
