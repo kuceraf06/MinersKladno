@@ -17,10 +17,17 @@ h4{
     min-height: 100vh;
 }
 
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
 .topheader{
     font-family: 'Bowlby One SC', cursive;
     display: flex;
     justify-content: space-between;
+    background-color: #F8F4F4;
     align-items: center;
     padding: 4px 10px;
 }
