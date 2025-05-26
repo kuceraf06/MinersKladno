@@ -28,6 +28,23 @@
     margin-bottom: auto;
 }
 
+.contact-coaches a{
+    background-color: white;
+    color: rgb(80, 80, 80);
+    padding: 4px 5px;
+    border-radius: 50%;
+}
+
+.phone {
+    margin-left: .5rem;
+}
+
+.contact-coaches a:hover {
+    background-color: #93C11F;
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+
 h5 {
     font-weight: 600;
 }
@@ -60,6 +77,13 @@ h5 {
 
 .team-league div {
     margin-bottom: 1rem;
+}
+
+@media (max-width: 1200px) {
+    .contact-coaches a:hover {
+        background-color: white;
+        color: rgb(80, 80, 80);
+}
 }
 
 @media (max-width: 619px) {
