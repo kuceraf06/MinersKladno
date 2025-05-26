@@ -94,7 +94,9 @@
     </div>
     <div class="col-xl-3">
         <h4>KALENDÁŘ</h4>
-        <partial name="_Calendar.cshtml" model="Model.Calendar" />
+        <div id="calendar-container">
+            <partial name="_Calendar.cshtml" model="Model.Calendar" />
+        </div>
     </div>
 </div>
 <div class="main-green">
@@ -117,7 +119,7 @@
         </div>
         <div class="main-green-row">
             <div class="main-green-text">
-                Buď vidět! Nakup merch na našem e-shopu
+                Buď vidět! Nakup merch na našeme <span style="white-space: nowrap;">e - hopu</span>
             </div>
             <a class="main-green-button" href="https://merch.minerskladno.cz" target="_blank">
                 MINERS MERCH
@@ -374,23 +376,36 @@ document.querySelectorAll('.matches').forEach(matchesBlock => {
   const matchesContainer = matchesBlock.querySelector('.matches-container');
   const prevBtn = matchesBlock.querySelector('.prevBtn');
   const nextBtn = matchesBlock.querySelector('.nextBtn');
-  const match = matchesContainer.querySelector('.match');
-  const remInPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
+  const matches = matchesContainer.querySelectorAll('.match');
+
+  // Použijme šířku prvního zápasu včetně marginu pro výpočet posunu
+  const match = matches[0];
+  const matchStyle = getComputedStyle(match);
   const matchWidth = match.offsetWidth;
-  const containerStyle = getComputedStyle(matchesContainer);
-  const gapRemContainer = parseFloat(containerStyle.gap) || 0;
-  const gapPxContainer = gapRemContainer * remInPx;
-  const scrollAmount = matchWidth + gapPxContainer;
+  const marginRight = parseFloat(matchStyle.marginRight);
+
+  // Pokud marginRight není nastavený, použij 0
+  const scrollAmount = matchWidth + (marginRight || 0);
+
+  function scrollToMatch(index) {
+    matchesContainer.scrollTo({ left: index * scrollAmount, behavior: 'smooth' });
+  }
 
   prevBtn.addEventListener('click', () => {
-    matchesContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    let currentScroll = matchesContainer.scrollLeft;
+    let currentIndex = Math.round(currentScroll / scrollAmount);
+    let newIndex = Math.max(currentIndex - 1, 0);
+    scrollToMatch(newIndex);
   });
 
   nextBtn.addEventListener('click', () => {
-    matchesContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    let currentScroll = matchesContainer.scrollLeft;
+    let currentIndex = Math.round(currentScroll / scrollAmount);
+    let maxIndex = matches.length - 1;
+    let newIndex = Math.min(currentIndex + 1, maxIndex);
+    scrollToMatch(newIndex);
   });
 });
-
 </script>
 
 
