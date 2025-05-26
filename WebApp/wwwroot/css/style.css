@@ -307,6 +307,11 @@ header {
     left:20px;
 }
 
+.carousel button i{
+    color: #000 !important;
+    font-size: 30px;
+}
+
 @media (min-width: 991px) and (max-width: 1440px) {
     .carousel-article{
         height: 400px;
@@ -1197,6 +1202,10 @@ footer h4 {
 @media (max-width: 619px) {
     .topheader div {
         font-size: .9rem;
+    }
+
+    .carousel button i{
+        font-size: 24px;
     }
 
     .carousel-article {
