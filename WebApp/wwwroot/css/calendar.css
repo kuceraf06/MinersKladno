@@ -29,6 +29,26 @@
     color: black;
 }
 
+@media (max-width: 1440px) {
+    .calendar{
+        font-size: .8rem;
+    }
+
+    h4 {
+        font-size: 1.2rem !important;
+    }
+
+    .calendar thead tr:first-child th{
+        font-size: 1.2rem;
+        padding: 0px 0 !important;
+    }
+
+    .calendar tbody td{
+        line-height: 35px;
+        height:35px;
+    }
+}
+
 @media (max-width: 740px) {
     .calendar{
         font-size: 0.8rem;

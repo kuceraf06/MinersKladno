@@ -327,6 +327,16 @@ header {
         width: 65px !important;
         overflow: hidden;
     }
+
+    .navbar .nav-item a {
+        font-size: 1.15rem !important;
+    }
+
+    .logo img{
+        aspect-ratio: 117 / 100;
+        width: 110px;
+        height: auto;
+    }
 }
 
 
@@ -974,7 +984,7 @@ footer h4 {
     }
 }
 
-@media (max-width: 1283px) {
+@media (max-width: 1310px) {
     .navbar .nav-item {
         margin-left: 0;
     }
@@ -1212,6 +1222,7 @@ footer h4 {
     .actuality h5 {
         font-size: 1.1rem;
     }
+
     .navbar-margin {
         margin-left: 25px;
     }
