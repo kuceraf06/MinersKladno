@@ -1,5 +1,6 @@
 .calendar-box {
-    min-height: auto;
+    min-height: 812px;
+    height: auto;
     padding-bottom: 20px;
     background-color: white;
 }
@@ -19,6 +20,7 @@
 .calendar tbody td{
     line-height: 30px;
     height: 45px;
+    border: none;
     width: 45px;
     padding: 0;
 }
@@ -38,7 +40,9 @@
 }
 
 .calendar-day:hover {
-    color: #93C11F;
+    color: white;
+    background-color: black;
+    border-radius: 50%;
 }
 
 .calendar-header th {
@@ -82,13 +86,46 @@
 }
 
 .calendar td.selected-day .calendar-day {
-    background-color: #93C11F;
+    background-color: black;
     color: white;
+}
+
+.calendar td.inactive {
+    color: white !important;
+    opacity: 0.5 !important;
+}
+
+.calendar td.event a {
+    background-color: #93C11F;
+    height: 35px;
+    width: 35px;
+    border: none;
+    padding: 0;
+    color: white;
+}
+
+.calendar td.event a:hover {
+    color: white;
+    background-color: black;
 }
 
 @media (max-width: 1440px) {
     .calendar{
         font-size: .8rem;
+    }
+
+    .calendar td.event a {
+        height: 25px;
+        width: 25px;
+    }
+
+    .calendar-day {
+        width: 25px;
+        height: 25px;
+    }
+
+    .calendar-box {
+        min-height: 712px;
     }
 
     .day-body h5{
