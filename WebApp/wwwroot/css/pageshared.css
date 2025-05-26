@@ -36,6 +36,10 @@
     gap: 1rem;
 }
 
+.mobile {
+    display: none !important;
+}
+
 .box-bordered {
     border-radius: 10px;
 }
@@ -114,28 +118,20 @@
 }
 
 @media (max-width: 406px) {
-    .main-box,
-    .box-white.d-flex {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 0.5rem;
-    }
-
-    .text-end {
-        text-align: left !important;
-    }
-
-    .profile,
-    .profile-text,
-    .text-end {
-        width: 100%;
-    }
-
-    .box-white {
-        padding: 1rem;
+    .contact {
+        margin-top: .5rem;
     }
 
     .profile-pic {
-        margin-bottom: 0.5rem;
-  }
+        width: 50px;
+        height: 50px;
+    }
+
+    .mobile {
+        display: flex !important;
+    }
+
+    .desktop {
+        display: none !important;
+    }
 }
