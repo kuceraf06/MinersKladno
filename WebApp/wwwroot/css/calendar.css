@@ -1,3 +1,9 @@
+.calendar-box {
+    min-height: auto;
+    padding-bottom: 20px;
+    background-color: white;
+}
+
 .calendar{
     width:100%;
     text-align:center;
@@ -11,14 +17,28 @@
 }
 
 .calendar tbody td{
-    line-height: 45px;
-    height:45px;
+    line-height: 30px;
+    height: 45px;
+    width: 45px;
+    padding: 0;
 }
 
-.calendar-day{
-    color:black;
-    text-decoration: none;
+.calendar-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    border-radius: 50%;
     font-weight: 600;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.2s;
+}
+
+.calendar-day:hover {
+    color: #93C11F;
 }
 
 .calendar-header th {
@@ -41,9 +61,42 @@
     font-size: 1rem;
 }
 
+.one-day {
+    margin: 0 20px;
+}
+
+.day-body h5{
+    font-weight: 500;
+    color: black;
+    font-family: 'Bowlby One SC', cursive;
+}
+
+.day-body {
+    text-align: center;
+}
+
+.calendar-divider {
+    border-top: 2px solid #93C11F;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.calendar td.selected-day .calendar-day {
+    background-color: #93C11F;
+    color: white;
+}
+
 @media (max-width: 1440px) {
     .calendar{
         font-size: .8rem;
+    }
+
+    .day-body h5{
+        font-size: 1rem;
+    }
+
+    .day-body p {
+        font-size: 0.8rem;
     }
 
     .arrow {
