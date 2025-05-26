@@ -40,6 +40,11 @@ a {
     outline: none;
 }
 
+.clanky-link:hover {
+    color: #93C11F;
+    transition: all 0.3s ease-in-out;
+}
+
 .btn:disabled {
     background-color: #93C11F;
     opacity: 0.6;
