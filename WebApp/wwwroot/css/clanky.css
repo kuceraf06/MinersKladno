@@ -1,8 +1,27 @@
-﻿.article-image img{
+﻿.box.d-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.article-image img {
     min-width: 250px;
     max-width: 250px;
     height: 150px;
     object-fit: cover;
+}
+
+.box-clanek img {
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
 }
 
 .btn {
@@ -11,16 +30,62 @@
 }
 
 .btn:hover {
-    background-color: black;
+    background-color: #7DAA1A;
 }
 
-a{
-    color:black;
-    text-decoration: none;
+.btn:active,
+.btn:focus {
+    background-color: #7DAA1A;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn:disabled {
+    background-color: #93C11F;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+    div, span, p{
+        font-size: .8rem !important;
+    }
+
+    h5 {
+        font-size: 1rem !important;
+    }
+    
 }
 
 @media (max-width: 619px) {
-    div, span, p, b {
-        font-size: .8rem !important;
+    .box.d-flex {
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
     }
+
+    .article-image img {
+        width: 100% !important;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .article-image {
+        margin-right: 0 !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .flex-grow-1 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 474px) {
+    .box-clanek img {
+    max-width: 100%;
+    width: 100% !important;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
 }
