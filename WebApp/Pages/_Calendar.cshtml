@@ -1,51 +1,112 @@
 ﻿@model Miners.Web.WebApp.Models.CalendarModel
 
-<table class="calendar">
-    <thead>
-    <tr>
-        <th colspan="7">
-            <div class="d-flex justify-content-between p-2">
-                <div>
-                    <a class="month-control" href="" data-month="@Model.PrevMonth">
-                        <span class="fa-stack">
-                            <i class="fa-solid fa-chevron-left  arrow"></i>
-                        </span>
-                    </a>
-                </div>
-                <span class="month-title">@Model.Month</span>
-                <div>
-                    <a class="month-control" href="" data-month="@Model.NextMonth">
-                        <span class="fa-stack">
-                            <i class="fa-solid fa-chevron-right  arrow"></i>
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </th>
-    </tr>
-    <tr class="calendar-header">
-        <th>PO</th>
-        <th>ÚT</th>
-        <th>ST</th>
-        <th>ČT</th>
-        <th>PÁ</th>
-        <th>SO</th>
-        <th>NE</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var week in Model.Weeks)
-    {
+<div class="calendar-box">
+    <table class="calendar">
+        <thead>
         <tr>
-            @foreach (var day in week.Days)
-            {
-                <td class="@day.CssClass">
-                    <a href="#" class="calendar-day" data-day="@day.Date.ToString("yyyy-MM-dd")">@day.Date.Day</a>
-                </td>
-            }
+            <th colspan="7">
+                <div class="d-flex justify-content-between p-2">
+                    <div>
+                        <a class="month-control" href="" data-month="@Model.PrevMonth">
+                            <span class="fa-stack">
+                                <i class="fa-solid fa-chevron-left arrow"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <span class="month-title">@Model.Month</span>
+                    <div>
+                        <a class="month-control" href="" data-month="@Model.NextMonth">
+                            <span class="fa-stack">
+                                <i class="fa-solid fa-chevron-right arrow"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </th>
         </tr>
-    }
-    </tbody>
-</table>
+        <tr class="calendar-header text-center">
+            <th>PO</th>
+            <th>ÚT</th>
+            <th>ST</th>
+            <th>ČT</th>
+            <th>PÁ</th>
+            <th>SO</th>
+            <th>NE</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var week in Model.Weeks)
+        {
+            <tr>
+                @foreach (var day in week.Days)
+                {
+                    <td class="@day.CssClass text-center">
+                        <a href="#" class="calendar-day" data-day="@day.Date.ToString("yyyy-MM-dd")">
+                            @day.Date.Day
+                        </a>
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="calendar-divider"></div>
+
+    <div id="calendar-day-details" class="mt-4"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dayLinks = document.querySelectorAll('.calendar-day');
+        const detailsDiv = document.getElementById('calendar-day-details');
+
+        const dayNames = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
+
+        function clearSelection() {
+            document.querySelectorAll('.calendar td').forEach(td => {
+                td.classList.remove('selected-day');
+            });
+        }
+
+        function showDayDetails(dateStr, tdElement) {
+            const date = new Date(dateStr);
+            const dayName = dayNames[date.getDay()];
+            const formattedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+
+            detailsDiv.innerHTML = `
+                <div class="one-day">
+                    <div class="day-body">
+                        <h5 class="card-title">${dayName} ${formattedDate}</h5>
+                        <p class="card-text">Zde můžeš zobrazit další informace o tomto dni.</p>
+                    </div>
+                </div>
+            `;
+
+            clearSelection();
+            if (tdElement) {
+                tdElement.classList.add('selected-day');
+            }
+        }
+
+        dayLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const dateStr = this.getAttribute('data-day');
+                const td = this.closest('td');
+                showDayDetails(dateStr, td);
+            });
+        });
+
+        // Automatický výběr dnešního dne
+        const today = new Date();
+        const todayStr = today.toISOString().split('T')[0];
+        const todayLink = document.querySelector(`.calendar-day[data-day="${todayStr}"]`);
+        if (todayLink) {
+            const todayTd = todayLink.closest('td');
+            showDayDetails(todayStr, todayTd);
+        }
+    });
+</script>
 
 
+</div>
