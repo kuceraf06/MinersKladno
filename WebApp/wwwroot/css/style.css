@@ -1199,6 +1199,10 @@ footer h4 {
         font-size: .9rem;
     }
 
+    .carousel-article {
+        height: 400px;
+    }
+
     .hamburger {
         font-size: 26px;
     }
@@ -1362,5 +1366,10 @@ footer h4 {
         font-size: .65rem;
         font-weight: 600;
     }
+
+    .carousel-article {
+        height: 350px;
+    }
+
 }
 
