@@ -304,6 +304,32 @@ header {
     left:20px;
 }
 
+@media (min-width: 991px) and (max-width: 1440px) {
+    .carousel-article{
+        height: 400px;
+    }
+
+    .link-box {
+        height: 120px !important;
+    }
+
+    .link-box.fotogalerie img{
+        width: 118px !important;
+        overflow: hidden;
+    }
+
+    .link-box.nabory img {
+        width: 155px !important;
+        overflow: hidden;
+    }
+
+    .link-box.kalendar img {
+        width: 65px !important;
+        overflow: hidden;
+    }
+}
+
+
 .row h4, .upcomingMatches h4, .results h4 {
     font-size: 1.3rem;
 }
