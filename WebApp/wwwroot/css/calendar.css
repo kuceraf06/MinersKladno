@@ -23,10 +23,16 @@
 .month-title {
     margin-top: auto;
     margin-bottom: auto;
+    font-weight: 500;
+    color: black;
 }
 
 .arrow {
     color: black;
+    text-decoration: none;
+    background-color: rgb(211, 211, 211);
+    padding: 5px 9px;
+    border-radius: 50%;
 }
 
 @media (max-width: 1440px) {
@@ -39,8 +45,8 @@
     }
 
     .calendar thead tr:first-child th{
-        font-size: 1.2rem;
-        padding: 0px 0 !important;
+        font-size: 1rem !important;
+        padding: 0px !important;
     }
 
     .calendar tbody td{

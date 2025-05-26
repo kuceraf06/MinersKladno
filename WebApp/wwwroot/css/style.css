@@ -227,10 +227,13 @@ header {
 .navbar .dropdown{
     cursor: pointer;
 }
+
 .navbar .dropdown-menu{
     background-color: rgba(0,0,0,0.7);
     color:white;
     text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .navbar .dropdown-item-group{
@@ -328,7 +331,7 @@ header {
         overflow: hidden;
     }
 
-    .navbar .nav-item a {
+    .navbar .nav-link {
         font-size: 1.15rem !important;
     }
 
@@ -336,6 +339,10 @@ header {
         aspect-ratio: 117 / 100;
         width: 110px;
         height: auto;
+    }
+
+    .dropdown-item {
+        font-size: 1rem !important;
     }
 }
 
