@@ -7,7 +7,7 @@
             <th colspan="7">
                 <div class="d-flex justify-content-between p-2">
                     <div>
-                        <a class="month-control" href="" data-month="@Model.PrevMonth">
+                        <a class="month-control" href="#" data-month="@Model.PrevMonth">
                             <span class="fa-stack">
                                 <i class="fa-solid fa-chevron-left arrow"></i>
                             </span>
@@ -15,7 +15,7 @@
                     </div>
                     <span class="month-title">@Model.Month</span>
                     <div>
-                        <a class="month-control" href="" data-month="@Model.NextMonth">
+                        <a class="month-control" href="#" data-month="@Model.NextMonth">
                             <span class="fa-stack">
                                 <i class="fa-solid fa-chevron-right arrow"></i>
                             </span>
@@ -40,8 +40,8 @@
             <tr>
                 @foreach (var day in week.Days)
                 {
-                    <td class="@day.CssClass text-center">
-                        <a href="#" class="calendar-day" data-day="@day.Date.ToString("yyyy-MM-dd")">
+                    <td class="@day.CssClass text-center" data-day="@day.Date.ToString("yyyy-MM-dd")">
+                        <a href="#" class="calendar-day">
                             @day.Date.Day
                         </a>
                     </td>
@@ -55,58 +55,67 @@
 
     <div id="calendar-day-details" class="mt-4"></div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const dayLinks = document.querySelectorAll('.calendar-day');
-        const detailsDiv = document.getElementById('calendar-day-details');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dayLinks = document.querySelectorAll('.calendar-day');
+            const detailsDiv = document.getElementById('calendar-day-details');
+            const dayNames = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
 
-        const dayNames = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
-
-        function clearSelection() {
-            document.querySelectorAll('.calendar td').forEach(td => {
-                td.classList.remove('selected-day');
-            });
-        }
-
-        function showDayDetails(dateStr, tdElement) {
-            const date = new Date(dateStr);
-            const dayName = dayNames[date.getDay()];
-            const formattedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-
-            detailsDiv.innerHTML = `
-                <div class="one-day">
-                    <div class="day-body">
-                        <h5 class="card-title">${dayName} ${formattedDate}</h5>
-                        <p class="card-text">Zde můžeš zobrazit další informace o tomto dni.</p>
-                    </div>
-                </div>
-            `;
-
-            clearSelection();
-            if (tdElement) {
-                tdElement.classList.add('selected-day');
+            function clearSelection() {
+                document.querySelectorAll('.calendar td').forEach(td => {
+                    td.classList.remove('selected-day');
+                });
             }
-        }
 
-        dayLinks.forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const dateStr = this.getAttribute('data-day');
-                const td = this.closest('td');
-                showDayDetails(dateStr, td);
+            function showDayDetails(dateStr, tdElement) {
+                const date = new Date(dateStr);
+                const dayName = dayNames[date.getDay()];
+                const formattedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+
+                detailsDiv.innerHTML = `
+                    <div class="one-day">
+                        <div class="day-body">
+                            <h5 class="card-title">${dayName} ${formattedDate}</h5>
+                            <p class="card-text">Zde můžeš zobrazit další informace o tomto dni.</p>
+                        </div>
+                    </div>
+                `;
+
+                clearSelection();
+                if (tdElement) {
+                    tdElement.classList.add('selected-day');
+                }
+            }
+
+            dayLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const td = this.closest('td');
+                    const dateStr = td.getAttribute('data-day');
+                    showDayDetails(dateStr, td);
+                });
+            });
+
+            // Automatický výběr dnešního dne
+            const today = new Date();
+            const todayStr = today.toISOString().split('T')[0];
+            const todayTd = document.querySelector(`.calendar td[data-day="${todayStr}"]`);
+            if (todayTd) {
+                showDayDetails(todayStr, todayTd);
+            }
+
+            // Přepínání měsíců pomocí šipek
+            document.querySelectorAll('.month-control').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const selectedMonth = this.getAttribute('data-month');
+                    if (selectedMonth) {
+                        const url = new URL(window.location.href);
+                        url.searchParams.set('month', selectedMonth);
+                        window.location.href = url.toString();
+                    }
+                });
             });
         });
-
-        // Automatický výběr dnešního dne
-        const today = new Date();
-        const todayStr = today.toISOString().split('T')[0];
-        const todayLink = document.querySelector(`.calendar-day[data-day="${todayStr}"]`);
-        if (todayLink) {
-            const todayTd = todayLink.closest('td');
-            showDayDetails(todayStr, todayTd);
-        }
-    });
-</script>
-
-
+    </script>
 </div>
