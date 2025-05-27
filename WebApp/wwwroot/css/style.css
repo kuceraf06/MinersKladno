@@ -53,6 +53,11 @@ header {
     text-align: center;
 }
 
+.partners .row .single-partner a img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
 #mobileMenu ul li a {
     position: relative;
     display: block;
@@ -1026,6 +1031,10 @@ footer h4 {
         font-size: 31px;
         cursor: pointer;
         padding: 0;
+    }
+
+    .partners .row .single-partner a img:hover {
+        transform: default;
     }
 
     .hover-img {
