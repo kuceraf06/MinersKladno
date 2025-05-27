@@ -7,6 +7,11 @@
     min-height: auto !important;
 }
 
+.contact a, .text-end a{
+    color: #93C11F;
+    font-weight: bold;
+}
+
 .profile-pic {
     width: 50px;
     height: 50px;
