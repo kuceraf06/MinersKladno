@@ -10,6 +10,7 @@
 .contact a, .text-end a{
     color: #93C11F;
     font-weight: bold;
+    font-size: .9rem;
 }
 
 .profile-pic {
@@ -106,6 +107,10 @@
 @media (max-width: 474px) {
     .profile-text {
         font-size: 0.8rem;
+    }
+
+    .contact a, .text-end a{
+        font-size: .8rem;
     }
 
     .text-end {
