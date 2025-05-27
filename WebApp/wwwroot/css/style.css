@@ -40,6 +40,8 @@ header {
 
 #mobileMenu {
     display: none;
+    font-family: 'Bowlby One SC', cursive;
+    font-weight: 100 !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -112,6 +114,8 @@ header {
 
 .submenu-screen {
     position: fixed;
+    font-family: 'Bowlby One SC', cursive;
+    font-weight: 100 !important;
     top: 0;
     left: 0;
     width: 100vw;
@@ -140,16 +144,11 @@ header {
 
 #submenu-tymy ul li {
     margin: 7px 0;
-}
-
-#submenu-tymy ul li {
     font-size: 18px;
-    font-weight: 600;
 }
 
 #submenu-tymy ul li a {
     font-size: 16px;
-    font-weight: 500;
 }
 
 .submenu-screen ul .dropdown-item-group {
@@ -160,7 +159,6 @@ header {
 .submenu-screen a {
     text-decoration: none;
     color: black;
-    font-weight: bolder;
     font-size: 20px;
 }
 
