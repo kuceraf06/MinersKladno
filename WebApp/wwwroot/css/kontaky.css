@@ -2,9 +2,21 @@ h5 {
     font-family:"Titan One", sans-serif;
 }
 
+@media (max-width: 740px) {
+    .main-box p {
+        margin: auto;
+    }
+}
+
 @media (max-width: 685px) {
-    h4.box {
+    h5.box {
         font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 619px) {
+    .main-box div{
+        font-size: .9rem;
     }
 }
 
