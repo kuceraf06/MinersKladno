@@ -3,58 +3,105 @@
 @model Miners.Web.WebApp.Pages.Clanky
 
 @section Head{
-    <link href="~/css/pageshared.css" rel="stylesheet"/>
-    <link href="~/css/clanky.css" rel="stylesheet"/>
+    <link href="~/css/pageshared.css" rel="stylesheet" />
+    <link href="~/css/clanky.css" rel="stylesheet" />
 }
 
 <div class="page-container">
     <h4>ČLÁNKY</h4>
+
+    <div class="filter-container mb-3">
+        <div class="row g-2">
+            <div class="col-md-3">
+                <select class="form-select" id="yearSelect" onchange="onFilterChange()">
+                    <option value="" disabled selected>Vyberte rok</option>
+                    @for (int y = DateTime.Now.Year; y >= 2020; y--)
+                    {
+                        <option value="@y">@y</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="monthSelect" onchange="onFilterChange()">
+                    <option value="" disabled selected>Vyberte měsíc</option>
+                    @for (int m = 1; m <= 12; m++)
+                    {
+                        <option value="@m">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(m)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3 d-flex align-items-start">
+                <button class="btn btn-secondary" onclick="resetFilters()">Zrušit filtr</button>
+            </div>
+        </div>
+    </div>
+
     <div id="list">
         <partial name="_ClankyList" model="Model.Articles" />
     </div>
+
     @if (Model.HasMoreArticles)
     {
         <div class="text-center" id="load-more-container">
-            <button class="btn btn-primary" id="btnMore" data-current-page="@Model.CurrentPage" onclick="LoadNext()">Načti další...</button>
+            <button class="btn btn-primary" id="btnMore" data-current-page="@Model.CurrentPage" onclick="LoadNext()">Načíst další</button>
         </div>
     }
 </div>
 
 <script>
-        async function LoadNext() {
-            const btn = document.getElementById("btnMore");
-            const currentPage = parseInt(btn.dataset.currentPage);
-            const nextPage = currentPage + 1;
-            const loadMoreContainer = document.getElementById('load-more-container');
-            try {
-                btn.disabled = true;
-                btn.textContent = 'Načítání...';
+    async function LoadNext(reset = false) {
+        const btn = document.getElementById("btnMore");
+        const currentPage = reset ? 1 : parseInt(btn.dataset.currentPage);
+        const nextPage = reset ? 1 : currentPage + 1;
+        const year = document.getElementById("yearSelect").value;
+        const month = document.getElementById("monthSelect").value;
 
-                const response = await fetch(`?page=${nextPage}`, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
+        try {
+            btn.disabled = true;
+            btn.textContent = 'Načítání...';
 
-                if (!response.ok) throw new Error('Network response was not ok');
-
-                const html = await response.text();
-
-                if (html.trim()) {
-                    const articlesContainer = document.getElementById('list');
-                    articlesContainer.insertAdjacentHTML('beforeend', html);
-                    btn.dataset.currentPage = nextPage;
-                    btn.disabled = false;
-                    btn.textContent = 'Načíst další';
-                } else {
-                    // No more articles to load
-                    loadMoreContainer.remove();
+            const response = await fetch(`?page=${nextPage}&year=${year}&month=${month}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                btn.textContent = 'Chyba při načítání';
-                btn.disabled = false;
-            }
-        }
+            });
 
-    </script>
+            if (!response.ok) throw new Error('Network response was not ok');
+
+            const html = await response.text();
+            const articlesContainer = document.getElementById('list');
+
+            if (reset) {
+                articlesContainer.innerHTML = html;
+                btn.dataset.currentPage = 1;
+                btn.disabled = false;
+                btn.textContent = 'Načíst další';
+                return;
+            }
+
+            if (html.trim()) {
+                articlesContainer.insertAdjacentHTML('beforeend', html);
+                btn.dataset.currentPage = nextPage;
+                btn.disabled = false;
+                btn.textContent = 'Načíst další';
+            } else {
+                document.getElementById('load-more-container')?.remove();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            btn.textContent = 'Chyba při načítání';
+            btn.disabled = false;
+        }
+    }
+
+    function onFilterChange() {
+        LoadNext(true);
+    }
+
+    function resetFilters() {
+    document.getElementById("yearSelect").value = "";
+    document.getElementById("monthSelect").value = "";
+    LoadNext(true);
+}
+
+</script>
