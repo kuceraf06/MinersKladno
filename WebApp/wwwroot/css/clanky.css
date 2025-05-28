@@ -5,6 +5,10 @@
     margin-bottom: 1rem;
 }
 
+.page-container {
+    min-height: 50vh;
+}
+
 a {
     text-decoration: none;
     color: inherit;
