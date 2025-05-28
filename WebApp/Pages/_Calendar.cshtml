@@ -20,20 +20,10 @@
                         </button>
 
                         <div id="monthYearDropdown" class="calendar-dropdown">
-                            <label for="monthSelect">Měsíc:</label>
-                            <select id="monthSelect" class="form-select form-select-sm mb-2">
-                                @{
-                                    var months = new[] { "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" };
-                                }
-                                @for (int i = 1; i <= 12; i++)
-                                {
-                                    var selected = (Model.Month == i.ToString()) ? "selected" : "";
-                                    <option value="@i" @selected>@months[i - 1]</option>
-                                }
-                            </select>
-
+                            
                             <label for="yearSelect">Rok:</label>
                             <select id="yearSelect" class="form-select form-select-sm mb-2">
+                                <option value="" disabled selected>Vyberte rok</option>
                                 @{
                                     int currentYear = DateTime.Now.Year;
                                     int startYear = currentYear - 10;
@@ -43,6 +33,19 @@
                                 {
                                     var selected = (Model.Year == y.ToString()) ? "selected" : "";
                                     <option value="@y" @selected>@y</option>
+                                }
+                            </select>
+
+                            <label for="monthSelect">Měsíc:</label>
+                            <select id="monthSelect" class="form-select form-select-sm mb-2">
+                                <option value="" disabled selected>Vyberte měsíc</option>
+                                @{
+                                    var months = new[] { "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" };
+                                }
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    var selected = (Model.Month == i.ToString()) ? "selected" : "";
+                                    <option value="@i" @selected>@months[i - 1]</option>
                                 }
                             </select>
 
