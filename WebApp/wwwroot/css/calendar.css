@@ -57,6 +57,16 @@
     background-color: #7DAA1A;
 }
 
+.btn-secondary {
+    font-family: 'Inter', sans-serif;
+        border: none;
+}
+
+.btn-secondary:hover {
+    font-family: 'Inter', sans-serif;
+    border: none;
+}
+
 .calendar{
     width:100%;
     text-align:center;
@@ -240,6 +250,10 @@
     }
 
     .btn-primary {
+        font-size: .8rem;
+    }
+
+    .btn-secondary {
         font-size: .8rem;
     }
 }
