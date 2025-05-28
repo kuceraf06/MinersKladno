@@ -1,4 +1,4 @@
-using BusinessLayer.Entities;
+﻿using BusinessLayer.Entities;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
