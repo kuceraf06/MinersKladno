@@ -95,7 +95,7 @@ async function LoadNext(reset = false) {
                 newBtn.dataset.currentPage = 1;
                 newBtn.disabled = false;
                 newBtn.textContent = 'Načíst další';
-                newbtn.classList.remove("loading");
+                newBtn.classList.remove("loading");  // Opraven překlep
             }
 
             return;
@@ -123,13 +123,13 @@ async function LoadNext(reset = false) {
     }
 }
 
-    function onFilterChange() {
-        LoadNext(true);
-    }
+function onFilterChange() {
+    LoadNext(true);
+}
 
-    function resetFilters() {
-        document.getElementById("yearSelect").value = "";
-        document.getElementById("monthSelect").value = "";
-        LoadNext(true);
-    }
+function resetFilters() {
+    document.getElementById("yearSelect").value = "";
+    document.getElementById("monthSelect").value = "";
+    LoadNext(true);
+}
 </script>
