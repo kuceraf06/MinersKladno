@@ -60,6 +60,7 @@ async function LoadNext(reset = false) {
         if (btn) {
             btn.disabled = true;
             btn.textContent = 'Načítání...';
+            btn.classList.add("loading");
         }
 
         const response = await fetch(`?page=${nextPage}&year=${year}&month=${month}`, {
@@ -81,7 +82,6 @@ async function LoadNext(reset = false) {
                 return;
             }
 
-            // Při resetu znovu zobrazíme tlačítko, pokud ještě není
             if (!document.getElementById('load-more-container')) {
                 const container = document.createElement('div');
                 container.id = 'load-more-container';
@@ -95,6 +95,7 @@ async function LoadNext(reset = false) {
                 newBtn.dataset.currentPage = 1;
                 newBtn.disabled = false;
                 newBtn.textContent = 'Načíst další';
+                newbtn.classList.remove("loading");
             }
 
             return;
@@ -107,6 +108,7 @@ async function LoadNext(reset = false) {
                 btn.dataset.currentPage = nextPage;
                 btn.disabled = false;
                 btn.textContent = 'Načíst další';
+                btn.classList.remove("loading");
             }
         } else {
             document.getElementById('load-more-container')?.remove();
@@ -116,6 +118,7 @@ async function LoadNext(reset = false) {
         if (btn) {
             btn.textContent = 'Chyba při načítání';
             btn.disabled = false;
+            btn.classList.remove("loading");
         }
     }
 }

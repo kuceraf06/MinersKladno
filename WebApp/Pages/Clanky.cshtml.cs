@@ -26,7 +26,6 @@ public class Clanky(AppDbContext dbContext) : PageModel
         if (month.HasValue)
             query = query.Where(x => x.DateCreated.Month == month.Value);
 
-        // Načtení a stránkování
         var articles = query.OrderByDescending(x => x.DateCreated)
             .Skip((CurrentPage - 1) * PageSize)
             .Take(PageSize + 1)
@@ -38,7 +37,6 @@ public class Clanky(AppDbContext dbContext) : PageModel
             articles.RemoveAt(PageSize);
         }
 
-        // Mapa na ArticleModel
         Articles = articles.Select(x => new ArticleModel()
         {
             Id = x.Id,
