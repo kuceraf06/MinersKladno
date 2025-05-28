@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 
 body{
     font-family: 'Inter', sans-serif;
@@ -8,7 +8,7 @@ body{
 }
 
 h4{
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
 }
 
 .container{
@@ -24,7 +24,8 @@ header {
 }
 
 .topheader{
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
+    text-transform: uppercase;
     display: flex;
     justify-content: space-between;
     background-color: #F8F4F4;
@@ -70,7 +71,7 @@ header {
 
 #mobileMenu {
     display: none;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
     font-weight: 100 !important;
     position: fixed;
     top: 0;
@@ -149,7 +150,7 @@ header {
 
 .submenu-screen {
     position: fixed;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
     font-weight: 100 !important;
     top: 0;
     left: 0;
@@ -225,11 +226,11 @@ header {
 
 .navbar-collapse{
     padding-left:150px;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
 }
 
 .navbar-collapse a{
-    font-size: 20px;
+    font-size: 1.2rem;
 }
 
 .nav-item, .nav-link {
@@ -238,7 +239,6 @@ header {
 
 .navbar .nav-item{
     white-space: nowrap;
-    margin-right: 20px;
 }
 
 .navbar .nav-link{
@@ -267,7 +267,7 @@ header {
 
 .navbar .dropdown-item{
     color:white;
-    font-size:15px;
+    font-size:1.1rem;
 }
 
 .navbar .dropdown-item:hover{
@@ -282,6 +282,22 @@ header {
 .logo img{
     width: 122px;
     height: auto;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 2vw;
+}
+
+.navbar-nav .nav-item {
+    white-space: nowrap;
+}
+
+.navbar-nav .nav-link {
+    display: inline-block;
 }
 
 .to-top {
@@ -362,8 +378,8 @@ header {
         height: auto;
     }
 
-    .dropdown-item {
-        font-size: 1rem !important;
+    .navbar .dropdown-item {
+        font-size: 1rem;
     }
 }
 
@@ -373,7 +389,7 @@ header {
 }
 
 .link-box{
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -645,7 +661,7 @@ header {
     justify-content: center;
     background-color: #93C11F;
     color: #000;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
     font-size: 1.4rem;
     padding: 10px;
     width: 60px;
@@ -1128,7 +1144,11 @@ footer h4 {
         align-items: center;
         width: 100%;
         margin-left: 25px;
-    }  
+    } 
+    
+    .navbar .dropdown-item{
+        font-size: .9rem;
+    }
 
     .link-box {
         font-size: 20px;
@@ -1227,12 +1247,6 @@ footer h4 {
         overflow: hidden;
     }
 
-    .logo img{
-        aspect-ratio: 117 / 100;
-        width: 110px;
-        height: auto;
-    }
-
     .hamburger {
         display: block;
         margin-left: auto;
@@ -1251,6 +1265,7 @@ footer h4 {
 
     .logo img {
         width: 100px !important;
+        aspect-ratio: 117 / 100;
         height: auto;
     }
 
@@ -1259,7 +1274,7 @@ footer h4 {
         align-items: center;
         width: 100%;
         margin-left: 50px;
-    } 
+    }
 
 }
 

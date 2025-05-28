@@ -12,7 +12,8 @@
 }
 
 .calendar thead tr:first-child th{
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
+    text-transform: uppercase;
     background-color: #93C11F;
     font-size: 1.4rem;
 }
@@ -72,7 +73,8 @@
 .day-body h5{
     font-weight: 500;
     color: black;
-    font-family: 'Bowlby One SC', cursive;
+    font-family: "Titan One", sans-serif;
+    text-transform: lowercase;
 }
 
 .day-body {
@@ -166,7 +168,7 @@
     }
     .calendar-day{
         line-height: 30px;
-        height:25px;
+        height: 25px;
     }
 
     .calendar thead tr:first-child th{
