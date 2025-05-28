@@ -63,6 +63,26 @@ header {
     height: 24px;
 }
 
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.topheader .streamON {
+    animation: blink 1.25s infinite;
+    border-radius: 3px;
+}
+
+.social-links .streamON {
+    animation: blink 1.25s infinite;
+    background-color: red !important;
+    color: white !important;
+}
+
 .navbar{
     background-color: #93C11F;
     position: relative;
@@ -142,10 +162,21 @@ header {
     display: flex;
 }
 
-.header-icons a:hover {
+.header-icons a:hover:not(:nth-child(4)) {
     color: #93C11F;
     background-color: #93C11F;
     transition: all 0.3s ease;
+}
+
+.header-icons .yt-default:hover {    
+    color: #93C11F;
+    background-color: #93C11F;
+    transition: all 0.3s ease;
+}
+
+.social-links .yt-default:hover {
+    color: WHITE;
+    background-color: black;
 }
 
 .submenu-screen {
@@ -835,7 +866,7 @@ footer h4 {
     margin-left: 20px;
 }
 
-.footer-col .social-links a:hover{
+.footer-col .social-links a:hover:not(:first-child){
     color: WHITE;
     background-color: black;
 }
@@ -944,7 +975,7 @@ footer h4 {
     }
 }
 
-@media (max-width: 611px) {
+@media (max-width: 636px) {
     .none {
         display: block;
     }
