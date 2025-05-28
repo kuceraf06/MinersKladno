@@ -16,7 +16,7 @@
     </div>
     @foreach (var team in Model.Teams)
     {
-        <h4 class="box box-green box-bordered box-@team.Kategorie" id="@team.Kategorie" style="text-transform: uppercase">@team.Title</h4>
+        <h5 class="box box-green box-bordered box-@team.Kategorie" id="@team.Kategorie" style="text-transform: uppercase">@team.Title</h5>
         @foreach (var trener in team.Treneri)
         {
         <div class="box box-white d-flex justify-content-between desktop">

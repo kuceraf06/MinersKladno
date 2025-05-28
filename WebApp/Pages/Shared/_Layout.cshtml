@@ -36,7 +36,15 @@
                 <a href="https://softball.cz" target="_blank"><img src="~/img/header/softballczech.png"/></a>
                 <a href="https://www.baseball.cz" target="_blank"><img src="~/img/header/baseballczech.png"/></a>
                 <a href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank"><img src="~/img/header/flickr.png"/></a>
-                <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><img src="~/img/header/MTVc.png"/></a>
+                <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><img src="~/img/header/MTVc.png" class="yt-default"/>
+                @*@if (Model.LiveTv == "Y")
+                {
+                    <a href="@Model.LiveTvUrl" target="_blank"><img src="~/img/header/MTV_RED.png" class="streamON"/></a>
+                }
+                else
+                {
+                    <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><img src="~/img/header/MTVc.png" class="yt-default"/></a>
+                }*@
                 <a href="https://www.facebook.com/minerskladno" target="_blank"><img src="~/img/header/FB.png"/></a>
                 <a href="https://www.instagram.com/minerskladno/" target="_blank"><img src="~/img/header/IG.png"/></a>
             </div>
@@ -202,7 +210,15 @@
                 <div class="footer-col">
                     <h4>SLEDUJTE NÁS</h4>
                     <div class="social-links">
-                        <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><i class="fab fa-youtube"></i></a>
+                        @*@if (Model.LiveTv == "Y")
+                        {
+                            <a class="streamON" href="@Model.LiveTvUrl" target="_blank"><i class="fab fa-youtube"></i></a>
+                        }
+                        else
+                        {
+                            <a class="yt-default" href="https://www.youtube.com/@@minerskladno1990" target="_blank"><i class="fab fa-youtube"></i></a>
+                        }*@
+                        <a class="yt-default" href="https://www.youtube.com/@@minerskladno1990" target="_blank"><i class="fab fa-youtube"></i></a>
                         <a href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank"><i class="fa-brands fa-flickr"></i></a><br class="none">
                         <a href="https://www.facebook.com/minerskladno" target="_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/minerskladno/" target="_blank"><i class="fab fa-instagram"></i></a>
