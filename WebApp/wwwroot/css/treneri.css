@@ -41,6 +41,10 @@
     color: black;
 }
 
+#pripravka, #baseball, #softball, #atletika {
+    scroll-margin-top: 150px;
+}
+
 @media (max-width: 1200px) {
     .box-kategorie:hover {
         transform: scale(1);

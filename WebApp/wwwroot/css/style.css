@@ -29,7 +29,37 @@ header {
     justify-content: space-between;
     background-color: #F8F4F4;
     align-items: center;
-    padding: 4px 10px;
+    padding: 2px 10px;
+}
+
+.topheader div {
+    font-size: 1rem;
+}
+
+.topheader .header-icons a:first-child img {
+    width: 47.2px; /* 39.33 × 1.2 */
+    height: 24px;  /* 20 × 1.2 */
+}
+
+.topheader .header-icons a:nth-child(2) img {
+    width: 26.4px; /* 22 × 1.2 */
+    height: 24px;
+}
+
+.topheader .header-icons a:nth-child(3) img {
+    width: 24.8px; /* 20.67 × 1.2 */
+    height: 24px;
+}
+
+.topheader .header-icons a:nth-child(4) img {
+    width: 35.2px; /* 29.33 × 1.2 */
+    height: 24px;
+}
+
+.topheader .header-icons a:nth-child(5) img,
+.topheader .header-icons a:nth-child(6) img {
+    width: 24px;  /* 20 × 1.2 */
+    height: 24px;
 }
 
 .navbar{
@@ -323,7 +353,7 @@ header {
     }
 
     .navbar .nav-link {
-        font-size: 1.15rem !important;
+        font-size: 1.15rem;
     }
 
     .logo img{
@@ -378,6 +408,10 @@ header {
 
 .link-box.fotogalerie{
     background-color: #fff;
+}
+
+#upcomingMatches {
+    scroll-margin-top: 150px;
 }
 
 .img-fluid {
@@ -1033,18 +1067,6 @@ footer h4 {
 }
 
 @media (max-width: 1200px) {
-    .hamburger {
-        display: block;
-        margin-left: auto;
-        margin-right: 20px;
-        background: none;
-        border: none;
-        color: black;
-        font-size: 31px;
-        cursor: pointer;
-        padding: 0;
-    }
-
     .partners .row .single-partner a img:hover {
         transform: default;
     }
@@ -1091,14 +1113,21 @@ footer h4 {
         color: black;
     }
 
-    #navbarSupportedContent {
-        display: none !important;
+    .navbar .nav-link {
+        font-size: .99rem !important;
+        margin-left: 0;
+    }
+
+    .logo img {
+        width: 90px !important;
+        height: auto;
     }
 
     .navbar-margin {
         display: flex;
         align-items: center;
         width: 100%;
+        margin-left: 25px;
     }  
 
     .link-box {
@@ -1141,34 +1170,34 @@ footer h4 {
 }
 
 @media (max-width: 1001px) {
-.main-green {
-  flex-direction: column;
-  align-items: center;
-}
+    .main-green {
+    flex-direction: column;
+    align-items: center;
+    }
 
-.main-green-text {
-    font-family: 'Inter', sans-serif;
-    font-style: italic;
-    font-weight: bold;
-    margin-right:2rem;
-}
+    .main-green-text {
+        font-family: 'Inter', sans-serif;
+        font-style: italic;
+        font-weight: bold;
+        margin-right:2rem;
+    }
 
-.main-green-button {
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-}
+    .main-green-button {
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
 
-.main-green-image {
-    margin-top: 1.5rem;
-}
+    .main-green-image {
+        margin-top: 1.5rem;
+    }
 
-.main-green-image img {
-    width: 250px;
-    height: auto;
-    margin: auto;
-    display: inline-block;
-}
+    .main-green-image img {
+        width: 250px;
+        height: auto;
+        margin: auto;
+        display: inline-block;
+    }
 }
 
 @media (min-width: 741px) and (max-width: 991px) {
@@ -1197,6 +1226,41 @@ footer h4 {
         min-width: 0px !important;
         overflow: hidden;
     }
+
+    .logo img{
+        aspect-ratio: 117 / 100;
+        width: 110px;
+        height: auto;
+    }
+
+    .hamburger {
+        display: block;
+        margin-left: auto;
+        margin-right: 20px;
+        background: none;
+        border: none;
+        color: black;
+        font-size: 31px;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    #navbarSupportedContent {
+        display: none !important;
+    }
+
+    .logo img {
+        width: 100px !important;
+        height: auto;
+    }
+
+    .navbar-margin {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-left: 50px;
+    } 
+
 }
 
 @media (max-width: 841px) {
@@ -1228,6 +1292,10 @@ footer h4 {
         padding-top: 10px;
         margin-bottom: 1rem;
         font-size: 18px;
+    }
+
+    .link-box img {
+        width: 120px !important;
     }
 
     .row h4, .upcomingMatches h4, .results h4 {
