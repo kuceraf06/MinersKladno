@@ -31,15 +31,15 @@ public class IndexModel(AppDbContext dbContext) : PageModel
         CarouselArticles.ForEach(x => x.Teaser = CreateTeaser(x.Teaser));
 
         DateTime targetDate;
-        if (!string.IsNullOrEmpty(month) && month.Length == 6 &&
-            int.TryParse(month.Substring(0, 2), out int parsedMonth) &&
-            int.TryParse(month.Substring(2, 4), out int parsedYear))
+
+        if (!string.IsNullOrEmpty(month))
         {
-            try
+            // Očekává formát "yyyy-MM", např. "2025-01"
+            if (DateTime.TryParseExact(month, "yyyy-MM", null, System.Globalization.DateTimeStyles.None, out var parsedDate))
             {
-                targetDate = new DateTime(parsedYear, parsedMonth, 1);
+                targetDate = new DateTime(parsedDate.Year, parsedDate.Month, 1);
             }
-            catch
+            else
             {
                 targetDate = DateTime.Now;
             }
