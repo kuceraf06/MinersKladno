@@ -1,0 +1,12 @@
+.nabory img {
+    width: 100%;
+    height: auto;
+}
+
+.nabory {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 11px #00000040;
+}

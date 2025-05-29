@@ -37,3 +37,16 @@
         </ul>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.page-container ul li a').forEach(link => {
+            link.addEventListener('click', function () {
+                const li = this.closest('li');
+                if (li) {
+                    li.classList.add('downloaded');
+                }
+            });
+        });
+    </script>
+}

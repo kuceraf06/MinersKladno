@@ -1,0 +1,31 @@
+.partner-title h5{
+    margin-top: 3rem;
+    font-weight: bold;
+}
+
+.row:nth-child(2) {
+    margin-top: 0rem !important;
+}
+
+.row .single-partner a img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.row .single-partner a .big{
+    width: 295px;
+}
+
+.partners hr {
+    color: #acacac;
+    border: 1px solid #acacac;
+    width: 87.5%;
+    margin: 50px auto 25px auto;
+    opacity: 1 !important;
+}
+
+@media (max-width: 991px) {
+    .row .single-partner a img:hover {
+        transform: default;
+    }
+}

@@ -8,6 +8,10 @@
     <meta name="format-detection" content="telephone=no">
     <title>MINERS TEST</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
@@ -21,6 +25,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="topheader">
@@ -31,7 +36,15 @@
                 <a href="https://softball.cz" target="_blank"><img src="~/img/header/softballczech.png"/></a>
                 <a href="https://www.baseball.cz" target="_blank"><img src="~/img/header/baseballczech.png"/></a>
                 <a href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank"><img src="~/img/header/flickr.png"/></a>
-                <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><img src="~/img/header/MTVc.png"/></a>
+                <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><img src="~/img/header/MTVc.png" class="yt-default"/>
+                @*@if (Model.LiveTv == "Y")
+                {
+                    <a href="@Model.LiveTvUrl" target="_blank"><img src="~/img/header/MTV_RED.png" class="streamON"/></a>
+                }
+                else
+                {
+                    <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><img src="~/img/header/MTVc.png" class="yt-default"/></a>
+                }*@
                 <a href="https://www.facebook.com/minerskladno" target="_blank"><img src="~/img/header/FB.png"/></a>
                 <a href="https://www.instagram.com/minerskladno/" target="_blank"><img src="~/img/header/IG.png"/></a>
             </div>
@@ -46,7 +59,7 @@
                         <li class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                    KLUB <i class="fa-solid fa-angle-right"></i>
+                                    KLUB <i class="fa-solid fa-angle-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="~/kontakty">KONTAKTY</a></li>
@@ -54,14 +67,15 @@
                                     <li><a class="dropdown-item" href="#">KALENDÁŘ</a></li>
                                     <li><a class="dropdown-item" href="~/hriste">HŘIŠTĚ</a></li>
                                     <li><a class="dropdown-item" href="~/historie">HISTORIE</a></li>
-                                     <li><a class="dropdown-item" href="~/stream">STREAM</a></li>
+                                    <li><a class="dropdown-item" href="~/kestazeni">KE STAŽENÍ</a></li>
+                                    <li><a class="dropdown-item" href="~/stream">STREAM</a></li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                    TÝMY <i class="fa-solid fa-angle-right"></i>
+                                    TÝMY <i class="fa-solid fa-angle-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-item-group">PŘÍPRAVKA</li>
@@ -88,7 +102,7 @@
                         <li class="nav-item">
                             <div class="dropdown">
                                 <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                    AKCE <i class="fa-solid fa-angle-right"></i>   
+                                    AKCE <i class="fa-solid fa-angle-right dropdown-arrow"></i>   
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="~/soustredeni">SOUSTŘEDĚNÍ</a></li>
@@ -107,7 +121,7 @@
                             <a class="nav-link" aria-current="page" href="~/clanky">ČLÁNKY</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="https://merch.minerskladno.cz" target="_blank">E-Shop</a>
+                            <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="https://merch.minerskladno.cz" target="_blank">E-SHOP</a>
                         </li>
                     </ul>
                 </div>
@@ -122,7 +136,7 @@
                         <li><a href="~/nabory">NÁBORY</a></li>
                         <li><a data-submenu="submenu-akce">AKCE <i class="fa-solid fa-angle-right"></i></a></li>
                         <li><a href="~/partneri">PARTNEŘI</a></li>
-                        <li><a href="~/Scm">SCM</a></li>
+                        <li><a href="~/scm">SCM</a></li>
                         <li><a href="~/clanky">ČLÁNKY</a></li>
                         <li><a href="https://merch.minerskladno.cz" target="_blank">E-SHOP</a></li>
                     </ul>
@@ -165,7 +179,7 @@
                     <button class="back-btn" data-back><i class="fa-solid fa-arrow-left"></i></button>
                     <button class="close-btn" id="closeSubmenuBtn3"><i class="fa-solid fa-xmark"></i></button>
                     <ul>
-                        <li><a href="#">SOUSTŘEDĚNÍ</a></li>
+                        <li><a href="~/soustredeni">SOUSTŘEDĚNÍ</a></li>
                         <li><a href="https://safe.minerskladno.cz" target="_blank">SAFE</a></li>
                         <li><a href="https://barochova.wixsite.com/kiwileague" target="_blank">KIWI LEAGUE</a></li>
                     </ul>
@@ -196,7 +210,15 @@
                 <div class="footer-col">
                     <h4>SLEDUJTE NÁS</h4>
                     <div class="social-links">
-                        <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><i class="fab fa-youtube"></i></a>
+                        @*@if (Model.LiveTv == "Y")
+                        {
+                            <a class="streamON" href="@Model.LiveTvUrl" target="_blank"><i class="fab fa-youtube"></i></a>
+                        }
+                        else
+                        {
+                            <a class="yt-default" href="https://www.youtube.com/@@minerskladno1990" target="_blank"><i class="fab fa-youtube"></i></a>
+                        }*@
+                        <a class="yt-default" href="https://www.youtube.com/@@minerskladno1990" target="_blank"><i class="fab fa-youtube"></i></a>
                         <a href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank"><i class="fa-brands fa-flickr"></i></a><br class="none">
                         <a href="https://www.facebook.com/minerskladno" target="_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/minerskladno/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -205,8 +227,7 @@
                 <div class="footer-col">
                     <h4>KONTAKTUJTE NÁS</h4>
                     <div class="contact-footer">
-                        <p><a href="mailto:miners@minerkladno.cz">miners@minerskladno.cz</a></p>
-                        <br>
+                        <p><a href="mailto:miners@minerkladno.cz" target="_blank">miners@minerskladno.cz</a></p>
                         <p>Miners Kladno, z.s.
                             <br>
                             U Trati 3489
@@ -219,7 +240,7 @@
         </div>
     </div>
     <div class="copyright">
-        <a href="mailto:miners@minerkladno.cz">Miners Kladno 2025 &copy; Všechna práva vyhrazena</a>
+        <a href="mailto:miners@minerkladno.cz" target="_blank">Miners Kladno 2025 &copy; Všechna práva vyhrazena</a>
     </div>
 </footer>
 <a href="#" class="to-top">
@@ -303,6 +324,32 @@ window.addEventListener('scroll', function() {
     lastScrollTop = currentScroll;
 });
 </script>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        if (window.location.hash) {
+            history.replaceState(null, "", window.location.pathname + window.location.search);
+            window.scrollTo(0, 0); // Skroluje nahoru
+        }
+    });
+</script>
+<script>
+  document.querySelectorAll('.dropdown').forEach(dropdown => {
+    const arrow = dropdown.querySelector('.dropdown-arrow');
+
+    dropdown.addEventListener('show.bs.dropdown', function () {
+      if (arrow) {
+        arrow.style.transform = 'rotate(90deg)';
+      }
+    });
+
+    dropdown.addEventListener('hide.bs.dropdown', function () {
+      if (arrow) {
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    });
+  });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 @RenderSection("Scripts", required: false)
 </body>

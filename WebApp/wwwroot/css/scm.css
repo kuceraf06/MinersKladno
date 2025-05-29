@@ -1,0 +1,46 @@
+.scm h5 {
+    font-weight: bold;
+}
+
+.scm-logo {
+    width: 120px;
+    height: 120px;
+    margin: 1rem auto;
+}
+
+.scm-image {
+    width: 100%;
+    height: auto;
+    max-width: 1000px;
+    margin: 1rem auto;
+}
+
+.scm img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+}
+
+.info, .winter-practice, .summer-practice, .description {
+    margin: 2rem auto;
+}
+
+@media (max-width: 619px) {
+    .scm h5 {
+        font-size: 1rem;
+    }
+
+    .scm-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .scm p {
+        font-size: .8rem;
+    }
+
+    .scm-image {
+        max-width: 100%;
+    }
+}

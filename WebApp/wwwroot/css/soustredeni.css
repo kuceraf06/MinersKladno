@@ -1,0 +1,25 @@
+.summer p, .summer ul, .winter p, .winter ul {
+    margin-left: 1rem;
+}
+
+.soustredeni h5 {
+    font-weight: bold;
+}
+
+.soustredeni hr {
+    width: 95%;
+    margin: 1rem auto;
+}
+
+.soustredeni img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    height: auto;
+}
+
+@media (max-width: 619px) {
+    .summer p, .summer ul, .winter p, .winter ul {
+        font-size: .8rem;
+    }
+}

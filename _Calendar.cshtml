@@ -21,18 +21,16 @@
                             <label for="yearSelect">Rok:</label>
                             <select id="yearSelect" class="form-select form-select-sm mb-2">
                                 @{
-                                    int actualYear = DateTime.Now.Year;
-                                    int selectedYear = int.Parse(Model.Year);
-                                    int startYear = actualYear - 10;
-                                    int endYear = actualYear + 10;
-
+                                    int currentYear = int.Parse(Model.Year);
+                                    // Rozsah +-50 let od aktuálního roku, nebo od vybraného roku (Model.Year)
+                                    int startYear = currentYear - 10;
+                                    int endYear = currentYear + 10;
                                     for (int y = startYear; y <= endYear; y++)
                                     {
-                                        var selected = y == selectedYear ? "selected" : "";
+                                        var selected = y == currentYear ? "selected" : "";
                                         <option value="@y" @selected>@y</option>
                                     }
                                 }
-
                             </select>
 
                                 <label for="monthSelect">Měsíc:</label>
@@ -87,8 +85,9 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     let currentMonthDate;
-    let selectedDateStr = null;
+    let selectedDateStr = null; // uložený výběr ve formátu 'YYYY-MM-DD'
 
+    // Inicializace aktuálního měsíce z URL nebo dnešního data
     const urlParams = new URLSearchParams(window.location.search);
     const monthParam = urlParams.get('month');
     if (monthParam && /^\d{4}-\d{2}$/.test(monthParam)) {
@@ -100,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showDayDetails(dateStr) {
-        selectedDateStr = dateStr;
+        selectedDateStr = dateStr; // zapamatovat si výběr
 
         const date = new Date(dateStr);
         const dayName = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'][date.getDay()];
@@ -114,8 +113,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </div>`;
 
+        // Odstranit předchozí výběr
         document.querySelectorAll('td.selected-day').forEach(td => td.classList.remove('selected-day'));
 
+        // Vybrat aktuální den
         const newSelected = document.querySelector(`td[data-day="${dateStr}"]`);
         if (newSelected) {
             newSelected.classList.add('selected-day');
@@ -162,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('resetBtn')?.addEventListener('click', () => {
             const today = new Date();
             currentMonthDate = new Date(today.getFullYear(), today.getMonth(), 1);
-            loadCalendarPartial('', true);
+            loadCalendarPartial('', true); // true = zobrazit dnešní den
         });
 
         document.addEventListener('click', function (e) {
@@ -195,6 +196,7 @@ function loadCalendarPartial(month, highlightToday = false) {
                 if (selectedCell) {
                     showDayDetails(selectedDateStr);
                 } else {
+                    // Pokud vybraný den není v aktuálním měsíci, nezobrazuj nic
                     document.getElementById('calendar-day-details').innerHTML = '';
                 }
             }
@@ -203,6 +205,7 @@ function loadCalendarPartial(month, highlightToday = false) {
 
     attachEvents();
 
+    // Po prvním načtení: zobraz dnešní den, pokud je ve viditelném měsíci
     const today = new Date();
     if (
         currentMonthDate.getFullYear() === today.getFullYear() &&
@@ -212,7 +215,7 @@ function loadCalendarPartial(month, highlightToday = false) {
         const todayCell = document.querySelector(`td[data-day="${todayStr}"]`);
         if (todayCell) {
             todayCell.classList.add('today-highlight');
-            todayCell.classList.add('selected-day');
+            todayCell.classList.add('selected-day'); // označ i jako vybraný
             showDayDetails(todayStr, todayCell);
         }
     }

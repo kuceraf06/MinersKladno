@@ -56,27 +56,23 @@
                 <div class="article">
                     <img src="img/articletest.png"/>
                     <div>
-                        <a href="#">
-                            <h5 class="fw-bold">Výroční soustředění v Nymburku</h5>
-                            <p>Od pátku do neděle se ve Sportovním centru Nymburk konalo tradiční – již desáté – zimní
-                                soustředění. V perfektních podmínkách se tak připravovalo a zdokonalovalo celkem 42 hráčů
-                                a hráček z kategorií U11-U18. Dopolední páteční příjezd začínáme ubytováním a výborným obědem                         Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
-                                Nashvillu na akademii Pro5, kam se k nim připojil Ondra
-                                Vostatek, který přelítával z Portorika                         Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
-                                Nashvillu na akademii Pro5, kam se k nim připojil Ondra
-                                Vostatek, který přelítával z Portorika....</p>
-                            </a>
+                        <h5 class="fw-bold">Výroční soustředění v Nymburku</h5>
+                        <p>Od pátku do neděle se ve Sportovním centru Nymburk konalo tradiční – již desáté – zimní
+                            soustředění. V perfektních podmínkách se tak připravovalo a zdokonalovalo celkem 42 hráčů
+                            a hráček z kategorií U11-U18. Dopolední páteční příjezd začínáme ubytováním a výborným obědem                         Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
+                            Nashvillu na akademii Pro5, kam se k nim připojil Ondra
+                            Vostatek, který přelítával z Portorika                         Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
+                            Nashvillu na akademii Pro5, kam se k nim připojil Ondra
+                            Vostatek, který přelítával z Portorika....</p>
                     </div>
                 </div>
                 <div class="article">
                     <img src="img/articletest.png"/>
                     <div>
-                        <a href="#">
-                            <h5 class="fw-bold">Miners U9 vyhráli Kladenský kahan</h5>
-                            <p>Od pátku do neděle se ve Sportovním centru Nymburk konalo tradiční – již desáté – zimní
-                                soustředění. V perfektních podmínkách se tak připravovalo a zdokonalovalo celkem 42 hráčů
-                                a hráček z kategorií U11-U18. Dopolední páteční příjezd začínáme ubytováním a výborným obědem...</p>
-                        </a>
+                        <h5 class="fw-bold">Miners U9 vyhráli Kladenský kahan</h5>
+                        <p>Od pátku do neděle se ve Sportovním centru Nymburk konalo tradiční – již desáté – zimní
+                            soustředění. V perfektních podmínkách se tak připravovalo a zdokonalovalo celkem 42 hráčů
+                            a hráček z kategorií U11-U18. Dopolední páteční příjezd začínáme ubytováním a výborným obědem...</p>
                     </div>
                 </div>
             </div>
@@ -389,11 +385,13 @@ document.querySelectorAll('.matches').forEach(matchesBlock => {
   const nextBtn = matchesBlock.querySelector('.nextBtn');
   const matches = matchesContainer.querySelectorAll('.match');
 
+  // Použijme šířku prvního zápasu včetně marginu pro výpočet posunu
   const match = matches[0];
   const matchStyle = getComputedStyle(match);
   const matchWidth = match.offsetWidth;
   const marginRight = parseFloat(matchStyle.marginRight);
 
+  // Pokud marginRight není nastavený, použij 0
   const scrollAmount = matchWidth + (marginRight || 0);
 
   function scrollToMatch(index) {

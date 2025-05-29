@@ -1,6 +1,26 @@
+h5 {
+    font-family:"Titan One", sans-serif;
+}
+
+.box-white {
+    box-shadow: 0 4px 11px #00000040;
+}
+
+@media (max-width: 740px) {
+    .main-box p {
+        margin: auto;
+    }
+}
+
 @media (max-width: 685px) {
-    h4.box {
+    h5.box {
         font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 619px) {
+    .main-box div{
+        font-size: .9rem;
     }
 }
 
