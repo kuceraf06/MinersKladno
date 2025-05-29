@@ -79,7 +79,7 @@ h5 {
     margin-bottom: 1rem;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 991px) {
     .contact-coaches a:hover {
         background-color: white;
         color: rgb(80, 80, 80);

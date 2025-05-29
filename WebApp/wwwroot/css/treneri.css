@@ -49,7 +49,7 @@ h5 {
     scroll-margin-top: 150px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 991px) {
     .box-kategorie:hover {
         transform: scale(1);
     }

@@ -8,10 +8,10 @@
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 991px) {
     .page-container a:hover{
         color: #93C11F;
-}
+    }
 }
 
 .page-container h5 {
@@ -27,8 +27,8 @@
     transition: all 30s ease;
 }
 
-.page-container a:hover{
-    color: #6b8b17;
+.page-container a:hover {
+    color: #7DAA1A;
 }
 
 .page-container ul li {

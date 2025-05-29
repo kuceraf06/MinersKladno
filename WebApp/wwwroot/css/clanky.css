@@ -39,6 +39,10 @@ a {
     background-color: #7DAA1A;
 }
 
+.btn.loading {
+    background-color: #7DAA1A !important;
+}
+
 .btn:active {
     background-color: #7DAA1A;
     box-shadow: none;
@@ -75,6 +79,24 @@ select.form-select option {
 @media (max-width: 1000px) {
     select.form-select {
         width: 14rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .btn:hover {
+        background-color: #93C11F;
+    }
+
+    .btn.loading {
+        background-color: #93C11F !important;
+    }
+
+    .btn:active {
+        background-color: #93C11F;
+    }
+
+    .clanky-link:hover {
+        color: #000000;
     }
 }
 

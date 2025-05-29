@@ -516,6 +516,20 @@ header {
     margin-top: 10px;
 }
 
+.article div a {
+    color: #000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.article div a:hover {
+    color: #93C11F;
+}
+
+.article div a h5 {
+    text-decoration: underline;
+}
+
 .article p {
     padding-right: 10px;
     overflow: hidden;
@@ -1137,52 +1151,6 @@ footer h4 {
 }
 
 @media (max-width: 1200px) {
-    .partners .row .single-partner a img:hover {
-        transform: default;
-    }
-
-    .hover-img {
-        opacity: 0;
-    }
-
-    .main-green-button:hover .default-img {
-        opacity: 1;
-    }
-
-    .main-green-button:hover .hover-img {
-        opacity: 0;
-    }
-
-    .footer-col .social-links a:hover{
-        color: black;
-        background-color: white;
-    }
-
-    .footer-col ul li a:hover{
-        padding-left: 0px;    
-    }
-
-    .main-green-button img:hover {
-        filter: none;
-    }
-
-    .main-green-button:hover {
-        color: #93C11F;
-    }
-
-    .header-icons a:hover {
-        color: transparent;
-        background-color: transparent;
-    }
-
-    .link-box:hover {
-        scale: none;
-    }
-
-    .hamburger i {
-        color: black;
-    }
-
     .navbar .nav-link {
         font-size: .99rem !important;
         margin-left: 0;
@@ -1330,6 +1298,55 @@ footer h4 {
         margin-left: 50px;
     }
 
+    .article div a:hover {
+        color: black;
+    }
+
+    .partners .row .single-partner a img:hover {
+        transform: default;
+    }
+    
+    .hover-img {
+        opacity: 0;
+    }
+
+    .main-green-button:hover .default-img {
+        opacity: 1;
+    }
+
+    .main-green-button:hover .hover-img {
+        opacity: 0;
+    }
+
+    .footer-col .social-links a:hover{
+        color: black;
+        background-color: white;
+    }
+
+    .footer-col ul li a:hover{
+        padding-left: 0px;    
+    }
+
+    .main-green-button img:hover {
+        filter: none;
+    }
+
+    .main-green-button:hover {
+        color: #93C11F;
+    }
+
+    .header-icons a:hover {
+        color: transparent;
+        background-color: transparent;
+    }
+
+    .link-box:hover {
+        scale: none;
+    }
+
+    .hamburger i {
+        color: black;
+    }
 }
 
 @media (max-width: 841px) {
