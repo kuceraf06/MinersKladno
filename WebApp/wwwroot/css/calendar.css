@@ -3,6 +3,7 @@
     height: auto;
     padding-bottom: 20px;
     background-color: white;
+    box-shadow: 0 4px 11px #00000040;
 }
 
 #monthYearBtn {

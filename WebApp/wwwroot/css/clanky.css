@@ -9,9 +9,14 @@
     min-height: 50vh;
 }
 
-a {
+.clanky-list, .box-clanek {
+    box-shadow: 0 4px 11px #00000040;
+}
+
+.clanky-link {
     text-decoration: none;
-    color: inherit;
+    color: black;
+    background-color: white;
 }
 
 .article-image img {

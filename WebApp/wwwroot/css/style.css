@@ -672,6 +672,7 @@ header {
 
 .matches {
     background-color: #fff;
+    box-shadow: 0 4px 11px #00000040;
     display: flex;
     align-items: center;
     padding: 1rem;
@@ -1305,7 +1306,7 @@ footer h4 {
     .partners .row .single-partner a img:hover {
         transform: default;
     }
-    
+
     .hover-img {
         opacity: 0;
     }

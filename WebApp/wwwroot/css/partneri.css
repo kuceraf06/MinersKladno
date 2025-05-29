@@ -24,7 +24,7 @@
     opacity: 1 !important;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 991px) {
     .row .single-partner a img:hover {
         transform: default;
     }

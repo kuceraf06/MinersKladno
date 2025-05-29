@@ -3,6 +3,10 @@
     margin:auto;
 }
 
+.box-white {
+    box-shadow: 0 4px 11px #00000040;
+}
+
 .container {
     min-height: auto !important;
 }

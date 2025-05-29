@@ -6,6 +6,7 @@
 .historie-box{
     background-color: #fff;
     padding: 1rem;
+    box-shadow: 0 4px 11px #00000040;
 }
 
 h5:not(.first-block) {

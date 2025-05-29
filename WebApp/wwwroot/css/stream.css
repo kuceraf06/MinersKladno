@@ -4,3 +4,7 @@
     margin: 0 auto;
     height: auto;
 }
+
+.stream {
+    box-shadow: 0 4px 11px #00000040;
+}

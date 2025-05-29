@@ -9,6 +9,10 @@
     padding: 1rem;
 }
 
+.team-coaches, .team-league, .team-training, .team-description, .team-fee{
+    box-shadow: 0 4px 11px #00000040;
+}
+
 .team-training{
     background-color: #93C11F;
     border-radius: 10px;
