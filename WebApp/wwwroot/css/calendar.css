@@ -50,7 +50,7 @@
 
 .calendar-buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .btn-primary {
