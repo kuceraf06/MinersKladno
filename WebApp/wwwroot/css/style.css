@@ -23,6 +23,19 @@ header {
     z-index: 1000;
 }
 
+@media(min-width: 1920px) {
+    .topheader,
+    .navbar {
+        width: 100%;
+    }
+
+    .topheader,
+    .navbar .navbar-margin {
+        max-width: 1920px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+}
 .topheader{
     font-family: "Titan One", sans-serif;
     text-transform: uppercase;
@@ -162,9 +175,10 @@ header {
     display: flex;
 }
 
-.header-icons a:hover:not(:nth-child(4)) {
+.header-icons a img:hover:not(:nth-child(4)) {
     color: #93C11F;
     background-color: #93C11F;
+    border-radius: 4px;
     transition: all 0.3s ease;
 }
 
@@ -1336,7 +1350,7 @@ footer h4 {
         color: #93C11F;
     }
 
-    .header-icons a:hover {
+    .header-icons a img:hover {
         color: transparent;
         background-color: transparent;
     }
