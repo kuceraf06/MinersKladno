@@ -385,13 +385,11 @@ document.querySelectorAll('.matches').forEach(matchesBlock => {
   const nextBtn = matchesBlock.querySelector('.nextBtn');
   const matches = matchesContainer.querySelectorAll('.match');
 
-  // Použijme šířku prvního zápasu včetně marginu pro výpočet posunu
   const match = matches[0];
   const matchStyle = getComputedStyle(match);
   const matchWidth = match.offsetWidth;
   const marginRight = parseFloat(matchStyle.marginRight);
 
-  // Pokud marginRight není nastavený, použij 0
   const scrollAmount = matchWidth + (marginRight || 0);
 
   function scrollToMatch(index) {
