@@ -49,6 +49,62 @@ public class IndexModel(AppDbContext dbContext) : PageModel
 
         CarouselArticles.ForEach(x => x.Teaser = CreateTeaser(x.Teaser));
     }
+    
+    public IActionResult OnGetEventPartial(DateTime date)
+    {
+        var eventsModel = new EventsModel { Date = date };
+        CalendarClient cc = new CalendarClient();
+        var x = cc.Main(date, date);
+        eventsModel.Events = x.Items.Select(x => new EventModel
+        {
+            Start = x.Start.DateTime.Value,
+            End = x.End.DateTime,
+            Date = DateString(x),
+            Text = x.Summary,
+            Location = x.Location
+        }).ToList();
+        return Partial("_Event", eventsModel);
+    }
+    
+    string DateString(Google.Apis.Calendar.v3.Data.Event value)
+    {
+        var result = "";
+        bool isWholeDaye = !string.IsNullOrEmpty(value.Start.Date);
+        string timeFormat = "HH:mm";
+        if (!string.IsNullOrEmpty(value.Start.Date))
+        {
+            timeFormat = "dd.MM.yyyy";
+        }
+        else if (value.End != null && value.End.DateTime.HasValue && value.Start.DateTime.Value.Date != value.End.DateTime.Value.Date)
+        {
+            timeFormat = "dd.MM.yyyy HH:mm";
+        }
+
+        if (!string.IsNullOrEmpty(value.Start.Date))
+        {
+            result = DateTime.Parse(value.Start.Date).ToString(timeFormat);
+        }
+        else
+        {
+            result = value.Start.DateTime.Value.ToString(timeFormat);
+        }
+        if (value.End != null)
+        {
+            if (!string.IsNullOrEmpty(value.End.Date))
+            {
+                var d = DateTime.Parse(value.End.Date).AddDays(-1);
+                if(d.Date != value.Start.DateTime.Value.Date)
+                {
+                    result += " - " + d.ToString(timeFormat);
+                }
+            }
+            else
+            {
+                result += " - " + value.End.DateTime.Value.ToString(timeFormat);
+            }
+        }
+        return result;
+    }
 
     private DateTime GetTargetDate(string? month)
     {

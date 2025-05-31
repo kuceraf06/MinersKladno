@@ -101,19 +101,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showDayDetails(dateStr) {
-        selectedDateStr = dateStr;
-
-        const date = new Date(dateStr);
-        const dayName = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'][date.getDay()];
-        const formattedDate = date.toLocaleDateString('cs-CZ');
-
-        document.getElementById('calendar-day-details').innerHTML = `
-            <div class="one-day">
-                <div class="day-body">
-                    <h5 class="card-title">${dayName} ${formattedDate}</h5>
-                    <p class="card-text">Zde můžeš zobrazit další informace o tomto dni.</p>
-                </div>
-            </div>`;
+        fetch(`Index?handler=EventPartial&date=${dateStr}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("calendar-day-details").innerHTML = html;
+            })
+            .catch(error => console.error("Error loading event:", error));
 
         document.querySelectorAll('td.selected-day').forEach(td => td.classList.remove('selected-day'));
 

@@ -42,6 +42,6 @@
         public string Text { get; set; }
         public string Location { get; set; }
 
-        public string DateLabel { get; set; }
+        public string Date { get; set; }
     }
 }

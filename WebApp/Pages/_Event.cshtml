@@ -1,0 +1,28 @@
+﻿@model Miners.Web.WebApp.Models.EventsModel
+
+<div class="event-date">@Model.Date.ToLongDateString()</div>
+
+@if (Model.Events.Count > 0)
+{
+    @foreach (var item in Model.Events)
+    {
+
+        <div class="event-team">
+            <div class="text-left">@item.Text</div>
+        </div>
+        <div class="event">
+            @*<div class="event-item">@item.Text</div>*@
+            <div class="event-time">
+                <i class="fas fa-clock"></i>&nbsp;@item.Date
+            </div>
+            @if (!string.IsNullOrEmpty(item.Location))
+            {
+                <div class="event-location"><i class="fas fa-map-marker-alt"></i>&nbsp;@item.Location</div>
+            }
+        </div>
+    }
+}
+else
+{
+    <div>Tento den máme volno.</div>
+}
