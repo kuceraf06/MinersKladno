@@ -1,0 +1,21 @@
+﻿@page
+@model Miners.Web.WebApp.Pages.Stream
+
+@section Head{
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <link href="~/css/stream.css" rel="stylesheet"/>
+}
+
+<div class="page-container">
+    <h4>STREAM</h4>
+    <div class="box box-white stream" style="min-height: 550px">
+        @if (Model.LiveTv == "Y")
+        {
+            <iframe width="100%" height="500" src="@Model.LiveTvUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        }
+        else
+        {
+            <img src="~/img/stream/NoStream.png" title="YouTube video player"></img>
+        }
+    </div>
+</div>

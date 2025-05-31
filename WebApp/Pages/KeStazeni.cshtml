@@ -1,0 +1,52 @@
+﻿@page
+@model Miners.Web.WebApp.Pages.KeStazeni
+
+@section Head{
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <link href="~/css/kestazeni.css" rel="stylesheet"/>
+}
+
+<div class="page-container">
+    <h4>KE STAŽENÍ</h4>
+    <div class="box box-white">
+        <h5>Administrativa</h5>
+        <ul>
+            <li><a href="~/doc/PrihlaskaDeti.docx" target="_blank">Přihláška do 18 let</a></li>
+            <li><a href="~/doc/PrihlaskaDospeli.docx" target="_blank">Přihláška od 18 let</a></li>
+            <li><a href="~/doc/GDPR.pdf" target="_blank">GDPR</a></li>
+            <li><a href="~/doc/ZdravotniZpusobilost.docx" target="_blank">Zdravotní způsobilost</a></li>
+            <li><a href="~/doc/DohodaOdpovednost.docx" target="_blank">Dohoda o odpovědnosti</a></li>
+        </ul>
+        <h5>Výroční zprávy Miners Kladno</h5>
+        <ul>
+            <li><a href="vz-miners/vyrocni zprava 2023.pdf" target="_blank">Výroční zpráva 2023</a></li>
+            <li><a href="vz-miners/vyrocni zprava 2022.pdf" target="_blank">Výroční zpráva 2022</a></li>
+            <li><a href="vz-miners/vyrocni zprava 2021.pdf" target="_blank">Výroční zpráva 2021</a></li>
+            <li><a href="vz-miners/vyrocni zprava 2020.pdf" target="_blank">Výroční zpráva 2020</a></li>
+            <li><a href="vz-miners/vyrocni zprava 2019.pdf" target="_blank">Výroční zpráva 2019</a></li>
+            <li><a href="vz-miners/vyrocni zprava 2018.pdf" target="_blank">Výroční zpráva 2018</a></li>
+            <li><a href="vz-miners/vyrocni zprava 2017.pdf" target="_blank">Výroční zpráva 2017</a></li>
+            <li><a href="vz-miners/vyrocni zprava 2016.pdf" target="_blank">Výroční zpráva 2016</a></li>
+        </ul>
+        <h5>Výroční zprávy Sportovní centrum Miners</h5>
+        <ul>
+            <li><a href="vz-scm/vyrocni zprava 2023.pdf" target="_blank">Výroční zpráva 2023</a></li>
+            <li><a href="vz-scm/vyrocni zprava 2022.pdf" target="_blank">Výroční zpráva 2022</a></li>
+            <li><a href="vz-scm/vyrocni zprava 2021.pdf" target="_blank">Výroční zpráva 2021</a></li>
+            <li><a href="vz-scm/vyrocni zprava 2020.pdf" target="_blank">Výroční zpráva 2020</a></li>
+        </ul>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.page-container ul li a').forEach(link => {
+            link.addEventListener('click', function () {
+                const li = this.closest('li');
+                if (li) {
+                    li.classList.add('downloaded');
+                }
+            });
+        });
+    </script>
+}

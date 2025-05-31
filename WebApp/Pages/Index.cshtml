@@ -1,0 +1,423 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Miners.Web.WebApp.Pages.IndexModel
+
+<div class="row">
+    <div class="col-xl-9">
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < Model.CarouselArticles.Count; i++)
+                        {
+                            var item = Model.CarouselArticles[i];
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <div class="carousel-article" style="background-image: url(@Url.Page("/File", new { id = @item.ImageId }))">
+                                    <div class="carousel-article-title">
+                                        <h5 class="fw-bold">@item.Title</h5>
+                                        <p>@item.Teaser</p>
+                                        <span class="fw-bold">@item.DateCreated</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-between  link-box-container">
+                <a class="link-box nabory" href="~/nabory">
+                    NÁBORY <img class="img-fluid" src="img/linkbox/nabory.png"/>
+                    @* <img src="img/linkbox/nabory.png"> *@
+                </a>
+                <a class="link-box kalendar" href="#upcomingMatches">
+                    ROZPIS ZÁPASŮ <img class="img-fluid" src="img/linkbox/kalendar.png"/>
+                </a>
+                <a class="link-box fotogalerie" href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank">
+                    FOTOGALERIE <img class="img-fluid" src="img/linkbox/ondra.png"/>
+                </a>        
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <h4>ČLÁNKY</h4>
+                <div class="article">
+                    <img src="img/articletest.png"/>
+                    <div>
+                        <a href="#">
+                            <h5 class="fw-bold">Výroční soustředění v Nymburku</h5>
+                            <p>Od pátku do neděle se ve Sportovním centru Nymburk konalo tradiční – již desáté – zimní
+                                soustředění. V perfektních podmínkách se tak připravovalo a zdokonalovalo celkem 42 hráčů
+                                a hráček z kategorií U11-U18. Dopolední páteční příjezd začínáme ubytováním a výborným obědem                         Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
+                                Nashvillu na akademii Pro5, kam se k nim připojil Ondra
+                                Vostatek, který přelítával z Portorika                         Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
+                                Nashvillu na akademii Pro5, kam se k nim připojil Ondra
+                                Vostatek, který přelítával z Portorika....</p>
+                            </a>
+                    </div>
+                </div>
+                <div class="article">
+                    <img src="img/articletest.png"/>
+                    <div>
+                        <a href="#">
+                            <h5 class="fw-bold">Miners U9 vyhráli Kladenský kahan</h5>
+                            <p>Od pátku do neděle se ve Sportovním centru Nymburk konalo tradiční – již desáté – zimní
+                                soustředění. V perfektních podmínkách se tak připravovalo a zdokonalovalo celkem 42 hráčů
+                                a hráček z kategorií U11-U18. Dopolední páteční příjezd začínáme ubytováním a výborným obědem...</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>AKTUALITY</h4>
+                <div class="actuality">
+                    <h5 class="fw-bold">Kučera, Kuklík a Vostatek na Pro5</h5>
+                    <p>
+                        Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
+                        Nashvillu na akademii Pro5, kam se k nim připojil Ondra
+                        Vostatek, který přelítával z Portorika.
+                    </p>
+                </div>
+                <div class="actuality">
+                    <h5 class="fw-bold">Školení zapisovatelů</h5>
+                    <p>
+                        23.2. proběhlo školení zapisovatelů na program MyBallClub,
+                        kterého se zúčastnili i trenéři, hráči a rodiče Miners.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <h4>KALENDÁŘ</h4>
+        <div id="calendar-container">
+            <partial name="_Calendar" model="Model.Calendar" />
+        </div>
+    </div>
+</div>
+<div class="main-green">
+    <div class="flex-grow-1 d-flex flex-column p-2">
+        <div class="main-green-row">
+            <div class="main-green-text">
+                Staň se součástí Miners!
+            </div>
+            <a class="main-green-button" href="~/nabory">
+                NÁBOR HRÁČŮ
+            </a>
+        </div>
+        <div class="main-green-row">
+            <div class="main-green-text">
+                Staň se součástí třetího týmu na hřišti!
+            </div>
+            <a class="main-green-button" href="~/nabory">
+                NÁBOR ROZHODČÍCH
+            </a>
+        </div>
+        <div class="main-green-row">
+            <div class="main-green-text">
+                Buď vidět! Nakup merch na našem <span style="white-space: nowrap;">e - shopu</span>
+            </div>
+            <a class="main-green-button" href="https://merch.minerskladno.cz" target="_blank">
+                MINERS MERCH
+            </a>
+        </div>
+        <div class="main-green-row">
+            <div class="main-green-text">
+                Livestreamy a další videa uvidíš na našem YT kanále
+            </div>
+            <a class="main-green-button buttonWimg" href="https://www.youtube.com/@@minerskladno1990" target="_blank">
+                    <div class="img-wrapper">
+                        <img class="img-fluid default-img" src="img/greenbox/MTVb.png" alt="YouTube logo" />
+                        <img class="img-fluid hover-img" src="img/greenbox/MTVc.png" alt="YouTube hover logo" />
+                    </div>
+            </a>
+        </div>
+    </div>
+    <div class="main-green-image text-center" style="width:38%">
+        <img class="img-fluid" src="img/greenbox/hracrozhodci.png"/>
+    </div>
+</div>
+<div class="upcomingMatches" id="upcomingMatches">
+    <h4>ROZPIS NADCHÁZEJÍCÍCH ZÁPASŮ</h4>
+</div>
+<div class="matches">
+    <button class="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+    <div class="matches-container">
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div>7. ZŠ Kladno</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. BerounX</div>
+                <div>9.4.2025 17:00</div>
+                <div>7. ZŠ Kladno</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div>7. ZŠ Kladno</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div>7. ZŠ Kladno</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info"> 
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div>7. ZŠ Kladno</div>
+            </div>
+        </div>    
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div>7. ZŠ Kladno</div>
+            </div>
+        </div>
+    </div>
+    <button class="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+<div class="results">
+    <h4>POSLEDNÍ ZÁPASY</h4>
+</div>
+<div class="matches">
+    <button class="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+    <div class="matches-container">
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div class="match-result win">21:4</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. BerounX</div>
+                <div>9.4.2025 17:00</div>
+                <div class="match-result win">21:4</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div class="match-result lose">21:4</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div class="match-result win">21:4</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info"> 
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div class="match-result lose">21:4</div>
+            </div>
+        </div>    
+        <div class="match">
+            <div class="match-category">
+                <div>U9</div>
+            </div>
+            <div class="match-info">
+                <div>Miners vs. Beroun</div>
+                <div>9.4.2025 17:00</div>
+                <div class="match-result lose">21:4</div>
+            </div>
+        </div>
+    </div>
+    <button class="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+<h4 class="partners-header">PARTNEŘI</h4>
+<div class="partners">
+    @* <div class="row footer partner-title no-gutters"> *@
+    @*     <div class="col"> *@
+    @*         <div>HLAVNÍ PARTNEŘI</div> *@
+    @*     </div> *@
+    @* </div> *@
+    <div class="row footer no-gutters logo-border">
+        <div class="col-md-4 single-partner">
+            <a href="http://www.mestokladno.cz/" target="_blank">
+                <img src="/img/partners/kladno.png">
+            </a>
+        </div>
+        <div class="col-md-4 single-partner">
+            <a href="https://www.kr-stredocesky.cz/" target="_blank">
+                <img src="/img/partners/kraj.png">
+            </a>
+        </div>
+        <div class="col-md-4 single-partner">
+            <a href="https://agenturasport.cz/" target="_blank">
+                <img src="/img/partners/nsa.png">
+            </a>
+        </div>
+    </div>
+    @* <div class="row footer partner-title no-gutters"> *@
+    @*     <div class="col"> *@
+    @*         <div>PARTNEŘI</div> *@
+    @*     </div> *@
+    @* </div> *@
+    <div class="row footer no-gutters">
+        <div class="col-md-4 single-partner">
+            <a href="http://ave.cz/" target="_blank">
+                <img src="/img/partners/ave.png">
+            </a>
+        </div>
+        <div class="col-md-4 single-partner">
+            <a href="http://www.underarmour.cz/" target="_blank">
+                <img src="/img/partners/ua.png">
+            </a>
+        </div>
+        <div class="col-md-4 single-partner">
+            <a href="https://cpzp.cz/" target="_blank">
+                <img src="/img/partners/cpzp.png">
+            </a>
+        </div>
+
+    </div>
+    <div class="row footer no-gutters">
+        <div class="col-md-4 single-partner">
+            <a href="http://www.baseball.cz/" target="_blank">
+                <img src="/img/partners/cba.png">
+            </a>
+        </div>
+        <div class="col-md-4 single-partner">
+            <a href="https://www.starokladno.cz/" target="_blank">
+                <img src="/img/partners/starokladno.png">
+            </a>
+        </div>
+        <div class="col-md-4 single-partner">
+            <a href="http://www.softball.cz/" target="_blank">
+                <img src="/img/partners/csa.png">
+            </a>
+        </div>
+    </div>
+    <div class="row footer no-gutters logo-border">
+        <div class="col-md-4 x single-partner">
+            <a href="https://www.clever-fit.com/cz/studios/kladno/" target="_blank">
+                <img src="/img/partners/cleverfit.png">
+            </a>
+        </div>
+        <div class="col-md-4 x single-partner">
+            <a href="https://www.infinitnutrition.eu/" target="_blank">
+                <img src="/img/partners/infinit.png">
+            </a>
+        </div>
+        <div class="col-md-4 x single-partner">
+            <a href="https://svatbykladno.cz/" target="_blank">
+                <img src="/img/partners/divadelnikavarna.png">
+            </a>
+        </div>
+    </div>
+    @* <div class="row footer partner-title no-gutters"> *@
+    @*     <div class="col"> *@
+    @*         <div>HLAVNÍ MEDIÁLNÍ PARTNER</div> *@
+    @*     </div> *@
+    @* </div> *@
+    <div class="row footer no-gutters">
+        <div class="col single-partner">
+            <a href="https://kladenskymesic.cz/" target="_blank">
+                <img src="/img/partners/km.png">
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.matches').forEach(matchesBlock => {
+  const matchesContainer = matchesBlock.querySelector('.matches-container');
+  const prevBtn = matchesBlock.querySelector('.prevBtn');
+  const nextBtn = matchesBlock.querySelector('.nextBtn');
+  const matches = matchesContainer.querySelectorAll('.match');
+
+  const match = matches[0];
+  const matchStyle = getComputedStyle(match);
+  const matchWidth = match.offsetWidth;
+  const marginRight = parseFloat(matchStyle.marginRight);
+
+  const scrollAmount = matchWidth + (marginRight || 0);
+
+  function scrollToMatch(index) {
+    matchesContainer.scrollTo({ left: index * scrollAmount, behavior: 'smooth' });
+  }
+
+  prevBtn.addEventListener('click', () => {
+    let currentScroll = matchesContainer.scrollLeft;
+    let currentIndex = Math.round(currentScroll / scrollAmount);
+    let newIndex = Math.max(currentIndex - 1, 0);
+    scrollToMatch(newIndex);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    let currentScroll = matchesContainer.scrollLeft;
+    let currentIndex = Math.round(currentScroll / scrollAmount);
+    let maxIndex = matches.length - 1;
+    let newIndex = Math.min(currentIndex + 1, maxIndex);
+    scrollToMatch(newIndex);
+  });
+});
+</script>
+
+
+
+
+

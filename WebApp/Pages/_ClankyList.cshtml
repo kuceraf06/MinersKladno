@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Miners.Web.WebApp.Models.ArticleModel>
+
+@foreach (var article in Model)
+{
+    <a href="/clanek/@article.Url" class="clanky-link">
+    <div class="box box-white d-flex clanky-list">
+        <div class="article-image me-4" >
+            <img src="@Url.Page("./Clanky", "Image", new { id = article.Id })"
+                 loading="lazy"
+                 class="img-fluid" />
+
+        </div>
+        <div class="flex-grow-1">
+            <div>@article.Date</div>
+            <h5><b>@article.Title</b></h5>
+            @Html.Raw(article.Teaser)
+        </div>
+    </div>
+    </a>
+}
+
+

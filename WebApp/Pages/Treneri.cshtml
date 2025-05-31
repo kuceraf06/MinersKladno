@@ -1,0 +1,81 @@
+﻿@page
+@model Miners.Web.WebApp.Pages.Treneri
+
+@section Head{
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <link href="~/css/treneri.css" rel="stylesheet"/>
+}
+
+<div class="page-container">
+    <h4>TRENÉŘI</h4>
+    <div class="d-flex main-kategorie justify-content-between mb-3">
+        <a href="#pripravka" class="box-kategorie box-pripravka">PŘÍPRAVKA</a>
+        <a href="#baseball" class="box-kategorie box-baseball">BASEBALL</a>
+        <a href="#softball" class="box-kategorie box-softball">SOFTBALL</a>
+        <a href="#atletika" class="box-kategorie box-atletika">ATLETIKA</a>
+    </div>
+    @foreach (var team in Model.Teams)
+    {
+        <h5 class="box box-green box-bordered box-@team.Kategorie" id="@team.Kategorie" style="text-transform: uppercase">@team.Title</h5>
+        @foreach (var trener in team.Treneri)
+        {
+        <div class="box box-white d-flex justify-content-between desktop">
+            <div class="profile">
+                <img src="@trener.Foto" alt="profile" class="profile-pic"/>
+                <div class="profile-text">
+                    <b>@trener.FullName</b><br/>
+                    @trener.Function<br/>
+                    @trener.Licence
+                </div>
+            </div>
+            <div class="text-end">
+                <a href="tel:@trener.Mobile" target="_blank">@trener.Mobile</a><br/>
+                <a href="mailto:@trener.Email">@trener.Email</a>
+            </div>
+        </div>
+
+        <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+            <div class="profile-text">
+                <b>@trener.FullName</b><br />
+                @trener.Function<br />
+                @trener.Licence
+                <div class="contact">
+                    <a href="tel:@trener.Mobile" target="_blank">@trener.Mobile</a><br />
+                    <a href="mailto:@trener.Email" target="_blank">@trener.Email</a>
+                </div>
+            </div>
+            <div class="profile">
+                <img src="@trener.Foto" alt="profile" class="profile-pic"/>
+            </div>
+        </div>
+        }
+    }
+    <h4 class="box box-green box-bordered box-atletika" id="atletika" style="text-transform: uppercase">Atletika</h4>
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/hriste/minersfield.png" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Karel Kuklík</b><br/>
+                hlavní trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:722470911" target="_blank">722 470 911</a><br/>
+            <a href="mailto:kuklik@minerskladno.cz" target="_blank">kuklik@minerskladno.cz</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Karel Kuklík</b><br />
+            hlavní trenér<br />
+            <div class="contact">
+                <a href="tel:722470911" target="_blank">722 470 911</a><br />
+                <a href="mailto:kuklik@minerskladno.cz" target="_blank">kuklik@minerskladno.cz</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/hriste/minersfield.png" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,222 @@
+﻿@model Miners.Web.WebApp.Models.CalendarModel
+
+<div class="calendar-box" id="calendar-container" data-year="@Model.Year" data-month="@Model.Month">
+    <table class="calendar">
+        <thead>
+        <tr>
+            <th colspan="7">
+                <div class="d-flex justify-content-between p-2 align-items-center">
+                    <div>
+                        <a class="month-control prev-month" href="#">
+                            <i class="fa-solid fa-chevron-left arrow"></i>
+                        </a>
+                    </div>
+
+                    <div style="position: relative;">
+                        <button id="monthYearBtn" class="btn btn-link p-0" type="button">
+                            @Model.MonthNameYear
+                        </button>
+
+                        <div id="monthYearDropdown" class="calendar-dropdown">
+                            <label for="yearSelect">Rok:</label>
+                            <select id="yearSelect" class="form-select form-select-sm mb-2">
+                                @{
+                                    int actualYear = DateTime.Now.Year;
+                                    int selectedYear = int.Parse(Model.Year);
+                                    int startYear = actualYear - 10;
+                                    int endYear = actualYear + 10;
+
+                                    for (int y = startYear; y <= endYear; y++)
+                                    {
+                                        var selected = y == selectedYear ? "selected" : "";
+                                        <option value="@y" @selected>@y</option>
+                                    }
+                                }
+
+                            </select>
+
+                                <label for="monthSelect">Měsíc:</label>
+                                <select id="monthSelect" class="form-select form-select-sm mb-2">
+                                    @{
+                                        var months = new[] { "Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec" };
+                                        int currentMonth = int.Parse(Model.Month);
+                                        for (int i = 1; i <= 12; i++)
+                                        {
+                                            var selected = i == currentMonth ? "selected" : "";
+                                            <option value="@i" @selected>@months[i - 1]</option>
+                                        }
+                                    }
+                                </select>
+                            <div class="calendar-buttons">
+                                <button id="saveBtn" class="btn btn-primary btn-sm mt-1">Přejít</button>
+                                <button id="resetBtn" class="btn btn-secondary btn-sm mt-1 ms-2">Dnes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a class="month-control next-month" href="#">
+                            <i class="fa-solid fa-chevron-right arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            </th>
+        </tr>
+        <tr class="calendar-header text-center">
+            <th>PO</th><th>ÚT</th><th>ST</th><th>ČT</th><th>PÁ</th><th>SO</th><th>NE</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var week in Model.Weeks)
+        {
+            <tr>
+                @foreach (var day in week.Days)
+                {
+                    <td class="@day.CssClass text-center" data-day="@day.Date.ToString("yyyy-MM-dd")">
+                        <a href="#" class="calendar-day">@day.Date.Day</a>
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <div class="calendar-divider"></div>
+    <div id="calendar-day-details" class="mt-4"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let currentMonthDate;
+    let selectedDateStr = null;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const monthParam = urlParams.get('month');
+    if (monthParam && /^\d{4}-\d{2}$/.test(monthParam)) {
+        const parts = monthParam.split('-');
+        currentMonthDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, 1);
+    } else {
+        const today = new Date();
+        currentMonthDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    }
+
+    function showDayDetails(dateStr) {
+        selectedDateStr = dateStr;
+
+        const date = new Date(dateStr);
+        const dayName = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'][date.getDay()];
+        const formattedDate = date.toLocaleDateString('cs-CZ');
+
+        document.getElementById('calendar-day-details').innerHTML = `
+            <div class="one-day">
+                <div class="day-body">
+                    <h5 class="card-title">${dayName} ${formattedDate}</h5>
+                    <p class="card-text">Zde můžeš zobrazit další informace o tomto dni.</p>
+                </div>
+            </div>`;
+
+        document.querySelectorAll('td.selected-day').forEach(td => td.classList.remove('selected-day'));
+
+        const newSelected = document.querySelector(`td[data-day="${dateStr}"]`);
+        if (newSelected) {
+            newSelected.classList.add('selected-day');
+        }
+    }
+
+
+    function attachEvents() {
+        document.querySelectorAll('.calendar-day').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const td = this.closest('td');
+                const dateStr = td.getAttribute('data-day');
+                showDayDetails(dateStr);
+            });
+        });
+
+        document.querySelectorAll('.month-control').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (this.classList.contains('prev-month')) {
+                    currentMonthDate.setMonth(currentMonthDate.getMonth() - 1);
+                } else if (this.classList.contains('next-month')) {
+                    currentMonthDate.setMonth(currentMonthDate.getMonth() + 1);
+                }
+
+                const newMonth = currentMonthDate.getFullYear() + '-' + String(currentMonthDate.getMonth() + 1).padStart(2, '0');
+                loadCalendarPartial(newMonth);
+            });
+        });
+
+        document.getElementById('monthYearBtn')?.addEventListener('click', () => {
+            const dropdown = document.getElementById('monthYearDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('saveBtn')?.addEventListener('click', () => {
+            const year = document.getElementById('yearSelect').value;
+            const month = String(document.getElementById('monthSelect').value).padStart(2, '0');
+            currentMonthDate = new Date(parseInt(year), parseInt(month) - 1, 1);
+            loadCalendarPartial(`${year}-${month}`);
+        });
+
+        document.getElementById('resetBtn')?.addEventListener('click', () => {
+            const today = new Date();
+            currentMonthDate = new Date(today.getFullYear(), today.getMonth(), 1);
+            loadCalendarPartial('', true);
+        });
+
+        document.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('monthYearDropdown');
+            const btn = document.getElementById('monthYearBtn');
+            if (dropdown && !dropdown.contains(e.target) && e.target !== btn) {
+                dropdown.style.display = 'none';
+            }
+        });
+    }
+
+function loadCalendarPartial(month, highlightToday = false) {
+    const url = `/Index?handler=CalendarPartial${month ? `&month=${month}` : ''}`;
+    fetch(url)
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('calendar-container').innerHTML = html;
+            attachEvents();
+
+            if (highlightToday) {
+                const today = new Date();
+                const todayStr = today.toISOString().slice(0, 10);
+                const todayCell = document.querySelector(`td[data-day="${todayStr}"]`);
+                if (todayCell) {
+                    todayCell.classList.add('today-highlight');
+                    showDayDetails(todayStr);
+                }
+            } else if (selectedDateStr) {
+                const selectedCell = document.querySelector(`td[data-day="${selectedDateStr}"]`);
+                if (selectedCell) {
+                    showDayDetails(selectedDateStr);
+                } else {
+                    document.getElementById('calendar-day-details').innerHTML = '';
+                }
+            }
+        });
+}
+
+    attachEvents();
+
+    const today = new Date();
+    if (
+        currentMonthDate.getFullYear() === today.getFullYear() &&
+        currentMonthDate.getMonth() === today.getMonth()
+    ) {
+        const todayStr = today.toISOString().slice(0, 10);
+        const todayCell = document.querySelector(`td[data-day="${todayStr}"]`);
+        if (todayCell) {
+            todayCell.classList.add('today-highlight');
+            todayCell.classList.add('selected-day');
+            showDayDetails(todayStr, todayCell);
+        }
+    }
+});
+</script>
+

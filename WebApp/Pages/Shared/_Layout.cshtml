@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="content-language" content="cs">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>MINERS TEST</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="~/css/style.css" rel="stylesheet"/>
+    <link href="~/css/calendar.css" rel="stylesheet"/>
+    @RenderSection("Head", false)
+    <style>
+        .nav-link {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="topheader">
+            <div>
+                Miners Kladno <span class="special">Baseball & Softball</span>
+            </div>
+            <div class="header-icons">
+                <a href="https://softball.cz" target="_blank"><img src="~/img/header/softballczech.png"/></a>
+                <a href="https://www.baseball.cz" target="_blank"><img src="~/img/header/baseballczech.png"/></a>
+                <a href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank"><img src="~/img/header/flickr.png"/></a>
+                <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><img src="~/img/header/MTVc.png" class="yt-default"/>
+                @*@if (Model.LiveTv == "Y")
+                {
+                    <a href="@Model.LiveTvUrl" target="_blank"><img src="~/img/header/MTV_RED.png" class="streamON"/></a>
+                }
+                else
+                {
+                    <a href="https://www.youtube.com/@@minerskladno1990" target="_blank"><img src="~/img/header/MTVc.png" class="yt-default"/></a>
+                }*@
+                <a href="https://www.facebook.com/minerskladno" target="_blank"><img src="~/img/header/FB.png"/></a>
+                <a href="https://www.instagram.com/minerskladno/" target="_blank"><img src="~/img/header/IG.png"/></a>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand custom-navbar">
+            <div class="navbar-margin">
+                <a class="logo" href="~/">
+                    <img src="~/img/header/Logo35c.png"/>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                    KLUB <i class="fa-solid fa-angle-right dropdown-arrow"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="~/kontakty">KONTAKTY</a></li>
+                                    <li><a class="dropdown-item" href="~/treneri">TRENÉŘI</a></li>
+                                    <li><a class="dropdown-item" href="#">KALENDÁŘ</a></li>
+                                    <li><a class="dropdown-item" href="~/hriste">HŘIŠTĚ</a></li>
+                                    <li><a class="dropdown-item" href="~/historie">HISTORIE</a></li>
+                                    <li><a class="dropdown-item" href="~/kestazeni">KE STAŽENÍ</a></li>
+                                    <li><a class="dropdown-item" href="~/stream">STREAM</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                    TÝMY <i class="fa-solid fa-angle-right dropdown-arrow"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item-group">PŘÍPRAVKA</li>
+                                    <li><a class="dropdown-item" href="~/team/u5">U5</a></li>
+                                    <li><a class="dropdown-item" href="~/team/u6">U6</a></li>
+                                    <li><a class="dropdown-item" href="~/team/u7">U7</a></li>
+                                    <li><a class="dropdown-item" href="~/team/u9">U9</a></li>
+                                    <li class="dropdown-item-group">BASEBALL</li>
+                                    <li><a class="dropdown-item" href="~/team/u11">U11</a></li>
+                                    <li><a class="dropdown-item" href="~/team/u13">U13</a></li>
+                                    <li><a class="dropdown-item" href="~/team/u15">U15</a></li>
+                                    <li><a class="dropdown-item" href="~/team/muzi">MUŽI</a></li>
+                                    <li class="dropdown-item-group">SOFTBALL</li>
+                                    <li><a class="dropdown-item" href="~/team/u11-soft">U11S</a></li>
+                                    <li><a class="dropdown-item" href="~/team/u13-soft">U13S</a></li>
+                                    <li><a class="dropdown-item" href="~/team/u16-soft">U16S</a></li>
+                                    <li><a class="dropdown-item" href="~/team/zenya">ŽENY</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="~/nabory">NÁBORY</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                    AKCE <i class="fa-solid fa-angle-right dropdown-arrow"></i>   
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="~/soustredeni">SOUSTŘEDĚNÍ</a></li>
+                                    <li><a class="dropdown-item" href="https://safe.minerskladno.cz" target="_blank">SAFE</a></li>
+                                    <li><a class="dropdown-item" href="https://barochova.wixsite.com/kiwileague" target="_blank">KIWI LEAGUE</a></li>
+                                </ul> 
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="~/partneri">PARTNEŘI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="~/scm">SCM</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="~/clanky">ČLÁNKY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="margin-right: 20px;" aria-current="page" href="https://merch.minerskladno.cz" target="_blank">E-SHOP</a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div id="mobileMenu" class="mobile-menu">
+                    <button class="close-btn" id="closeMenuBtn" aria-label="Zavřít menu"><i class="fa-solid fa-xmark"></i></button>
+                    <ul>
+                        <li><a data-submenu="submenu-klub">KLUB <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a data-submenu="submenu-tymy">TÝMY <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a href="~/nabory">NÁBORY</a></li>
+                        <li><a data-submenu="submenu-akce">AKCE <i class="fa-solid fa-angle-right"></i></a></li>
+                        <li><a href="~/partneri">PARTNEŘI</a></li>
+                        <li><a href="~/scm">SCM</a></li>
+                        <li><a href="~/clanky">ČLÁNKY</a></li>
+                        <li><a href="https://merch.minerskladno.cz" target="_blank">E-SHOP</a></li>
+                    </ul>
+                </div>
+                <div class="submenu-screen" id="submenu-klub">
+                    <button class="back-btn" data-back><i class="fa-solid fa-angle-left"></i></button>
+                    <button class="close-btn" id="closeSubmenuBtn1"><i class="fa-solid fa-xmark"></i></button>
+                    <ul>
+                        <li><a href="~/kontakty">KONTAKTY</a></li>
+                        <li><a href="~/treneri">TRENÉŘI</a></li>
+                        <li><a href="#">KALENDÁŘ</a></li>
+                        <li><a href="~/hriste">HŘIŠTĚ</a></li>
+                        <li><a href="~/historie">HISTORIE</a></li>
+                        <li><a href="~/kestazeni">KE STAŽENÍ</a></li>
+                        <li><a href="~/stream">STREAM</a></li>
+                    </ul>
+                </div>
+                <div class="submenu-screen" id="submenu-tymy">
+                    <button class="back-btn" data-back><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="close-btn" id="closeSubmenuBtn2"><i class="fa-solid fa-xmark"></i></button>
+                    <ul>
+                        <li class="dropdown-item-group">PŘÍPRAVKA</li>
+                        <li><a href="~/team/u5">U5</a></li>
+                        <li><a href="~/team/u6">U6</a></li>
+                        <li><a href="~/team/u7">U7</a></li>
+                        <li><a href="~/team/u9">U9</a></li>
+                        <li class="dropdown-item-group">BASEBALL</li>
+                        <li><a href="~/team/u11">U11</a></li>
+                        <li><a href="~/team/u13">U13</a></li>
+                        <li><a href="~/team/u15">U15</a></li>
+                        <li><a href="~/team/muzi">MUŽI</a></li>
+                        <li class="dropdown-item-group">SOFTBALL</li>
+                        <li><a href="~/team/u11-soft">U11S</a></li>
+                        <li><a href="~/team/u13-soft">U13S</a></li>
+                        <li><a href="~/team/u16-soft">U16S</a></li>
+                        <li><a href="~/team/zenya">ŽENY</a></li>
+                    </ul>
+                </div>
+                <div class="submenu-screen" id="submenu-akce">
+                    <button class="back-btn" data-back><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="close-btn" id="closeSubmenuBtn3"><i class="fa-solid fa-xmark"></i></button>
+                    <ul>
+                        <li><a href="~/soustredeni">SOUSTŘEDĚNÍ</a></li>
+                        <li><a href="https://safe.minerskladno.cz" target="_blank">SAFE</a></li>
+                        <li><a href="https://barochova.wixsite.com/kiwileague" target="_blank">KIWI LEAGUE</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+<div class="container" style="max-width: 1920px !important;">
+    <div class="mt-2 flex-grow-1">
+        @RenderBody()
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-container">
+            <div class="row-footer">
+                <div class="footer-col">
+                <img src="~/img/footer/Miners.png"/>
+                </div>
+                <div class="footer-col">
+                    <h4>DALŠÍ WEBY</h4>
+                    <ul>
+                        <li><a href="https://safe.minerskladno.cz" target="_blank">SAFE</a></li>
+                        <li><a href="https://barochova.wixsite.com/kiwileague" target="_blank">KIWI&nbsp;LEAGUE</a></li>
+                        <li><a href="https://merch.minerskladno.cz" target="_blank">E&minus;SHOP</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>SLEDUJTE NÁS</h4>
+                    <div class="social-links">
+                        @*@if (Model.LiveTv == "Y")
+                        {
+                            <a class="streamON" href="@Model.LiveTvUrl" target="_blank"><i class="fab fa-youtube"></i></a>
+                        }
+                        else
+                        {
+                            <a class="yt-default" href="https://www.youtube.com/@@minerskladno1990" target="_blank"><i class="fab fa-youtube"></i></a>
+                        }*@
+                        <a class="yt-default" href="https://www.youtube.com/@@minerskladno1990" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.flickr.com/photos/201375961@N07/albums" target="_blank"><i class="fa-brands fa-flickr"></i></a><br class="none">
+                        <a href="https://www.facebook.com/minerskladno" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/minerskladno/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>KONTAKTUJTE NÁS</h4>
+                    <div class="contact-footer">
+                        <p><a href="mailto:miners@minerkladno.cz" target="_blank">miners@minerskladno.cz</a></p>
+                        <p>Miners Kladno, z.s.
+                            <br>
+                            U Trati 3489
+                            <br>
+                            272 01 Kladno 1
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <a href="mailto:miners@minerkladno.cz" target="_blank">Miners Kladno 2025 &copy; Všechna práva vyhrazena</a>
+    </div>
+</footer>
+<a href="#" class="to-top">
+    <i class="fas fa-chevron-up"></i>
+</a>
+
+
+<script>
+document.querySelectorAll('#mobileMenu a[data-submenu]').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const submenuId = this.getAttribute('data-submenu');
+        document.getElementById('mobileMenu').style.display = 'none';
+        document.getElementById(submenuId).style.display = 'flex';
+    });
+});
+
+document.querySelectorAll('[data-back]').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();  // zabrání "kliknutí mimo" eventu, aby menu nezavřelo celé
+        const submenu = this.closest('.submenu-screen');
+        submenu.style.display = 'none';
+        const mainMenu = document.getElementById('mobileMenu');
+        mainMenu.style.display = 'flex';
+    });
+});
+
+document.querySelectorAll('.submenu-screen .close-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        this.parentElement.style.display = 'none';
+        document.getElementById('mobileMenu').style.display = 'none';
+    });
+});
+</script>
+<script>
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    hamburgerBtn.addEventListener("click", function () {
+        mobileMenu.style.display = mobileMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Zavřít při kliknutí mimo menu
+    document.addEventListener("click", function (e) {
+        if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+            mobileMenu.style.display = "none";
+        }
+    });
+</script>
+<script>
+    document.getElementById('hamburgerBtn').addEventListener('click', function () {
+        document.getElementById('mobileMenu').style.display = 'block';
+    });
+
+    document.getElementById('closeMenuBtn').addEventListener('click', function () {
+        document.getElementById('mobileMenu').style.display = 'none';
+    });
+</script>
+<script>
+const toTop = document.querySelector(".to-top");
+
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 100) {
+    toTop.classList.add("active");
+  } else {
+    toTop.classList.remove("active");
+  }
+})
+
+let lastScrollTop = 0;
+const header = document.querySelector('.mobile-header');
+const headerHeight = header.offsetHeight;
+
+window.addEventListener('scroll', function() {
+    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (currentScroll > lastScrollTop && currentScroll > headerHeight) {
+        header.classList.add('hide');
+    } else {
+        header.classList.remove('hide');
+    }
+    lastScrollTop = currentScroll;
+});
+</script>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        if (window.location.hash) {
+            history.replaceState(null, "", window.location.pathname + window.location.search);
+            window.scrollTo(0, 0); // Skroluje nahoru
+        }
+    });
+</script>
+<script>
+  document.querySelectorAll('.dropdown').forEach(dropdown => {
+    const arrow = dropdown.querySelector('.dropdown-arrow');
+
+    dropdown.addEventListener('show.bs.dropdown', function () {
+      if (arrow) {
+        arrow.style.transform = 'rotate(90deg)';
+      }
+    });
+
+    dropdown.addEventListener('hide.bs.dropdown', function () {
+      if (arrow) {
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+@RenderSection("Scripts", required: false)
+</body>
+</html>

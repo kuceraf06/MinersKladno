@@ -1,0 +1,93 @@
+﻿@page "{id}"
+@model Miners.Web.WebApp.Pages.Team
+
+@section Head{
+    <link href="~/css/team.css" rel="stylesheet"/>
+}
+
+<div class="team-container">
+    <h4 style="text-transform: uppercase;">@Model.TeamModel.Title</h4>
+    <div class="team-description d-flex align-items-center mb-4">
+        <img src="~/img/team/i.png" width="80px" height="80px" class="me-4"/>
+        <div>@Model.TeamModel.Description</div>
+    </div>
+    <div class="row mx-0 gx-0 mb-4">
+        <div class="col-8">
+            <div class="team-training me-2">
+                <h5>Tréninky</h5>
+                <div>v období duben - říjen:</div>
+                <table class="training-days">
+                    @foreach(var day in Model.TeamModel.TrainingDays.Leto)
+                    {
+                        <tr>
+                            <th style="width:75px">@day.Den.ToUpper()</th>
+                            <td class="time" style="width:110px">@day.Cas</td>
+                            <td>@day.Misto @(!string.IsNullOrEmpty(day.Poznamka) ? Html.Raw("<br/>("+day.Poznamka+")") : Html.Raw(""))</td>
+                        </tr>
+                    }
+                </table>
+                <div class="summer">v období listopad - březen:</div>
+                <table class="training-days">
+                    @foreach(var day in Model.TeamModel.TrainingDays.Zima)
+                    {
+                        <tr>
+                            <th style="width:75px">@day.Den.ToUpper()</th>
+                            <td class="time" style="width:110px">@day.Cas</td>
+                            <td>@day.Misto @(!string.IsNullOrEmpty(day.Poznamka) ? Html.Raw("<br/>("+day.Poznamka+")") : Html.Raw(""))</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="team-fee h-100 d-flex flex-column">
+                <h5>Příspěvky</h5>
+                <div class="price">
+                    <h5 class="text-center">@Model.TeamModel.Fee Kč / rok</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-0 gx-0 mb-4">
+        <div class="col-4">
+            <div class="team-league me-2 h-100 d-flex flex-column">
+                <h5>Soutež</h5>
+                <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                    <b class="text-center">@Model.TeamModel.League</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="team-coaches h-100 d-flex flex-column">
+                <h5>Trenéři</h5>
+                <table>
+                    @foreach(var coach in Model.TeamModel.Coaches)
+                    {
+                        <tr>
+                            <td>
+                                <b>@coach.FullName</b> - @coach.Function<br/>
+                                @coach.Licence
+                            </td>
+                            <td class="contact-coaches">
+                                @if (!string.IsNullOrWhiteSpace(coach.Email))
+                                {
+                                    <a href="mailto:@coach.Email" target="_blank" class="email"><i class="fa-solid fa-envelope"></i></a>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(coach.Mobile))
+                                {
+                                    <a href="tel:@coach.Mobile" target="_blank" class="phone"><i class="fa-solid fa-phone"></i></a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    @if (Model.TeamModel.TeamPhoto.HasValue)
+    {
+        <div>
+            <img src="@Url.Page("/File", new { id = @Model.TeamModel.TeamPhoto })" style="width:100%"/>
+        </div>
+    }
+</div>
