@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Miners.Web.BusinessLayer</AssemblyName>
+        <RootNamespace>Miners.Web.BusinessLayer</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.14" />
+      <PackageReference Include="RepoDb.PostgreSql" Version="1.13.1" />
+      <PackageReference Include="TSoft.Framework4.EfEntities" Version="0.7.18" />
+    </ItemGroup>
+
+</Project>
