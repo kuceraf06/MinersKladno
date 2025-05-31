@@ -1,0 +1,172 @@
+﻿.box.d-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.page-container {
+    min-height: 50vh;
+}
+
+.clanky-list, .box-clanek {
+    box-shadow: 0 4px 11px #00000040;
+}
+
+.clanky-link {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+}
+
+.article-image img {
+    min-width: 250px;
+    max-width: 250px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.box-clanek img {
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
+
+.btn {
+    background-color: #93C11F;
+    border: none;
+    height: 43px;
+    padding: 0 20px;
+}
+
+.btn:hover {
+    background-color: #7DAA1A;
+}
+
+.btn.loading {
+    background-color: #7DAA1A !important;
+}
+
+.btn:active {
+    background-color: #7DAA1A;
+    box-shadow: none;
+    outline: none;
+}
+
+.clanky-link:hover {
+    color: #93C11F;
+    transition: all 0.3s ease-in-out;
+}
+
+select.form-select {
+    border: 2px solid #93C11F;
+    width: 15rem;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    transition: border-color 0.3s;
+}
+
+select.form-select:focus {
+    border-color: #93C11F;
+    outline: none;
+    background-color: #fff;
+}
+
+select.form-select option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+@media (max-width: 1000px) {
+    select.form-select {
+        width: 14rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .btn:hover {
+        background-color: #93C11F;
+    }
+
+    .btn.loading {
+        background-color: #93C11F !important;
+    }
+
+    .btn:active {
+        background-color: #93C11F;
+    }
+
+    .clanky-link:hover {
+        color: #000000;
+    }
+}
+
+@media (max-width: 928px) {
+    select.form-select {
+        width: 13rem;
+    }
+}
+
+@media (max-width: 860px) {
+    select.form-select {
+        width: 12rem;
+    }
+}
+
+@media (max-width: 796px) {
+    select.form-select {
+        width: 11rem;
+    }
+}
+
+@media (max-width: 700px) {
+    div, span, p, select.form-select, .btn{
+        font-size: .8rem !important;
+    }
+
+    h5 {
+        font-size: 1rem !important;
+    }
+
+    .btn {
+        height: 35px;
+    }
+    
+}
+
+@media (max-width: 619px) {
+    .box.d-flex {
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
+    }
+
+    .article-image img {
+        width: 100% !important;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .article-image {
+        margin-right: 0 !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .flex-grow-1 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 474px) {
+    .box-clanek img {
+    max-width: 100%;
+    width: 100% !important;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+}
+}

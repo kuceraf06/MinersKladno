@@ -1,0 +1,57 @@
+@media (max-width: 619px) {
+    .page-container a {
+        font-size: .8rem;
+    }
+
+    .page-container h5  {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .page-container a:hover{
+        color: #93C11F;
+    }
+}
+
+.box {
+    box-shadow: 0 4px 11px #00000040;
+}
+
+.page-container h5 {
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.page-container a {
+    color: #93C11F;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 30s ease;
+}
+
+.page-container a:hover {
+    color: #7DAA1A;
+}
+
+.page-container ul li {
+    list-style: none;
+    position: relative;
+    padding-left: 2em;
+}
+
+.page-container ul li::before {
+    content: "\f358";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 400;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: font-weight 0.3s ease;
+}
+
+.page-container ul li.downloaded::before {
+    font-weight: 900;
+    color: #93C11F;
+}

@@ -1,0 +1,291 @@
+.calendar-box {
+    min-height: 812px;
+    height: auto;
+    padding-bottom: 20px;
+    background-color: white;
+    box-shadow: 0 4px 11px #00000040;
+}
+
+#monthYearBtn {
+    text-transform: uppercase;
+    color: black;
+    font-size: 1.4rem;
+}
+
+.calendar-dropdown {
+    display: none; 
+    position: absolute;
+    background: white; 
+    border: 1px solid #93C11F; 
+    border-top: none !important;
+    padding: 10px; 
+    z-index: 1; 
+    min-width: 160px;
+    left: 50%; 
+    transform: translateX(-50%);
+}
+
+.calendar-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 6px solid white;
+    width: 0;
+    height: 0;
+    z-index: 2;
+}
+
+.calendar-dropdown label {
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.calendar-dropdown select {
+    font-family: 'Inter', sans-serif;
+}
+
+.calendar-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-primary {
+    font-family: 'Inter', sans-serif;
+    background-color: #93C11F;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #7DAA1A;
+}
+
+.btn-secondary {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(117, 117, 117);
+    border: none;
+}
+
+.btn-secondary:hover {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(90, 90, 90);
+    border: none;
+}
+
+.calendar{
+    width:100%;
+    text-align:center;
+    background-color: white;
+}
+
+.calendar thead tr:first-child th{
+    font-family: "Titan One", sans-serif;
+    text-transform: uppercase;
+    background-color: #93C11F;
+    font-size: 1.4rem;
+}
+
+.calendar tbody td{
+    line-height: 30px;
+    height: 45px;
+    border: none;
+    width: 45px;
+    padding: 0;
+}
+
+.calendar-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    border-radius: 50%;
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.2s;
+}
+
+.calendar-day:hover {
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.calendar-header th {
+    font-weight: 800;
+}
+
+.month-title {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 500;
+    color: black;
+}
+
+.arrow {
+    color: black;
+    text-decoration: none;
+    background-color: rgb(211, 211, 211);
+    padding: 5px 9px;
+    border-radius: 50%;
+    font-size: 1rem;
+}
+
+.one-day {
+    margin: 0 20px;
+}
+
+.day-body h5{
+    font-weight: 500;
+    color: black;
+    font-family: "Titan One", sans-serif;
+    text-transform: lowercase;
+}
+
+.day-body {
+    text-align: center;
+}
+
+.calendar-divider {
+    border-top: 2px solid #93C11F;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.calendar td.selected-day .calendar-day {
+    background-color: black;
+    color: white;
+}
+
+.calendar td.inactive {
+    color: white !important;
+    opacity: 0.5 !important;
+}
+
+.calendar td.event a {
+    background-color: #93C11F;
+    height: 35px;
+    width: 35px;
+    border: none;
+    padding: 0;
+    color: white;
+}
+
+.calendar td.event a:hover {
+    color: white;
+    background-color: black;
+}
+
+@media (max-width: 1440px) {
+    .calendar{
+        font-size: .8rem;
+    }
+
+    .calendar td.event a {
+        height: 25px;
+        width: 25px;
+    }
+
+    .calendar-day {
+        width: 25px;
+        height: 25px;
+    }
+
+    .calendar-box {
+        min-height: 712px;
+    }
+
+    .day-body h5{
+        font-size: 1rem;
+    }
+
+    .day-body p {
+        font-size: 0.8rem;
+    }
+
+    .arrow {
+        color: black;
+        text-decoration: none;
+        background-color: rgb(211, 211, 211);
+        padding: 5px 7.5px;
+        border-radius: 50%;
+        font-size: .8rem;
+    }
+
+    h4 {
+        font-size: 1.2rem !important;
+    }
+
+    .calendar thead tr:first-child th{
+        font-size: 1rem !important;
+        padding: 0px !important;
+    }
+
+    .calendar tbody td{
+        line-height: 35px;
+        height:35px;
+    }
+
+    #monthYearBtn {
+        font-size: 1rem;
+    }
+
+    .calendar-dropdown {
+        padding: 6px; 
+        z-index: 1; 
+        min-width: 120px;
+    }
+
+    .calendar-dropdown::before {
+        top: -4px;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 4px solid white;
+    }
+
+    .calendar-dropdown label {
+        font-size: .9rem;
+    }
+
+    .calendar-dropdown select {
+        font-family: 'Inter', sans-serif;
+        font-size: .7rem;
+    }
+
+    .btn-primary {
+        font-size: .8rem;
+    }
+
+    .btn-secondary {
+        font-size: .8rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .btn-primary:hover {
+        background-color: #93C11F;
+    }
+
+    .btn-secondary:hover {
+        background-color: rgb(117, 117, 117);
+    }
+}
+
+@media (max-width: 740px) {
+    .calendar{
+        font-size: 0.8rem;
+    }
+    .calendar-day{
+        line-height: 30px;
+        height: 25px;
+    }
+
+    .calendar thead tr:first-child th{
+        font-size: 1.1rem;
+}
+}

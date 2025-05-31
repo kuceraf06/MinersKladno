@@ -1,0 +1,151 @@
+.page-container{
+    max-width: 1000px;
+    margin:auto;
+}
+
+.box-white {
+    box-shadow: 0 4px 11px #00000040;
+}
+
+.container {
+    min-height: auto !important;
+}
+
+.contact a, .text-end a{
+    color: #93C11F;
+    font-weight: bold;
+    font-size: .9rem;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-text {
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.box{
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobile {
+    display: none !important;
+}
+
+.box-bordered {
+    border-radius: 10px;
+}
+    
+.box-white{
+    background-color: #fff;
+}
+
+.box-green{
+    background-color: #93C11F;
+}
+
+.second-box {
+    width: 100%;
+    max-width: 400px;
+}
+
+@media (max-width: 740px) {
+    .page-container > .box-white:first-of-type {
+        flex-direction: column !important;
+        gap: 1rem;
+    }
+
+    .page-container > .box-white:first-of-type > .box-green {
+        order: 2;
+    }
+
+    .page-container > .box-white:first-of-type > div:first-child {
+        order: 1;
+    }
+    
+    .main-box {
+        padding: 0;
+        padding-bottom: 1rem;
+    }
+
+    .main-box div:nth-child(1) {
+        padding: 1rem;
+    }
+
+    .second-box {
+        max-width: none;
+        width: calc(100% - 1rem);
+        margin: 0.5rem;
+        padding: .5rem;
+    }
+}
+
+@media (max-width: 619px) {
+    h5 {
+        font-size: 1rem !important;
+    }
+
+    h4 {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 474px) {
+    .profile-text {
+        font-size: 0.8rem;
+    }
+
+    .contact a, .text-end a{
+        font-size: .8rem;
+    }
+
+    .text-end {
+        font-size: 0.8rem;
+    }
+
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+    }
+
+    .main-box div {
+        font-size: .89rem;
+    }
+}
+
+@media (max-width: 406px) {
+    .contact {
+        margin-top: .5rem;
+    }
+
+    .profile-pic {
+        width: 50px;
+        height: 50px;
+    }
+
+    .mobile {
+        display: flex !important;
+    }
+
+    .desktop {
+        display: none !important;
+    }
+}
