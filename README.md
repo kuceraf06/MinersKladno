@@ -1,2 +1,2 @@
-# Miners-Kladno
+# MinersKladno
 nové webové stránky Miners Kladno
