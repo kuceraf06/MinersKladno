@@ -16,6 +16,7 @@
                         @for (int i = 0; i < Model.CarouselArticles.Count; i++)
                         {
                             var item = Model.CarouselArticles[i];
+                            <a href="#">
                             <div class="carousel-item @(i == 0 ? "active" : "")">
                                 <div class="carousel-article" style="background-image: url(@Url.Page("/File", new { id = @item.ImageId }))">
                                     <div class="carousel-article-title">
@@ -25,6 +26,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         }
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
