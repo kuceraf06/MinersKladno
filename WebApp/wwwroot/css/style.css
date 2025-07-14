@@ -423,7 +423,7 @@ header {
 }
 
 .carousel-article-title p, .carousel-article-title h5, .carousel-article-title span {
-    opacity: .7;
+    opacity: .8;
 }
 
 .carousel button i{
@@ -567,6 +567,15 @@ header {
     -webkit-line-clamp: 4;
     line-clamp: 4;     
     -webkit-box-orient: vertical;
+}
+
+.articleLink {
+    color: var(--bs-body-color);
+    transition: .3s ease all;
+}
+
+.articleLink:hover {
+    color: #93C11F;
 }
 
 .actuality{
