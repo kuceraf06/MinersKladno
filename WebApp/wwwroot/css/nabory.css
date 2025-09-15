@@ -1,6 +1,10 @@
 .nabory img {
-    width: 100%;
+    width: 470px;
     height: auto;
+}
+
+.nabory img:not(:first-child) {
+    margin-left: 20px;
 }
 
 .nabory {
@@ -10,3 +14,64 @@
     text-align: center;
     box-shadow: 0 4px 11px #00000040;
 }
+
+@media (max-width: 1024px) {
+    .nabory img {
+        width: 420px;
+        height: auto;
+    }
+}
+
+@media (max-width: 916px) {
+    .nabory img {
+        width: 370px;
+        height: auto;
+    }
+}
+
+@media (max-width: 816px) {
+    .nabory img {
+        width: 320px;
+        height: auto;
+    }
+}
+
+@media (max-width: 740px) {
+    .nabory img {
+        width: 470px;
+        height: auto;
+    }
+    .nabory img:not(:first-child) {
+        margin-left: 0px;
+    }
+
+}
+
+@media (max-width: 528px) {
+    .nabory img {
+        width: 420px;
+        height: auto;
+    }
+}
+
+@media (max-width: 478px) {
+    .nabory img {
+        width: 370px;
+        height: auto;
+    }
+}
+
+@media (max-width: 420px) {
+    .nabory img {
+        width: 320px;
+        height: auto;
+    }
+}
+
+@media (max-width: 374px) {
+    .nabory img {
+        width: 270px;
+        height: auto;
+    }
+}
+
