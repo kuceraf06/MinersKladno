@@ -581,13 +581,11 @@ header {
 .video-block {
     overflow: hidden;
     height: 280px;
-    background-color: #fff;
+    background-color: #F8F4F4;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 11px #00000040;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
 }
 
 .video-wrapper {
@@ -1401,6 +1399,10 @@ footer h4 {
         width: 100%;
     }
 
+    .video-wrapper {
+        padding-bottom: 40%;
+    }
+
     .link-box-container {
         flex-direction: column !important;
 
@@ -1509,6 +1511,10 @@ footer h4 {
 }
 
 @media (max-width: 531px) {
+    .video-wrapper {
+        padding-bottom: 56.25%;
+    }
+
     .topheader div {
         font-size: 1rem;
     }
