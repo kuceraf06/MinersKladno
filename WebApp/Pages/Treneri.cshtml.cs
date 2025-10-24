@@ -52,7 +52,7 @@ public string GetPersonFotoBase64(Guid personId)
                 }
                 else
                 {
-                    model.Foto = "/img/hriste/minersfield.png";
+                    model.Foto = "/img/kontakty/none.webp";
                 }
                 teamModel.Treneri.Add(model);
             }
