@@ -6,6 +6,23 @@
     box-shadow: 0 4px 11px #00000040;
 }
 
+#calendar-day-details {
+    max-height: 431px;
+    min-height: 431px;
+    overflow-y: auto;
+    margin-top: 10px !important;
+}
+
+#calendar-day-details::-webkit-scrollbar {
+    border-radius: 4px;
+    width: 6px;
+}
+
+#calendar-day-details::-webkit-scrollbar-thumb {
+    background-color: rgb(117, 117, 117);
+    border-radius: 4px;
+}
+
 #monthYearBtn {
     text-transform: uppercase;
     color: black;
@@ -153,8 +170,7 @@
 
 .calendar-divider {
     border-top: 2px solid #93C11F;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .calendar td.selected-day .calendar-day {
@@ -179,6 +195,44 @@
 .calendar td.event a:hover {
     color: white;
     background-color: black;
+}
+
+.event-date {
+    text-align: center;
+    font-family: "Titan One", sans-serif;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.event-team {
+    background-color: #93C11F;
+}
+
+.oneEvent:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.event-team .text-left {
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 1.1rem;
+}
+
+.event {
+    padding-left: 15px;
+}
+
+.event i {
+    margin-right: 5px;
+}
+
+.event-location {
+    padding-left: 2px;
+}
+
+.freeDay {
+    text-align: center;
 }
 
 @media (max-width: 1440px) {
@@ -264,6 +318,54 @@
     .btn-secondary {
         font-size: .8rem;
     }
+
+    #calendar-day-details {
+        max-height: 372px;
+        overflow-y: auto;
+    }
+
+    .event-date {
+        font-size: 1rem;
+        margin-bottom: 3px;
+    }
+
+    .oneEvent:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .event-team .text-left {
+        padding-left: 10px;
+        font-size: .9rem;
+    }
+
+    .event {
+        padding-left: 10px;
+        font-size: .8rem;
+    }
+
+    .event i {
+        margin-right: 3px;
+    }
+
+    .event-location {
+        padding-left: 2px;
+    }
+
+    .freeDay {
+        font-size: .8rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    #calendar-day-details {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .calendar-box {
+        min-height: 0px;
+    }
+
 }
 
 @media (max-width: 991px) {

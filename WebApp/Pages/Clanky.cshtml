@@ -11,8 +11,8 @@
     <h4>ČLÁNKY</h4>
 
     <div class="filter-container mb-3">
-        <div class="row g-2">
-            <div class="col-md-3">
+        <div class="d-flex flex-wrap gap-2">
+            <div class="col-auto">
                 <select class="form-select" id="yearSelect" onchange="onFilterChange()">
                     <option value="" disabled selected>Vyberte rok</option>
                     @for (int y = DateTime.Now.Year; y >= 2020; y--)
@@ -21,7 +21,7 @@
                     }
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-auto">
                 <select class="form-select" id="monthSelect" onchange="onFilterChange()">
                     <option value="" disabled selected>Vyberte měsíc</option>
                     @for (int m = 1; m <= 12; m++)
@@ -30,7 +30,7 @@
                     }
                 </select>
             </div>
-            <div class="col-md-3 d-flex align-items-start">
+            <div class="col-auto">
                 <button class="btn btn-secondary" onclick="resetFilters()">Zrušit filtr</button>
             </div>
         </div>
