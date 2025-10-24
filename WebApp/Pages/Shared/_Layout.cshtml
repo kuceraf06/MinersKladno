@@ -64,7 +64,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="~/kontakty">KONTAKTY</a></li>
                                     <li><a class="dropdown-item" href="~/treneri">TRENÉŘI</a></li>
-                                    <li><a class="dropdown-item" href="#">KALENDÁŘ</a></li>
+                                    <li><a class="dropdown-item" href="~/kalendar">KALENDÁŘ</a></li>
                                     <li><a class="dropdown-item" href="~/hriste">HŘIŠTĚ</a></li>
                                     <li><a class="dropdown-item" href="~/historie">HISTORIE</a></li>
                                     <li><a class="dropdown-item" href="~/kestazeni">KE STAŽENÍ</a></li>
@@ -148,7 +148,7 @@
                     <ul>
                         <li><a href="~/kontakty">KONTAKTY</a></li>
                         <li><a href="~/treneri">TRENÉŘI</a></li>
-                        <li><a href="#">KALENDÁŘ</a></li>
+                        <li><a href="~/kalendar">KALENDÁŘ</a></li>
                         <li><a href="~/hriste">HŘIŠTĚ</a></li>
                         <li><a href="~/historie">HISTORIE</a></li>
                         <li><a href="~/kestazeni">KE STAŽENÍ</a></li>
@@ -314,7 +314,7 @@ window.addEventListener("scroll", () => {
 
 let lastScrollTop = 0;
 const header = document.querySelector('.mobile-header');
-const headerHeight = header.offsetHeight;
+const headerHeight = header?.offsetHeight ?? 0;
 
 window.addEventListener('scroll', function() {
     let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
