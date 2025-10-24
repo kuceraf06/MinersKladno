@@ -4,34 +4,37 @@
 @section Head{
     <link href='~/lib/fullcalendar/core/main.css' rel='stylesheet' />
     <link href="~/css/kalendar.css" rel="stylesheet"/>
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src='~/lib/fullcalendar/core/main.js'></script>
     <script src="~/lib/fullcalendar/core/locales/cs.js"></script>
     <script src="~/lib/fullcalendar/daygrid/main.js"></script>
     <script src='~/lib/fullcalendar/google-calendar/main.js'></script>
 }
+<div class="page-container">
+    <h4>KALENDÁŘ</h4>
+    <div  style="background-color: white; box-shadow: 0 4px 11px #00000040;" class="p-2">
+        <h5>Miners kalendáře</h5>
+        <div class="row" id="legend-global">
+        </div><br />
+        <h5>Baseball</h5>
+        <div class="row" id="legend-baseball">
+        </div><br />
+        <h5>Softball</h5>
+        <div class="row" id="legend-softball">
+        </div><br />
 
-<div style="background-color:white" class="p-2">
-    <h5>Miners klendáře</h5>
-    <div class="row" id="legend-global">
-    </div>
-    <h5>Baseball</h5>
-    <div class="row" id="legend-baseball">
-    </div>
-    <h5>Softball</h5>
-    <div class="row" id="legend-softball">
-    </div>
-
-    <div class="pt-2">
-        <div id='calendar'></div>
+        <div class="pt-2">
+            <div id='calendar'></div>
+        </div>
     </div>
 </div>
 
 <script type="text/html" id="switchTemplate">
-    <div class="col-md-1 col-4 switch-<%=id%>">
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="switch-<%=id%>" onchange="switchChange('<%=id%>', this)" <%=selected ? 'checked' : ''%> />
-            <label class="custom-control-label text-nowrap" for="switch-<%=id%>"><%=title%></label>
+    <div class="col-md-1 col-4">
+        <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="switch-<%=id%>" onchange="switchChange('<%=id%>', this)" <%=selected ? 'checked' : ''%> />
+            <label class="form-check-label text-nowrap" for="switch-<%=id%>"><%=title%></label>
         </div>
     </div>
 </script>
