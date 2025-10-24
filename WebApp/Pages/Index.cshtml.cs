@@ -3,6 +3,7 @@ using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Miners.Web.BusinessLayer;
+using Miners.Web.BusinessLayer.Services;
 using Miners.Web.WebApp.GoogleCalendar;
 using Miners.Web.WebApp.Models;
 
@@ -11,6 +12,7 @@ namespace Miners.Web.WebApp.Pages;
 public class IndexModel(AppDbContext dbContext) : PageModel
 {
     public List<CarouselArticleModel> CarouselArticles { get; set; }
+    public List<CarouselArticleModel> Articles { get; set; }
     public CalendarModel Calendar { get; set; }
 
     public void OnGet([FromQuery] string? month)
@@ -36,18 +38,41 @@ public class IndexModel(AppDbContext dbContext) : PageModel
     private void LoadArticles()
     {
         CarouselArticles = dbContext.Articles
-            .OrderByDescending(x => x.DateCreated)
-            .Take(3)
+            .Where(x=>x.Top)
+            .OrderByDescending(x=>x.DateCreated)
             .Select(x => new CarouselArticleModel
             {
                 Id = x.Id,
                 ImageId = x.GuidImage,
                 Title = x.Title,
                 DateCreated = x.DateCreated,
-                Teaser = x.Text
+                Teaser = x.Text,
+                Url = ArticleService.CreateUrl(x.Title, x.UrlId)
             }).ToList();
 
-        CarouselArticles.ForEach(x => x.Teaser = CreateTeaser(x.Teaser));
+        CarouselArticles.ForEach(x =>
+        {
+            x.Teaser = CreateTeaser(x.Teaser);
+        });
+        
+        Articles = dbContext.Articles
+            .Where(x=>!x.Top)
+            .OrderByDescending(x=>x.DateCreated)
+            .Take(2)
+            .Select(x => new CarouselArticleModel
+            {
+                Id = x.Id,
+                ImageId = x.GuidImage,
+                Title = x.Title,
+                DateCreated = x.DateCreated,
+                Teaser = x.Text,
+                Url = ArticleService.CreateUrl(x.Title, x.UrlId)
+            }).ToList();
+
+        Articles.ForEach(x =>
+        {
+            x.Teaser = CreateTeaser(x.Teaser);
+        });
     }
     
     public IActionResult OnGetEventPartial(DateTime date)

@@ -7,4 +7,5 @@ public class CarouselArticleModel
     public string Title { get; set; }
     public DateTime DateCreated { get; set; }
     public string Teaser { get; set; }
+    public string Url { get; set; }
 }

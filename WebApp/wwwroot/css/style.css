@@ -408,6 +408,7 @@ header {
 
 .carousel-article-title{
     background-color: rgba(147, 193, 31, 0.8);
+    color:black !important;
     border-radius: 10px;
     padding:10px;
     width: 85%;

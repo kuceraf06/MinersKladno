@@ -8,15 +8,18 @@
             <div class="col-md-8">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                     <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        @for (int i = 0; i < Model.CarouselArticles.Count; i++)
+                        {
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class='@(i == 0 ? "active" : "")' aria-current="true" aria-label="Slide 1"></button>
+                            
+                        }
                     </div>
                     <div class="carousel-inner">
                         @for (int i = 0; i < Model.CarouselArticles.Count; i++)
                         {
                             var item = Model.CarouselArticles[i];
                             <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <a href="/clanek/@item.Url" class="carousel-article-link">
                                 <div class="carousel-article" style="background-image: url(@Url.Page("/File", new { id = @item.ImageId }))">
                                     <div class="carousel-article-title">
                                         <h5 class="fw-bold">@item.Title</h5>
@@ -24,6 +27,7 @@
                                         <span class="fw-bold">@item.DateCreated</span>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         }
                     </div>
@@ -53,32 +57,21 @@
         <div class="row">
             <div class="col-sm-8">
                 <h4>ČLÁNKY</h4>
-                <div class="article">
-                    <img src="img/articletest.png"/>
-                    <div>
-                        <a href="#">
-                            <h5 class="fw-bold">Výroční soustředění v Nymburku</h5>
-                            <p>Od pátku do neděle se ve Sportovním centru Nymburk konalo tradiční – již desáté – zimní
-                                soustředění. V perfektních podmínkách se tak připravovalo a zdokonalovalo celkem 42 hráčů
-                                a hráček z kategorií U11-U18. Dopolední páteční příjezd začínáme ubytováním a výborným obědem                         Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
-                                Nashvillu na akademii Pro5, kam se k nim připojil Ondra
-                                Vostatek, který přelítával z Portorika                         Kluci Filip Kučera a Vojtěch Kuklík odletěli 9.2. opět do
-                                Nashvillu na akademii Pro5, kam se k nim připojil Ondra
-                                Vostatek, který přelítával z Portorika....</p>
-                            </a>
+                @for (int i = 0; i < Model.Articles.Count; i++)
+                {
+                    var item = Model.Articles[i];
+                    <div class="article">
+                        
+                        <img src="@Url.Page("/File", new { id = item.ImageId })"/>
+                        <div>
+                            <a href="/clanek/@item.Url">    
+                            <h5 class="fw-bold">@item.Title</h5>
+                            <p>@item.Teaser</p>
+                            </a>    
+                        </div>
+                        
                     </div>
-                </div>
-                <div class="article">
-                    <img src="img/articletest.png"/>
-                    <div>
-                        <a href="#">
-                            <h5 class="fw-bold">Miners U9 vyhráli Kladenský kahan</h5>
-                            <p>Od pátku do neděle se ve Sportovním centru Nymburk konalo tradiční – již desáté – zimní
-                                soustředění. V perfektních podmínkách se tak připravovalo a zdokonalovalo celkem 42 hráčů
-                                a hráček z kategorií U11-U18. Dopolední páteční příjezd začínáme ubytováním a výborným obědem...</p>
-                        </a>
-                    </div>
-                </div>
+                }
             </div>
             <div class="col-sm-4">
                 <h4>AKTUALITY</h4>
@@ -138,10 +131,10 @@
                 Livestreamy a další videa uvidíš na našem YT kanále
             </div>
             <a class="main-green-button buttonWimg" href="https://www.youtube.com/@@minerskladno1990" target="_blank">
-                    <div class="img-wrapper">
-                        <img class="img-fluid default-img" src="img/greenbox/MTVb.png" alt="YouTube logo" />
-                        <img class="img-fluid hover-img" src="img/greenbox/MTVc.png" alt="YouTube hover logo" />
-                    </div>
+                <div class="img-wrapper">
+                    <img class="img-fluid default-img" src="img/greenbox/MTVb.png" alt="YouTube logo" />
+                    <img class="img-fluid hover-img" src="img/greenbox/MTVc.png" alt="YouTube hover logo" />
+                </div>
             </a>
         </div>
     </div>
@@ -149,6 +142,7 @@
         <img class="img-fluid" src="img/greenbox/hracrozhodci.png"/>
     </div>
 </div>
+@*
 <div class="upcomingMatches" id="upcomingMatches">
     <h4>ROZPIS NADCHÁZEJÍCÍCH ZÁPASŮ</h4>
 </div>
@@ -287,6 +281,7 @@
     </div>
     <button class="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
+*@
 <h4 class="partners-header">PARTNEŘI</h4>
 <div class="partners">
     @* <div class="row footer partner-title no-gutters"> *@
