@@ -521,6 +521,15 @@ header {
     margin-top: 2rem;
 }
 
+.clankyHref {
+    color: #212529;
+    transition: all 0.3s ease;
+}
+
+.clankyHref:hover {
+    color: #93C11F; 
+}
+
 .article{
     display: flex;
     height: 128px;
