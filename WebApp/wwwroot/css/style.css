@@ -581,7 +581,8 @@ header {
 .video-block {
     overflow: hidden;
     height: 280px;
-    background-color: #F8F4F4;
+    box-shadow: 0 4px 11px #00000040;
+    background-color: #fff;
     margin-bottom: 1.5rem;
     display: flex;
     justify-content: center;
