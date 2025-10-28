@@ -521,6 +521,15 @@ header {
     margin-top: 2rem;
 }
 
+.clankyHref {
+    color: #212529;
+    transition: all 0.3s ease;
+}
+
+.clankyHref:hover {
+    color: #93C11F; 
+}
+
 .article{
     display: flex;
     height: 128px;
@@ -581,7 +590,8 @@ header {
 .video-block {
     overflow: hidden;
     height: 280px;
-    background-color: #F8F4F4;
+    box-shadow: 0 4px 11px #00000040;
+    background-color: #fff;
     margin-bottom: 1.5rem;
     display: flex;
     justify-content: center;
