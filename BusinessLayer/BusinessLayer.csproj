@@ -10,6 +10,11 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.14" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.14">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
       <PackageReference Include="RepoDb.PostgreSql" Version="1.13.1" />
       <PackageReference Include="TSoft.Framework4.EfEntities" Version="0.7.18" />
     </ItemGroup>

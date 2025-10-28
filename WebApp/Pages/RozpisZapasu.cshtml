@@ -1,4 +1,43 @@
 ﻿@page
 @model Miners.Web.WebApp.Pages.RozpisZapasu
 
-Rozpis zápasů
+<style>
+    table{
+        width:100%;
+        border-collapse: collapse;
+    }
+    th, td{
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+</style>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Datum</th>
+        <th>Kategorie</th>
+        <th>Soutež</th>
+        <th>Domácí</th>
+        <th>Hosté</th>
+        <th>Domácí skóre</th>
+        <th>Hosté skóre</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in Model.GamesModel)
+        {
+            <tr>
+                <td>@game.GameDate.ToString("dd.MM.yyyy")</td>
+                <td>@game.Category</td>
+                <td>@game.League</td>
+                <td>@game.HomeTeam</td>
+                <td>@game.AwayTeam</td>
+                <td>@(game.HomeScore.HasValue ? game.HomeScore.ToString() : "-")</td>
+                <td>@(game.AwayScore.HasValue ? game.AwayScore.ToString() : "-")</td>
+            </tr>
+        }
+    </tbody>
+</table>
