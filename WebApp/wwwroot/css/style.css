@@ -306,6 +306,19 @@ header {
     transform: translateX(-50%);
 }
 
+.dropdown-divider{
+    border: 1.5px solid #93C11F  !important;
+    opacity: 1 !important;
+    margin: 10px auto;
+    width: 90%;
+}
+
+.oneHref{
+    text-decoration: none;
+    color: white !important;
+    font-size: 18px !important;
+}
+
 .navbar .dropdown-item-group{
     color: #93C11F;
 }
