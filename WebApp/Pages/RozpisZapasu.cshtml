@@ -1,43 +1,184 @@
 ﻿@page
 @model Miners.Web.WebApp.Pages.RozpisZapasu
 
-<style>
-    table{
-        width:100%;
-        border-collapse: collapse;
-    }
-    th, td{
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-    }
-</style>
+@section Head{
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <link href="~/css/rozpis.css" rel="stylesheet"/>
+}
 
+<div class="page-container">
+    <!--<h4 id="rozpisZapasu">ROZPIS ZÁPASŮ</h4>
+    <table class="schedule" id="scheduleTable">
+        <thead>
+        <tr>
+            <th>Datum <i class="bi bi-filter"></i></th>
+            <th>Kategorie <i class="bi bi-filter"></i></th>
+            <th>Soutež <i class="bi bi-filter"></i></th>
+            <th>Domácí <i class="bi bi-filter"></i></th>
+            <th>Hosté <i class="bi bi-filter"></i></th>
+            <th>Hřiště <i class="bi bi-filter"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model.GamesModel)
+            {
+                <tr>
+                    <td>@game.GameDate.ToString("dd.MM.yyyy")</td>
+                    <td>@game.Category</td>
+                    <td>@game.League</td>
+                    <td>@game.HomeTeam</td>
+                    <td>@game.AwayTeam</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<table>
-    <thead>
-    <tr>
-        <th>Datum</th>
-        <th>Kategorie</th>
-        <th>Soutež</th>
-        <th>Domácí</th>
-        <th>Hosté</th>
-        <th>Domácí skóre</th>
-        <th>Hosté skóre</th>
-    </tr>
-    </thead>
-    <tbody>
-        @foreach (var game in Model.GamesModel)
-        {
-            <tr>
-                <td>@game.GameDate.ToString("dd.MM.yyyy")</td>
-                <td>@game.Category</td>
-                <td>@game.League</td>
-                <td>@game.HomeTeam</td>
-                <td>@game.AwayTeam</td>
-                <td>@(game.HomeScore.HasValue ? game.HomeScore.ToString() : "-")</td>
-                <td>@(game.AwayScore.HasValue ? game.AwayScore.ToString() : "-")</td>
-            </tr>
+    <br />!-->
+
+    <h4 id="vysledkyZapasu">VÝSLEDKY ZÁPASŮ</h4>
+    <table class="scores" id="scoresTable">
+        <thead>
+        <tr>
+            <th id="filterDatumBtn" class="dateFilter">
+                Datum <i class="bi bi-filter"></i>
+                <div id="filterDatumContainer" class="filter-container">
+                    <label>od: <input type="date" id="filterOd"></label><br>
+                    <label>do: <input type="date" id="filterDo"></label><br>
+                    <button id="applyFilterBtn">Filtrovat</button>
+                </div>
+            </th>
+            <th>Kategorie <i class="bi bi-filter"></i></th>
+            <th>Soutež <i class="bi bi-filter"></i></th>
+            <th>Domácí <i class="bi bi-filter"></i></th>
+            <th>Hosté <i class="bi bi-filter"></i></th>
+            <th>Hřiště <i class="bi bi-filter"></i></th>
+            <th>Skóre</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model.GamesModel)
+            {
+                <tr class="score-row" style="display:none">
+                    <td>@game.GameDate.ToString("dd.MM.yyyy")</td>
+                    <td>@game.Category</td>
+                    <td>@game.League</td>
+                    <td>@game.HomeTeam</td>
+                    <td>@game.AwayTeam</td>
+                    <td></td>
+                    <td>@(game.HomeScore.HasValue ? game.HomeScore.ToString() : "-"):@(game.AwayScore.HasValue ? game.AwayScore.ToString() : "-")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button id="loadMoreBtn" class="loadMoreBtn">zobrazit další zápasy</button>
+</div>
+
+<div id="btnVysledky" class="floating-btn" title="Výsledky zápasu">VÝSLEDKY</div>
+
+@section Scripts {
+<script>
+    const rows = document.querySelectorAll('#scoresTable .score-row');
+    let visibleCount = 10;
+
+    let currentFilter = { od: null, do: null };
+
+    function isRowVisible(row) {
+        if (!currentFilter.od && !currentFilter.do) return true;
+
+        const cellDate = row.querySelector('td').innerText;
+        const [day, month, year] = cellDate.split('.');
+        const rowDate = new Date(`${year}-${month}-${day}`);
+
+        let show = true;
+        if (currentFilter.od) show = show && rowDate >= new Date(currentFilter.od);
+        if (currentFilter.do) show = show && rowDate <= new Date(currentFilter.do);
+        return show;
+    }
+
+    function showRows(count) {
+        let shown = 0;
+        for (let i = 0; i < rows.length; i++) {
+            if (isRowVisible(rows[i]) && shown < count) {
+                rows[i].style.display = '';
+                shown++;
+            } else {
+                rows[i].style.display = 'none';
+            }
         }
-    </tbody>
-</table>
+    }
+
+    showRows(visibleCount);
+
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+        const currentlyVisible = Array.from(rows).filter(r => r.style.display !== 'none').length;
+        let newVisible = currentlyVisible + 10;
+        showRows(newVisible);
+
+        const anyMore = Array.from(rows).some(r => isRowVisible(r) && r.style.display === 'none');
+        if (!anyMore) document.getElementById('loadMoreBtn').style.display = 'none';
+    });
+
+    function scrollToWithOffset(elementId, offset = 120) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+
+    document.getElementById('btnVysledky').addEventListener('click', () => {
+        scrollToWithOffset('vysledkyZapasu', 120);
+    });
+
+    const floatingBtns = [document.getElementById('btnVysledky')];
+    function handleScrollButtons() {
+        if (window.scrollY > 50) {
+            floatingBtns.forEach(btn => btn.style.opacity = '1');
+        } else {
+            floatingBtns.forEach(btn => btn.style.opacity = '0');
+        }
+    }
+    floatingBtns.forEach(btn => btn.style.opacity = '0');
+    window.addEventListener('scroll', handleScrollButtons);
+
+    const filterBtn = document.getElementById('filterDatumBtn');
+    const filterContainer = document.getElementById('filterDatumContainer');
+
+    filterBtn.addEventListener('click', (e) => {
+        if (e.target.closest('#filterDatumContainer')) return;
+
+        if (filterContainer.style.display === 'none') {
+            const rect = filterBtn.getBoundingClientRect();
+            filterContainer.style.top = rect.bottom + window.scrollY + 'px';
+            filterContainer.style.left = rect.left + window.scrollX + 'px';
+            filterContainer.style.display = 'block';
+        } else {
+            filterContainer.style.display = 'none';
+        }
+    });
+
+    document.getElementById('applyFilterBtn').addEventListener('click', () => {
+        currentFilter.od = document.getElementById('filterOd').value || null;
+        currentFilter.do = document.getElementById('filterDo').value || null;
+
+        visibleCount = 10;
+        document.getElementById('loadMoreBtn').style.display = 'block';
+        showRows(visibleCount);
+
+        filterContainer.style.display = 'none';
+    });
+
+    document.addEventListener('click', (e) => {
+        const isClickInside = e.target.closest('#filterDatumContainer') || e.target.closest('#filterDatumBtn');
+        if (!isClickInside) {
+            filterContainer.style.display = 'none';
+        }
+    });
+</script>
+}
