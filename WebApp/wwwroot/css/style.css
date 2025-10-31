@@ -402,6 +402,10 @@ header {
     z-index: 2;
 }
 
+.to-top:hover {
+    background-color: #93C11F;
+}
+
 .to-top i {
     color: black;
 }
@@ -415,6 +419,10 @@ header {
 ::selection {
   background: #929292;
   color: white;
+}
+
+.carousel{
+    box-shadow: 0 4px 11px #00000040;
 }
 
 .carousel-article{
@@ -432,11 +440,24 @@ header {
     width: 85%;
     position:absolute;
     bottom:20px;
-    left:20px;
+    left: 7%;
+    transition: all 0.3s ease;
+}
+
+.carousel-control-next, .carousel-control-prev{
+    width: 8% !important;
+}
+
+.carousel-indicators {
+    margin-bottom: 0 !important;
 }
 
 .carousel-article-title p, .carousel-article-title h5, .carousel-article-title span {
     opacity: .8;
+}
+
+.carousel-article-title p:hover, .carousel-article-title h5:hover, .carousel-article-title span:hover {
+    opacity: 1;
 }
 
 .carousel button i{
