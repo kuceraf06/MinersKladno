@@ -7,8 +7,9 @@
 }
 
 <div class="page-container">
-    <!--<h4 id="rozpisZapasu">ROZPIS ZÁPASŮ</h4>
-    <table class="schedule" id="scheduleTable">
+    <h4 id="rozpisZapasu">ROZPIS ZÁPASŮ</h4>
+    <p>V nejbližší době žádné zápasy nehrajeme.</p> 
+    <!--<table class="schedule" id="scheduleTable">
         <thead>
         <tr>
             <th>Datum <i class="bi bi-filter"></i></th>
@@ -32,9 +33,9 @@
                 </tr>
             }
         </tbody>
-    </table>
+    </table>!-->
 
-    <br />!-->
+    <br />
 
     <h4 id="vysledkyZapasu">VÝSLEDKY ZÁPASŮ</h4>
     <table class="scores" id="scoresTable">
@@ -43,16 +44,91 @@
             <th id="filterDatumBtn" class="dateFilter">
                 Datum <i class="bi bi-filter"></i>
                 <div id="filterDatumContainer" class="filter-container">
-                    <label>od: <input type="date" id="filterOd"></label><br>
-                    <label>do: <input type="date" id="filterDo"></label><br>
+                    <label>od: <input type="date" id="filterOd"></label>
+                    <label>do: <input type="date" id="filterDo"></label>
                     <button id="applyFilterBtn">Filtrovat</button>
                 </div>
             </th>
-            <th>Kategorie <i class="bi bi-filter"></i></th>
-            <th>Soutěž <i class="bi bi-filter"></i></th>
-            <th>Domácí <i class="bi bi-filter"></i></th>
+            @{
+                var categories = Model.GamesModel
+                    .Select(x => x.Category)
+                    .Distinct()
+                    .OrderBy(cat =>
+                    {
+                        var match = System.Text.RegularExpressions.Regex.Match(cat, @"\d+");
+                        if (match.Success)
+                        {
+                            return int.Parse(match.Value);
+                        }
+                        else if (cat.ToLower().Contains("ženy"))
+                        {
+                            return int.MaxValue - 1;
+                        }
+                        else if (cat.ToLower().Contains("muži"))
+                        {
+                            return int.MaxValue;
+                        }
+                        else
+                        {
+                            return int.MaxValue;
+                        }
+                    })
+                .ToList();
+            }
+            <th id="filterKategorieBtn" class="categoryFilter"> 
+                Kategorie <i class="bi bi-filter"></i>
+                <div id="filterKategorieContainer" class="filter-container">
+                    <div class="filter-items">
+                        @foreach (var cat in categories)
+                        {
+                            <label><input type="checkbox" class="categoryCheckbox filterCheckbox" value="@cat"> @cat</label>
+                        }
+                    </div>
+                    <button id="applyKategorieFilterBtn" class="filter-button">Filtrovat</button>
+                </div>
+            </th>
+            @{
+                var leagues = Model.GamesModel
+                    .Select(x => x.League)
+                    .Distinct()
+                    .OrderBy(l => l)
+                    .ToList();
+            }
+            <th id="filterSoutezBtn" class="leagueFilter"> 
+                Soutěž <i class="bi bi-filter"></i>
+                <div id="filterSoutezContainer" class="filter-container">
+                    <input type="text" id="soutezSearchInput" placeholder="Hledej soutěž..." style="margin-bottom: 5px; padding: 3px; border-radius: 4px; border: 1px solid #666;"/>
+                    <div class="filter-items" id="soutezCheckboxesContainer">
+                        @foreach (var l in leagues)
+                        {
+                            <label><input type="checkbox" class="leagueCheckbox filterCheckbox" value="@l"> @l</label>
+                        }
+                    </div>
+                    <button id="applySoutezFilterBtn" class="filter-button">Filtrovat</button>
+                </div>
+            </th>
+            @{
+                var homeTeams = Model.GamesModel
+                    .Select(x => x.HomeTeam)
+                    .Distinct()
+                    .OrderBy(h => h)
+                    .ToList();
+            }
+            <th id="filterDomaciBtn" class="homeFilter">
+                Domácí <i class="bi bi-filter"></i>
+                <div id="filterDomaciContainer" class="filter-container">
+                    <input type="text" id="homeSearchInput" placeholder="Hledej tým..." style="margin-bottom: 5px; padding: 3px; border-radius: 4px; border: 1px solid #666;"/>
+                    <div class="filter-items" id="homeCheckboxesContainer">
+                        @foreach (var h in homeTeams)
+                        {
+                            <label><input type="checkbox" class="homeCheckbox filterCheckbox" value="@h"> @h</label>
+                        }
+                    </div>
+                    <button id="applyDomaciFilterBtn" class="filter-button">Filtrovat</button>
+                </div>
+            </th>       
             <th>Hosté <i class="bi bi-filter"></i></th>
-            <th>Hřiště <i class="bi bi-filter"></i></th>
+            <!--<th>Hřiště <i class="bi bi-filter"></i></th>!-->
             <th>Skóre</th>
         </tr>
         </thead>
@@ -65,7 +141,7 @@
                     <td>@game.League</td>
                     <td>@game.HomeTeam</td>
                     <td>@game.AwayTeam</td>
-                    <td></td>
+                    <!--<td></td>!-->
                     <td>@(game.HomeScore.HasValue ? game.HomeScore.ToString() : "-"):@(game.AwayScore.HasValue ? game.AwayScore.ToString() : "-")</td>
                 </tr>
             }
@@ -74,110 +150,185 @@
     <button id="loadMoreBtn" class="loadMoreBtn">zobrazit další zápasy</button>
 </div>
 
+<div id="btnRozpis" class="floating-btn" title="Rozpis zápasu">ROZPIS</div>
 <div id="btnVysledky" class="floating-btn" title="Výsledky zápasu">VÝSLEDKY</div>
 
 @section Scripts {
 <script>
     const rows = document.querySelectorAll('#scoresTable .score-row');
     let visibleCount = 10;
-    let currentFilter = { od: null, do: null };
+    let currentFilter = {
+        od: null,
+        do: null,
+        categories: [],
+        leagues: [],
+        homes: []
+    };
 
     function isRowVisible(row) {
-        if (!currentFilter.od && !currentFilter.do) return true;
+        const cells = row.querySelectorAll('td');
 
-        const cellDate = row.querySelector('td').innerText;
-        const [day, month, year] = cellDate.split('.');
+        const [day, month, year] = cells[0].innerText.split('.');
         const rowDate = new Date(`${year}-${month}-${day}`);
 
-        let show = true;
-        if (currentFilter.od) show = show && rowDate >= new Date(currentFilter.od);
-        if (currentFilter.do) show = show && rowDate <= new Date(currentFilter.do);
-        return show;
+        if (currentFilter.od && rowDate < new Date(currentFilter.od)) return false;
+        if (currentFilter.do && rowDate > new Date(currentFilter.do)) return false;
+
+        const rowCat = cells[1].innerText;
+        if (currentFilter.categories.length > 0 && !currentFilter.categories.includes(rowCat)) return false;
+
+        const rowLeague = cells[2].innerText;
+        if (currentFilter.leagues.length > 0 && !currentFilter.leagues.includes(rowLeague)) return false;
+
+        const rowHome = cells[3].innerText;
+        if (currentFilter.homes.length > 0 && !currentFilter.homes.includes(rowHome)) return false;
+
+        return true;
     }
 
     function showRows(count) {
         let shown = 0;
+        let totalVisible = 0;
+
         for (let i = 0; i < rows.length; i++) {
-            if (isRowVisible(rows[i]) && shown < count) {
-                rows[i].style.display = '';
-                shown++;
+            if (isRowVisible(rows[i])) {
+                totalVisible++;
+                if (shown < count) {
+                    rows[i].style.display = '';
+                    shown++;
+                } else {
+                    rows[i].style.display = 'none';
+                }
             } else {
                 rows[i].style.display = 'none';
             }
+        }
+
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (totalVisible <= shown) {
+            loadMoreBtn.classList.add('hidden');
+        } else {
+            loadMoreBtn.classList.remove('hidden');
         }
     }
 
     showRows(visibleCount);
 
     document.getElementById('loadMoreBtn').addEventListener('click', () => {
-        const currentlyVisible = Array.from(rows).filter(r => r.style.display !== 'none').length;
-        let newVisible = currentlyVisible + 10;
-        showRows(newVisible);
-
-        const anyMore = Array.from(rows).some(r => isRowVisible(r) && r.style.display === 'none');
-        if (!anyMore) document.getElementById('loadMoreBtn').style.display = 'none';
+        visibleCount += 10;
+        showRows(visibleCount);
     });
 
     function scrollToWithOffset(elementId, offset = 120) {
         const element = document.getElementById(elementId);
         if (!element) return;
-
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
     }
 
-    document.getElementById('btnVysledky').addEventListener('click', () => {
-        scrollToWithOffset('vysledkyZapasu', 120);
-    });
+    document.getElementById('btnRozpis').addEventListener('click', () => scrollToWithOffset('rozpisZapasu', 120));
+    document.getElementById('btnVysledky').addEventListener('click', () => scrollToWithOffset('vysledkyZapasu', 120));
 
-    const floatingBtns = [document.getElementById('btnVysledky')];
-    function handleScrollButtons() {
-        if (window.scrollY > 50) {
-            floatingBtns.forEach(btn => btn.style.opacity = '1');
-        } else {
-            floatingBtns.forEach(btn => btn.style.opacity = '0');
-        }
-    }
+    const floatingBtns = [document.getElementById('btnRozpis'), document.getElementById('btnVysledky')];
     floatingBtns.forEach(btn => btn.style.opacity = '0');
-    window.addEventListener('scroll', handleScrollButtons);
+    window.addEventListener('scroll', () => {
+        floatingBtns.forEach(btn => btn.style.opacity = window.scrollY > 50 ? '1' : '0');
+    });
 
     const filterBtn = document.getElementById('filterDatumBtn');
     const filterContainer = document.getElementById('filterDatumContainer');
-
-    filterBtn.addEventListener('click', (e) => {
+    filterBtn.addEventListener('click', e => {
         if (e.target.closest('#filterDatumContainer')) return;
-
-        if (filterContainer.style.display === 'none') {
-            const rect = filterBtn.getBoundingClientRect();
-            filterContainer.style.top = rect.bottom + window.scrollY + 'px';
-            filterContainer.style.left = rect.left + window.scrollX + 'px';
-            filterContainer.style.display = 'block';
-        } else {
-            filterContainer.style.display = 'none';
-        }
+        filterContainer.style.display = (filterContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterBtn.getBoundingClientRect();
+        filterContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterContainer.style.left = rect.left + window.scrollX + 'px';
     });
-
     document.getElementById('applyFilterBtn').addEventListener('click', () => {
         currentFilter.od = document.getElementById('filterOd').value || null;
         currentFilter.do = document.getElementById('filterDo').value || null;
-
-        visibleCount = 10;
-        document.getElementById('loadMoreBtn').style.display = 'block';
         showRows(visibleCount);
-
         filterContainer.style.display = 'none';
     });
 
-    document.addEventListener('click', (e) => {
-        const isClickInside = e.target.closest('#filterDatumContainer') || e.target.closest('#filterDatumBtn');
-        if (!isClickInside) {
-            filterContainer.style.display = 'none';
-        }
+    const filterKategorieBtn = document.getElementById('filterKategorieBtn');
+    const filterKategorieContainer = document.getElementById('filterKategorieContainer');
+    filterKategorieBtn.addEventListener('click', e => {
+        if (e.target.closest('#filterKategorieContainer')) return;
+        filterKategorieContainer.style.display = (filterKategorieContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterKategorieBtn.getBoundingClientRect();
+        filterKategorieContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterKategorieContainer.style.left = rect.left + window.scrollX + 'px';
     });
+    document.getElementById('applyKategorieFilterBtn').addEventListener('click', () => {
+        currentFilter.categories = Array.from(document.querySelectorAll('.categoryCheckbox:checked')).map(chk => chk.value);
+        showRows(visibleCount);
+        filterKategorieContainer.style.display = 'none';
+    });
+
+    const filterSoutezBtn = document.getElementById('filterSoutezBtn');
+    const filterSoutezContainer = document.getElementById('filterSoutezContainer');
+    filterSoutezBtn.addEventListener('click', e => {
+        if (e.target.closest('#filterSoutezContainer')) return;
+        filterSoutezContainer.style.display = (filterSoutezContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterSoutezBtn.getBoundingClientRect();
+        filterSoutezContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterSoutezContainer.style.left = rect.left + window.scrollX + 'px';
+    });
+    document.getElementById('applySoutezFilterBtn').addEventListener('click', () => {
+        currentFilter.leagues = Array.from(document.querySelectorAll('.leagueCheckbox:checked')).map(chk => chk.value);
+        showRows(visibleCount);
+        filterSoutezContainer.style.display = 'none';
+    });
+
+    const filterDomaciBtn = document.getElementById('filterDomaciBtn');
+    const filterDomaciContainer = document.getElementById('filterDomaciContainer');
+    filterDomaciBtn.addEventListener('click', e => {
+        if (e.target.closest('#filterDomaciContainer')) return;
+        filterDomaciContainer.style.display = (filterDomaciContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterDomaciBtn.getBoundingClientRect();
+        filterDomaciContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterDomaciContainer.style.left = rect.left + window.scrollX + 'px';
+    });
+    document.getElementById('applyDomaciFilterBtn').addEventListener('click', () => {
+        currentFilter.homes = Array.from(document.querySelectorAll('.homeCheckbox:checked')).map(chk => chk.value);
+        showRows(visibleCount);
+        filterDomaciContainer.style.display = 'none';
+    });
+
+    document.addEventListener('click', e => {
+        if (!e.target.closest('#filterDatumBtn') && !e.target.closest('#filterDatumContainer')) filterContainer.style.display = 'none';
+        if (!e.target.closest('#filterKategorieBtn') && !e.target.closest('#filterKategorieContainer')) filterKategorieContainer.style.display = 'none';
+        if (!e.target.closest('#filterSoutezBtn') && !e.target.closest('#filterSoutezContainer')) filterSoutezContainer.style.display = 'none';
+        if (!e.target.closest('#filterDomaciBtn') && !e.target.closest('#filterDomaciContainer')) filterDomaciContainer.style.display = 'none';
+    });
+
+    const homeSearchInput = document.getElementById('homeSearchInput');
+    const homeCheckboxesContainer = document.getElementById('homeCheckboxesContainer');
+
+    homeSearchInput.addEventListener('input', () => {
+        const filterText = homeSearchInput.value.toLowerCase();
+        const labels = homeCheckboxesContainer.querySelectorAll('label');
+
+        labels.forEach(label => {
+            const text = label.innerText.toLowerCase();
+            label.style.display = text.includes(filterText) ? 'flex' : 'none';
+        });
+    });
+
+    const soutezSearchInput = document.getElementById('soutezSearchInput');
+    const soutezCheckboxesContainer = document.getElementById('soutezCheckboxesContainer');
+
+    soutezSearchInput.addEventListener('input', () => {
+        const filterText = soutezSearchInput.value.toLowerCase();
+        const labels = soutezCheckboxesContainer.querySelectorAll('label');
+
+        labels.forEach(label => {
+            const text = label.innerText.toLowerCase();
+            label.style.display = text.includes(filterText) ? 'flex' : 'none';
+        });
+    });
+
+
 </script>
 }
