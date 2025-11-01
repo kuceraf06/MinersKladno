@@ -35,6 +35,10 @@
         transition: all 0.3s ease;
     }
 
+    .hidden {
+        display: none !important;
+    }
+
     .loadMoreBtn:hover {
         color: #93C11F;
         font-weight: 600;
@@ -80,14 +84,51 @@
     }
 
     .filter-container {
-        display:none;
+        display: none;      
         position: absolute;
         background-color: #93C11F;
+        min-width: 130px;
+        max-height: 350px;
         border-radius: 5px;
-        padding: 8px;
         font-size: 15px;
         z-index: 500;
         box-shadow: 0 4px 11px #00000040;
+        padding: 8px;
+
+        flex-direction: column; 
+    }
+
+    .filter-items {
+        display: flex;        
+        flex-direction: column;  
+        overflow-y: auto;      
+        max-height: 260px;    
+        scrollbar-width: thin;  
+        scrollbar-color: #666 #93C11F;
+    }
+
+    .filter-items::-webkit-scrollbar {
+        width: 8px;                     
+    }
+
+    .filter-items::-webkit-scrollbar-track {
+        background: #93C11F;             
+        border-radius: 4px;
+    }
+
+    .filter-items::-webkit-scrollbar-thumb {
+        background-color: #666;         
+        border-radius: 4px;
+        border: 2px solid #93C11F;      
+    }
+
+    .filter-items::-webkit-scrollbar-thumb:hover {
+        background-color: #444;          
+    }
+
+    .filter-button {
+        margin-top: 5px;
+        flex-shrink: 0;
     }
 
     .filter-container label {
@@ -116,6 +157,55 @@
     .filter-container button:hover {
         background-color: #d8d8d8;
     }
+
+    .categoryFilter {
+        cursor: pointer;
+    }
+
+    .leagueFilter {
+        cursor: pointer;
+    }
+
+    .homeFilter {
+        cursor: pointer;
+    }
+
+    .filter-container label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .filterCheckbox {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #333;
+        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        background-color: #fff;
+    }
+
+    .filterCheckbox:checked {
+        background-color: #fff;
+    }
+
+    .filterCheckbox:checked::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 6px;
+        height: 10px;
+        border: solid #333;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
 
     /*@media(max-width: 780px) {
         th, tr {
