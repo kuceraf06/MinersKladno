@@ -94,7 +94,6 @@
         z-index: 500;
         box-shadow: 0 4px 11px #00000040;
         padding: 8px;
-
         flex-direction: column; 
     }
 
@@ -170,6 +169,10 @@
         cursor: pointer;
     }
 
+    .awayFilter {
+        cursor: pointer;
+    }
+
     .filter-container label {
         display: flex;
         align-items: center;
@@ -197,8 +200,8 @@
     .filterCheckbox:checked::after {
         content: '';
         position: absolute;
-        top: 2px;
-        left: 5px;
+        top: 3px;
+        left: 6px;
         width: 6px;
         height: 10px;
         border: solid #333;
@@ -206,14 +209,323 @@
         transform: rotate(45deg);
     }
 
+    .evenScore {
+        font-weight: bold;
+    }
 
-    /*@media(max-width: 780px) {
-        th, tr {
-            font-size: 9px;
-            padding: 0;
+    td.miners-win {
+        color: #1eb72a !important;
+        font-weight: bold;
+    }
+
+    td.miners-loss {
+        color: #d62828 !important;
+        font-weight: bold;
+    }
+
+    .vysledkyClearFilter {
+        display: flex;
+    }
+
+    .clearFilter {
+        display:none; 
+        margin-left: auto; 
+        margin-bottom: 5px;
+        font-size:14px; 
+        font-weight: bold;
+        padding:3px 8px; 
+        background:#d62828; 
+        color:white; 
+        border:none; 
+        border-radius:4px; 
+        cursor:pointer;
+        transition: all 0.3s ease;
+    }
+
+    .clearFilter:hover {
+        background-color: #b22222;
+    }
+
+    .search {
+        margin-bottom: 5px; 
+        padding: 3px; 
+        border-radius: 4px; 
+        border: 1px solid #666;
+    }
+
+    @media(max-width: 700px) {
+        th, tr, td {
+            font-size: 14px;
+            padding: 6px;
+        }
+
+        th i {
+            font-size: 14px;
+        }
+
+        .clearFilter {
+            margin-bottom: 4px;
+            font-size:13px; 
+            padding:2px 6px; 
+        }
+
+        .loadMoreBtn {
+            font-size: 14px;
+            margin: 8px auto;
+        }
+
+        .filter-container {
+            max-height: 340px;
+            font-size: 14px;
+            padding: 6px;
+        }
+
+        .filter-items { 
+            max-height: 250px;     
+        }
+
+        .filter-button {
+            margin-top: 4px;
+        }
+
+        .filter-container label {
+            margin-bottom: 8px;
+        }
+
+        .filter-container input {
+            margin-left: 3px;
+        }
+
+        .filter-container button {
+            padding: 2px 4px;
+        }
+
+        .search {
+            margin-bottom: 4px; 
+            padding: 2px; 
+        }
+
+        .filter-container label {
+            gap: 8px;
+        }
+
+        .filterCheckbox {
+            width: 17px;
+            height: 17px;
+            border: 2px solid #333;
+        }
+
+        .filterCheckbox:checked::after {
+            width: 5px;
+            height: 9px;
+            border-width: 0 2px 2px 0;
+        }
+    }
+
+    @media(max-width: 607px) {
+        th, tr, td {
+            font-size: 12px;
+            padding: 4px;
+        }
+
+        th i {
+            font-size: 12px;
+        }
+
+        tr {
+            border-bottom: 2px solid #ddd;
+        }
+
+        .clearFilter {
+            margin-bottom: 6px;
+            font-size: 12px; 
+            padding: 0px 5px; 
+        }
+
+        .loadMoreBtn {
+            font-size: 12px;
+            margin: 6px auto;
+        }
+
+        .filter-container {
+            min-width: 100px;
+            max-height: 300px;
+            font-size: 12px;
+            padding: 4px;
+        }
+
+        .filter-items { 
+            max-height: 220px;     
+        }
+
+        .filter-button {
+            margin-top: 3px;
+        }
+
+        .filter-container label {
+            margin-bottom: 6px;
+        }
+
+        .filter-container input {
+            margin-left: 2px;
+        }
+
+        .filter-container button {
+            padding: 1px 3px;
+        }
+
+        .search {
+            margin-bottom: 3px; 
+            padding: 1px; 
+        }
+
+        .filter-container label {
+            gap: 6px;
+        }
+
+        .filterCheckbox {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #333;
+            border-radius: 4px !important;
+        }
+
+        .filterCheckbox:checked::after {
+            width: 4px;
+            height: 8px;
+            border-width: 0 2px 2px 0;
+        }
+    }
+
+    @media(max-width: 505px) {
+        th, tr, td {
+            font-size: 10px;
+            padding: 2px;
         }
 
         th i {
             font-size: 10px;
         }
-    }*/
+
+        tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .clearFilter {
+            margin-bottom: 8px;
+            font-size:10px; 
+            padding:0px 5px; 
+        }
+
+        .loadMoreBtn {
+            font-size: 10px;
+            margin: 4px auto;
+        }
+
+        .filter-container {
+            max-height: 250px;
+            min-width: 70px;
+            font-size: 10px;
+            padding: 2px;
+        }
+
+        .filter-items { 
+            max-height: 180px;     
+        }
+
+        .filter-button {
+            margin-top: 2px;
+        }
+
+        .filter-container label {
+            margin-bottom: 4px;
+        }
+
+        .filter-container input {
+            margin-left: 1px;
+        }
+
+        .filter-container button {
+            padding: 0px 2px;
+        }
+
+        .search {
+            margin-bottom: 2px; 
+            padding: 0px; 
+        }
+
+        .filter-container label {
+            gap: 4px;
+        }
+
+        .filterCheckbox {
+            width: 14px;
+            height: 14px;
+            border: 1px solid #333;
+        }
+
+        .filterCheckbox:checked::after {
+            width: 3px;
+            height: 7px;
+            border-width: 0 1px 1px 0;
+        }
+    }
+
+    @media(max-width: 410px) {
+        th, tr, td {
+            font-size: 8px;
+            padding: 0px;
+        }
+
+        th i {
+            font-size: 8px;
+        }
+
+        .clearFilter {
+            margin-bottom: 10px;
+            font-size: 8px; 
+            padding:0px 5px; 
+        }
+
+        .loadMoreBtn {
+            font-size: 8px;
+            margin: 2px auto;
+        }
+
+        .filter-container {
+            max-height: 250px;
+            font-size: 8px;
+            padding: 1px;
+        }
+
+        .filter-items { 
+            max-height: 140px;     
+        }
+
+        .filter-container label {
+            margin-bottom: 2px;
+        }
+
+        .filter-container button {
+            padding: 0px 2px;
+        }
+
+        .filter-container label {
+            gap: 2px;
+        }
+
+        .filterCheckbox {
+            width: 12px;
+            height: 12px;
+            border: 1px solid #333;
+            border-radius: 3px !important;
+        }
+
+        .filterCheckbox:checked::after {
+            left: 5px;
+            top: 2px;
+            width: 3px;
+            height: 6px;
+            border-width: 0 1px 1px 0;
+        }
+    }
