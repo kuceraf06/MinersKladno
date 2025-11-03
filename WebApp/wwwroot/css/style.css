@@ -36,6 +36,7 @@ header {
         box-sizing: border-box;
     }
 }
+
 .topheader{
     font-family: "Titan One", sans-serif;
     text-transform: uppercase;
@@ -411,7 +412,7 @@ header {
 }
 
 .to-top.active {
-    bottom: 32px;
+    bottom: 10px;
     pointer-events: auto;
     opacity: 1;
 }

@@ -72,11 +72,11 @@
     }
       
     #btnRozpis { 
-        bottom: 100px; 
+        bottom: 70px; 
     }
     
     #btnVysledky { 
-        bottom: 40px; 
+        bottom: 10px; 
     }
 
     .dateFilter {
@@ -400,7 +400,7 @@
     @media(max-width: 505px) {
         th, tr, td {
             font-size: 10px;
-            padding: 2px;
+            padding: 4px 2px;
         }
 
         th i {
@@ -474,7 +474,7 @@
     @media(max-width: 410px) {
         th, tr, td {
             font-size: 8px;
-            padding: 0px;
+            padding: 3px 0px;
         }
 
         th i {

@@ -26,6 +26,16 @@
     margin: 2rem auto;
 }
 
+.box-scm {
+    background-color: #464545;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.box-extra {
+    background-color: black !important;
+}
+
 @media (max-width: 619px) {
     .scm h5 {
         font-size: 1rem;
@@ -42,5 +52,9 @@
 
     .scm-image {
         max-width: 100%;
+    }
+
+    .box-scm {
+        font-size: 1rem !important;
     }
 }

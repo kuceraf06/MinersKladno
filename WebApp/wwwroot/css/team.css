@@ -37,6 +37,7 @@
     color: rgb(80, 80, 80);
     padding: 4px 5px;
     border-radius: 50%;
+    position: relative;
 }
 
 .phone {
@@ -47,6 +48,34 @@
     background-color: #93C11F;
     color: white;
     transition: all 0.2s ease-in-out;
+}
+
+.contact-coaches a:not(.disabled)::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #222;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease-in-out;
+    z-index: 10;
+}
+
+.contact-coaches a:not(.disabled):hover::after {
+    opacity: 1;
+}
+
+.crossed {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.4;
 }
 
 h5 {

@@ -1,14 +1,13 @@
 .calendar-box {
     min-height: 812px;
     height: auto;
-    padding-bottom: 20px;
     background-color: white;
     box-shadow: 0 4px 11px #00000040;
 }
 
 #calendar-day-details {
-    max-height: 431px;
-    min-height: 431px;
+    max-height: 430px;
+    min-height: 430px;
     overflow-y: auto;
     margin-top: 10px !important;
 }
@@ -320,7 +319,8 @@
     }
 
     #calendar-day-details {
-        max-height: 372px;
+        max-height: 410px;
+        min-height: 410px;
         overflow-y: auto;
     }
 
