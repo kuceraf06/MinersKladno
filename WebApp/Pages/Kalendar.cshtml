@@ -10,6 +10,8 @@
     <script src="~/lib/fullcalendar/core/locales/cs.js"></script>
     <script src="~/lib/fullcalendar/daygrid/main.js"></script>
     <script src='~/lib/fullcalendar/google-calendar/main.js'></script>
+    <style id="switchStyles">
+    </style>
 }
 <div class="page-container">
     <h4>KALENDÁŘ</h4>
@@ -31,7 +33,7 @@
 </div>
 
 <script type="text/html" id="switchTemplate">
-    <div class="col-md-1 col-4">
+    <div class="col-md-1 col-4 switch-<%=id%>">
         <div class="form-check form-switch">
             <input type="checkbox" class="form-check-input" id="switch-<%=id%>" onchange="switchChange('<%=id%>', this)" <%=selected ? 'checked' : ''%> />
             <label class="form-check-label text-nowrap" for="switch-<%=id%>"><%=title%></label>
@@ -40,7 +42,7 @@
 </script>
 
 <script type="text/html" id="switchClass">
-    .switch-<%=id%> .custom-control-input:checked~.custom-control-label::before {
+    .switch-<%=id%> .form-check-input:checked {
     color: <%=color%>;
     border-color: <%=backgroundColor%>;
     background-color: <%=backgroundColor%>;

@@ -1,11 +1,13 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Miners.Web.BusinessLayer;
 using Miners.Web.WebApp.Models;
 
 namespace Miners.Web.WebApp.Pages;
 
+[OutputCache(VaryByQueryKeys = ["id"])]
 public class Team(AppDbContext dbContext) : PageModel
 {
     public TeamModel TeamModel { get; set; }

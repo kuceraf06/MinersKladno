@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.OutputCaching;
 using Miners.Web.BusinessLayer;
 using Miners.Web.BusinessLayer.Entities;
 using Miners.Web.WebApp.Models;
 
 namespace Miners.Web.WebApp.Pages;
 
+[OutputCache]
 public class Treneri(AppDbContext dbContext) : PageModel
 {
     public List<TreneriTeamModel> Teams { get; set; } = new List<TreneriTeamModel>();

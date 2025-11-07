@@ -2,6 +2,7 @@
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.OutputCaching;
 using Miners.Web.BusinessLayer;
 using Miners.Web.BusinessLayer.Services;
 using Miners.Web.WebApp.GoogleCalendar;
@@ -9,6 +10,7 @@ using Miners.Web.WebApp.Models;
 
 namespace Miners.Web.WebApp.Pages;
 
+[OutputCache]
 public class IndexModel(AppDbContext dbContext) : PageModel
 {
     public List<CarouselArticleModel> CarouselArticles { get; set; }

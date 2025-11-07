@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using Miners.Web.BusinessLayer;
 using Miners.Web.WebApp.Models;
 
 namespace Miners.Web.WebApp.Pages;
 
+[OutputCache]
 public class RozpisZapasu(AppDbContext dbContext) : PageModel
 {
     public void OnGet()

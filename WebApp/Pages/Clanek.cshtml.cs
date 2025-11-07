@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.OutputCaching;
 using Miners.Web.BusinessLayer;
 using Miners.Web.WebApp.Models;
 
 namespace Miners.Web.WebApp.Pages;
 
+[OutputCache(VaryByQueryKeys = ["id"])]
 public class Clanek(AppDbContext dbContext) : PageModel
 {
     public ClanekModel ClanekModel { get; set; }

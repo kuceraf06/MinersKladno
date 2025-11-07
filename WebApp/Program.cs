@@ -18,6 +18,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddRazorPages();
 
+builder.Services.AddOutputCache(options =>
+{
+    options.DefaultExpirationTimeSpan = TimeSpan.FromMinutes(60);
+});
+
 
 var app = builder.Build();
 
@@ -25,6 +30,8 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseOutputCache();
 
 app.MapRazorPages();
 app.Run();
