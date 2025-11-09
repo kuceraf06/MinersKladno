@@ -1,5 +1,8 @@
 ﻿@page "{id}"
 @model Miners.Web.WebApp.Pages.Team
+@{
+    ViewData["Title"] = "| " + Model.TeamModel.Title;
+}
 
 @section Head{
     <link href="~/css/team.css" rel="stylesheet"/>
