@@ -308,17 +308,17 @@ header {
 }
 
 .dropdown-divider{
-    border: 1.5px solid white  !important;
-    opacity: 1 !important;
-    margin: 10px auto;
-    width: 200px;
-}
-
-.mobile-divider{
-    border: 1.5px solid #93C11F  !important;
+    border: 1.5px solid #93C11F !important;
     opacity: 1 !important;
     margin: 10px auto;
     width: 90%;
+}
+
+.mobile-divider{
+    border: 1.5px solid white   !important;
+    opacity: 1 !important;
+    margin: 10px auto;
+    width: 200px;
 }
 
 .oneHref{
