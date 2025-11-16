@@ -354,7 +354,7 @@
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1201px) {
     #calendar-day-details {
         max-height: none;
         overflow-y: visible;
