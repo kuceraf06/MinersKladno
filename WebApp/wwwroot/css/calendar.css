@@ -6,8 +6,8 @@
 }
 
 #calendar-day-details {
-    max-height: 430px;
-    min-height: 430px;
+    max-height: 470px;
+    min-height: 470px;
     overflow-y: auto;
     margin-top: 10px !important;
 }
@@ -319,8 +319,8 @@
     }
 
     #calendar-day-details {
-        max-height: 410px;
-        min-height: 410px;
+        max-height: 440px;
+        min-height: 440px;
         overflow-y: auto;
     }
 

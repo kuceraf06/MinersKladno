@@ -583,7 +583,8 @@ header {
 }
 
 .article img{
-    width: 30%;
+    width: 100%;
+    max-width: 150px;
     height: 110px;
     margin-left: 10px;
     margin-top: auto;
