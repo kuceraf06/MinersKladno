@@ -80,13 +80,16 @@
                 <h4>HYMNA</h4>
                 <div class="actuality video-block">
                     <div class="video-wrapper">
-                        <iframe 
+                        <iframe
                             src="https://www.youtube.com/embed/wLd_23SMTsA?si=ckY7fpR-aWEqSo_Y"
                             title="Hymna Miners" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen>
                         </iframe>
+                    </div>
+                    <div class="video-download">
+                        <a href="~/doc/KowarBudemeRubat.wav" download="KowarBudemeRubat.wav" onclick="zmenIkonu(this)"><i id="download-icon" class="fa-regular fa-circle-down"></i> Budeme rubat!</a>
                     </div>
                 </div>
             </div>
@@ -375,6 +378,15 @@
         </div>
     </div>
 </div>
+
+<script>
+function zmenIkonu(odkaz) {
+    const ikona = odkaz.querySelector('i');
+    
+    ikona.classList.remove('fa-regular');
+    ikona.classList.add('fa-solid');
+}
+</script>
 
 <script>
 document.querySelectorAll('.matches').forEach(matchesBlock => {
