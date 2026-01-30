@@ -342,11 +342,11 @@ header {
 
 .logo{
     position: absolute;
-    top:10px;
+    top: 5px;
 }
 
 .logo img{
-    width: 122px;
+    width: 100px;
     height: auto;
 }
 
