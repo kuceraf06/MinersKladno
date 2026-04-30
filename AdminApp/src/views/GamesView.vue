@@ -70,7 +70,7 @@
             @complete="filterLeagues"
             dropdown
             fluid
-            forceSelection="false"
+            :forceSelection="false"
           />
         </div>
         <div class="form-row-2">
@@ -108,7 +108,7 @@
 import { ref, onMounted } from 'vue'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
-import DataTable from 'primevue/datatable'
+import DataTable, { type DataTableSortEvent } from 'primevue/datatable'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
@@ -172,8 +172,8 @@ function onPage(event: { page: number; rows: number }) {
   loadGames()
 }
 
-function onSort(event: { sortField: string; sortOrder: number }) {
-  sortField.value = event.sortField
+function onSort(event: DataTableSortEvent) {
+  sortField.value = (typeof event.sortField === 'string' ? event.sortField : undefined) ?? 'gameDate'
   sortOrder.value = event.sortOrder === 1 ? 'asc' : 'desc'
   currentPage.value = 1
   loadGames()
@@ -266,7 +266,6 @@ function confirmDelete(game: Game) {
     icon: 'pi pi-trash',
     rejectLabel: 'Zrušit',
     acceptLabel: 'Smazat',
-    acceptSeverity: 'danger',
     accept: async () => {
       await api.delete(`/games/${game.id}`)
       toast.add({ severity: 'success', summary: 'Smazáno', life: 2000 })
