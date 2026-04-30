@@ -26,4 +26,5 @@ public class AppDbContext : TsfwDbContext
     public DbSet<Person> Persons { get; set; }
     public DbSet<Scoreboard> Scores { get; set; }
     public DbSet<Game> Games { get; set; }
+    public DbSet<Category> Categories { get; set; }
 }

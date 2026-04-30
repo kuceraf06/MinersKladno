@@ -16,22 +16,44 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'npm'
+        cache-dependency-path: AdminApp/package-lock.json
+
+    - name: Build Admin Vue app
+      working-directory: AdminApp
+      env:
+        VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+        VITE_API_URL: /api
+      run: |
+        npm ci
+        npm run build
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
     - name: Allow legacy SSL renegotiation
       run: echo 'openssl_conf = default_conf' >> ~/.openssl.cnf && echo '[default_conf]' >> ~/.openssl.cnf && echo 'ssl_conf = ssl_sect' >> ~/.openssl.cnf && echo '[ssl_sect]' >> ~/.openssl.cnf && echo 'system_default = crypto_policy' >> ~/.openssl.cnf && export OPENSSL_CONF=~/.openssl.cnf
+
     - name: Restore dependencies
       run: dotnet restore --configfile nuget.config
+
     - name: Publish
       run: dotnet publish -c Release -o publish
+
     - name: Deploy via SSH
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" publish/ github-deploy@172.205.192.35:/var/www/tm.stilip.cz/
+
     - name: Restart .NET Service
       run: |
         ssh github-deploy@172.205.192.35 << 'EOF'
