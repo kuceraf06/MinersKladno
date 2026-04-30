@@ -52,16 +52,16 @@ app.MapControllers();
 app.MapRazorPages();
 
 // SPA fallback pro admin
+var adminIndex = Path.Combine(app.Environment.WebRootPath, "admin", "index.html");
 app.MapGet("/admin", context =>
 {
-    context.Response.Redirect("/admin/", permanent: false);
-    return Task.CompletedTask;
+    context.Response.ContentType = "text/html";
+    return context.Response.SendFileAsync(adminIndex);
 });
-app.MapFallback("{*path:regex(^admin)}", context =>
+app.MapFallback("{*path:regex(^admin/)}", context =>
 {
     context.Response.ContentType = "text/html";
-    return context.Response.SendFileAsync(
-        Path.Combine(app.Environment.WebRootPath, "admin", "index.html"));
+    return context.Response.SendFileAsync(adminIndex);
 });
 
 app.Run();
