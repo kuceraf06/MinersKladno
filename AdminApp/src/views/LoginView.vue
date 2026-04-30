@@ -22,23 +22,19 @@ const router = useRouter()
 const auth = useAuthStore()
 const error = ref('')
 
-declare const google: any
-
-onMounted(() => {
-  google.accounts.id.initialize({
-    client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-    callback: handleCredentialResponse,
+function loadGsiScript(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (document.getElementById('google-gsi')) { resolve(); return }
+    const script = document.createElement('script')
+    script.id = 'google-gsi'
+    script.src = 'https://accounts.google.com/gsi/client'
+    script.onload = () => resolve()
+    script.onerror = () => reject(new Error('Google GSI script se nepodařilo načíst'))
+    document.head.appendChild(script)
   })
-  google.accounts.id.renderButton(document.getElementById('google-signin-btn'), {
-    theme: 'outline',
-    size: 'large',
-    text: 'signin_with',
-    locale: 'cs',
-    width: 280,
-  })
-})
+}
 
-async function handleCredentialResponse(response: { credential: string }) {
+async function handleCredentialResponse(response: google.accounts.id.CredentialResponse) {
   error.value = ''
   try {
     await auth.loginWithGoogle(response.credential)
@@ -47,6 +43,22 @@ async function handleCredentialResponse(response: { credential: string }) {
     error.value = 'Přístup odepřen. Váš účet nemá oprávnění k administraci.'
   }
 }
+
+onMounted(async () => {
+  await loadGsiScript()
+  google.accounts.id.initialize({
+    client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+    callback: handleCredentialResponse,
+  })
+  google.accounts.id.renderButton(document.getElementById('google-signin-btn')!, {
+    type: 'standard',
+    theme: 'outline',
+    size: 'large',
+    text: 'signin_with',
+    locale: 'cs',
+    width: 280,
+  })
+})
 </script>
 
 <style scoped>
