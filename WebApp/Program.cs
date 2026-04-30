@@ -52,7 +52,12 @@ app.MapControllers();
 app.MapRazorPages();
 
 // SPA fallback pro admin
-app.MapFallback("{*path:regex(^admin/.+)}", context =>
+app.MapGet("/admin", context =>
+{
+    context.Response.Redirect("/admin/", permanent: false);
+    return Task.CompletedTask;
+});
+app.MapFallback("{*path:regex(^admin)}", context =>
 {
     context.Response.ContentType = "text/html";
     return context.Response.SendFileAsync(
