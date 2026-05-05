@@ -61,6 +61,7 @@ const menuItems = [
   { to: '/', label: 'Dashboard', icon: 'pi pi-home' },
   { to: '/zapasy', label: 'Zápasy', icon: 'pi pi-calendar' },
   { to: '/clanky', label: 'Články', icon: 'pi pi-file-edit' },
+  { to: '/scoreboard', label: 'Scoreboard', icon: 'pi pi-chart-line' },
 ]
 
 function isItemActive(item: { to: string }) {

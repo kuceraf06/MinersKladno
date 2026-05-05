@@ -34,6 +34,11 @@ const router = createRouter({
           name: 'article-edit',
           component: () => import('@/views/ArticleEditView.vue'),
         },
+        {
+          path: 'scoreboard',
+          name: 'scoreboard',
+          component: () => import('@/views/ScoreboardView.vue'),
+        },
       ],
     },
     {

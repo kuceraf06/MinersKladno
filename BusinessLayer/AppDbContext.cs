@@ -17,7 +17,6 @@ public class AppDbContext : TsfwDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<Scoreboard>().HasNoKey();
         modelBuilder.Entity<Article>()
             .HasOne(a => a.Image)
             .WithMany()

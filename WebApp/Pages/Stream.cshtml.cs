@@ -5,13 +5,20 @@ namespace Miners.Web.WebApp.Pages;
 
 public class Stream(AppDbContext dbContext) : PageModel
 {
+    public string Active { get; set; } = "N";
     public string LiveTv { get; set; } = "";
     public string LiveTvUrl { get; set; } = "";
     
     public void OnGet()
     {
-        var scoreboard = dbContext.Scores.First();
-        LiveTv = scoreboard.LiveTv;
+        var scoreboard = dbContext.Scores.FirstOrDefault();
+        if (scoreboard is null)
+        {
+            return;
+        }
+
+        Active = scoreboard.Active;
+        LiveTv = Active == "Y" ? scoreboard.LiveTv : "N";
         
         LiveTvUrl = CreateEmbedUrlFromYouTubeUrl(scoreboard.LiveTvUrl);
     }
