@@ -1,7 +1,13 @@
 <template>
   <div class="login-page">
     <div class="login-card">
-      <div class="login-logo">⚾</div>
+      <div class="login-logo-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="8" stroke="white" stroke-width="1.5"/>
+          <path d="M5.5 5.5c1 1.5 1 5 0 9M14.5 5.5c-1 1.5-1 5 0 9" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M6 7.5q2 1 4 0M6 12.5q2-1 4 0M8 9q2 1 4 0M8 11q2-1 4 0" stroke="white" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+      </div>
       <h1>Miners <span class="green">Admin</span></h1>
       <p class="subtitle">Přihlaste se klubovým Google účtem</p>
       <div id="google-signin-btn"></div>
@@ -9,6 +15,7 @@
         <i class="pi pi-exclamation-triangle"></i>
         {{ error }}
       </p>
+      <p class="hint">Přístup pouze pro členy klubu</p>
     </div>
   </div>
 </template>
@@ -67,40 +74,45 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1a1a1a;
+  background: linear-gradient(135deg, #111318 60%, #1a2010);
 }
 
 .login-card {
-  background: #242424;
-  padding: 3rem 2.5rem;
-  border-radius: 14px;
-  border: 1px solid #2e2e2e;
+  width: 360px;
+  background: #181c23;
+  border-radius: 18px;
+  border: 1px solid #22262e;
+  padding: 44px 40px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
   text-align: center;
-  width: 340px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
 }
 
-.login-logo {
-  font-size: 3.5rem;
-  margin-bottom: 0.75rem;
-  line-height: 1;
+.login-logo-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
 }
 
 h1 {
-  margin: 0 0 0.5rem;
-  font-size: 1.8rem;
+  margin: 0 0 6px;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #eee;
+  color: #fff;
 }
 
 .green {
-  color: #93C11F;
+  color: var(--green);
 }
 
 .subtitle {
-  color: #777;
-  font-size: 0.875rem;
-  margin-bottom: 2rem;
+  color: #6b7280;
+  font-size: 0.845rem;
+  margin: 0 0 32px;
 }
 
 #google-signin-btn {
@@ -116,5 +128,11 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+}
+
+.hint {
+  font-size: 0.72rem;
+  color: #4b5563;
+  margin-top: 20px;
 }
 </style>

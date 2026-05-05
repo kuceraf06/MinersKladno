@@ -28,6 +28,60 @@ const MinersPreset = definePreset(Aura, {
       950: '#1e3204',
     },
   },
+  components: {
+    datatable: {
+      root: {
+        borderColor: '#e8eaed',
+      },
+      headerCell: {
+        background: '#fff',
+        hoverBackground: '#fff',
+        borderColor: '#e8eaed',
+        color: '#6b7280',
+        padding: '11px 16px',
+        sm: { padding: '11px 16px' },
+      },
+      columnTitle: {
+        fontWeight: '700',
+      },
+      row: {
+        background: '#fff',
+        hoverBackground: '#fafafa',
+        color: '#1a1d23',
+        stripedBackground: '#fafbfc',
+      },
+      bodyCell: {
+        borderColor: '#f3f4f6',
+        padding: '11px 16px',
+        sm: { padding: '11px 16px' },
+      },
+      paginatorBottom: {
+        borderColor: '#e8eaed',
+        borderWidth: '1.5px 0 0 0',
+      },
+    },
+    paginator: {
+      root: {
+        background: '#fafbfc',
+        padding: '8px 16px',
+        borderRadius: '0',
+      },
+      navButton: {
+        background: '#fff',
+        hoverBackground: '#f3f4f6',
+        selectedBackground: '#93C11F',
+        color: '#374151',
+        hoverColor: '#111318',
+        selectedColor: '#fff',
+        width: '28px',
+        height: '28px',
+        borderRadius: '7px',
+      },
+      currentPageReport: {
+        color: '#9ca3af',
+      },
+    },
+  },
 })
 
 const app = createApp(App)

@@ -17,22 +17,26 @@
       :rows="pageSize"
       :totalRecords="totalRecords"
       :rowsPerPageOptions="[10, 20, 50]"
-      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown CurrentPageReport"
-      currentPageReportTemplate="{first}–{last} z {totalRecords}"
+      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
       @page="onPage"
       @sort="onSort"
     >
+      <template #paginatorstart>
+        <span class="paginator-info">{{ paginatorInfo }}</span>
+      </template>
+      <template #paginatorend>
+      </template>
       <Column field="gameDate" header="Datum" sortable style="width: 110px">
         <template #body="{ data }">{{ formatDate(data.gameDate) }}</template>
       </Column>
-      <Column field="categoryTitle" header="Kategorie" sortable style="width: 110px" />
-      <Column field="league" header="Liga" sortable style="width: 160px" />
+      <Column field="categoryTitle" header="Kategorie" style="width: 110px" />
+      <Column field="league" header="Liga" style="width: 160px" />
       <Column header="Domácí" style="width: 180px">
         <template #body="{ data }">
           <span :class="{ 'winner': isHomeWinner(data) }">{{ data.homeTeam }}</span>
         </template>
       </Column>
-      <Column header="Skóre" style="width: 80px; text-align: center">
+      <Column header="Skóre" style="width: 80px;">
         <template #body="{ data }">
           <span v-if="data.homeScore != null" class="score">{{ data.homeScore }}:{{ data.awayScore }}</span>
           <span v-else class="score-empty">—</span>
@@ -45,8 +49,14 @@
       </Column>
       <Column style="width: 90px; text-align: right">
         <template #body="{ data }">
-          <Button icon="pi pi-pencil" text size="small" @click="openEdit(data)" />
-          <Button icon="pi pi-trash" text size="small" severity="danger" @click="confirmDelete(data)" />
+          <div class="icon-actions">
+            <button class="icon-action edit" @click="openEdit(data)" title="Upravit">
+              <i class="pi pi-pencil"></i>
+            </button>
+            <button class="icon-action delete" @click="confirmDelete(data)" title="Smazat">
+              <i class="pi pi-trash"></i>
+            </button>
+          </div>
         </template>
       </Column>
     </DataTable>
@@ -100,12 +110,12 @@
       </template>
     </Dialog>
 
-    <ConfirmDialog />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
 import DataTable, { type DataTableSortEvent } from 'primevue/datatable'
@@ -117,7 +127,6 @@ import DatePicker from 'primevue/datepicker'
 import InputText from 'primevue/inputtext'
 import InputNumber from 'primevue/inputnumber'
 import AutoComplete from 'primevue/autocomplete'
-import ConfirmDialog from 'primevue/confirmdialog'
 import api from '@/services/api'
 
 interface Category { id: string; code: string; title: string }
@@ -129,6 +138,8 @@ interface Game {
 
 const confirm = useConfirm()
 const toast = useToast()
+const route = useRoute()
+const router = useRouter()
 
 const games = ref<Game[]>([])
 const categories = ref<Category[]>([])
@@ -139,10 +150,17 @@ const saving = ref(false)
 const editingGame = ref<Game | null>(null)
 const leagueSuggestions = ref<string[]>([])
 const totalRecords = ref(0)
-const pageSize = ref(20)
+const pageSize = ref(10)
 const currentPage = ref(1)
 const sortField = ref('gameDate')
 const sortOrder = ref('desc')
+
+const paginatorInfo = computed(() => {
+  if (totalRecords.value === 0) return '0 záznamů'
+  const first = (currentPage.value - 1) * pageSize.value + 1
+  const last = Math.min(currentPage.value * pageSize.value, totalRecords.value)
+  return `${first}–${last} z ${totalRecords.value}`
+})
 
 function filterLeagues(event: { query: string }) {
   const q = event.query.toLowerCase()
@@ -193,10 +211,14 @@ const form = ref(emptyForm())
 onMounted(async () => {
   const [, c] = await Promise.all([loadGames(), api.get<Category[]>('/categories'), loadLeagues()])
   categories.value = c.data
+  openNewFromQuery()
 })
 
+watch(() => route.query.new, openNewFromQuery)
+
 function formatDate(d: string) {
-  return new Date(d).toLocaleDateString('cs-CZ')
+  const [year, month, day] = d.split('-').map(Number)
+  return new Date(year, month - 1, day).toLocaleDateString('cs-CZ')
 }
 
 function isHomeWinner(g: Game) {
@@ -213,11 +235,21 @@ function openNew() {
   dialogVisible.value = true
 }
 
+function openNewFromQuery() {
+  const openFlag = Array.isArray(route.query.new) ? route.query.new[0] : route.query.new
+  if (openFlag !== '1') return
+
+  openNew()
+
+  const { new: _ignored, ...queryWithoutNew } = route.query
+  router.replace({ query: queryWithoutNew })
+}
+
 function openEdit(game: Game) {
   editingGame.value = game
   form.value = {
     categoryId: game.categoryId,
-    gameDate: new Date(game.gameDate),
+    gameDate: (() => { const [y, m, d] = game.gameDate.split('-').map(Number); return new Date(y, m - 1, d) })(),
     league: game.league,
     homeTeam: game.homeTeam,
     awayTeam: game.awayTeam,
@@ -232,12 +264,16 @@ async function save() {
     toast.add({ severity: 'warn', summary: 'Chybí údaje', detail: 'Vyplňte kategorii, datum, ligu a týmy.', life: 3000 })
     return
   }
-
+debugger;
   saving.value = true
   try {
     const payload = {
       categoryId: form.value.categoryId,
-      gameDate: form.value.gameDate.toISOString().split('T')[0],
+      gameDate: [
+        form.value.gameDate.getFullYear(),
+        String(form.value.gameDate.getMonth() + 1).padStart(2, '0'),
+        String(form.value.gameDate.getDate()).padStart(2, '0'),
+      ].join('-'),
       league: form.value.league,
       homeTeam: form.value.homeTeam,
       awayTeam: form.value.awayTeam,
@@ -261,11 +297,11 @@ async function save() {
 
 function confirmDelete(game: Game) {
   confirm.require({
-    message: `Smazat zápas ${game.homeTeam} vs ${game.awayTeam}?`,
+    message: `Smazat zápas ${game.homeTeam} vs ${game.awayTeam} (${formatDate(game.gameDate)}, ${game.categoryTitle})?`,
     header: 'Potvrzení',
     icon: 'pi pi-trash',
-    rejectLabel: 'Zrušit',
-    acceptLabel: 'Smazat',
+    acceptProps: { severity: 'danger', label: 'Smazat' },
+    rejectProps: { label: 'Zrušit', severity: 'secondary' },
     accept: async () => {
       await api.delete(`/games/${game.id}`)
       toast.add({ severity: 'success', summary: 'Smazáno', life: 2000 })
@@ -276,22 +312,6 @@ function confirmDelete(game: Game) {
 </script>
 
 <style scoped>
-.page {
-  padding: 2rem;
-}
-
-.page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-}
-
-h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #1a1a1a;
-}
 
 .winner {
   font-weight: 700;

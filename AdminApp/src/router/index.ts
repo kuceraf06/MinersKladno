@@ -24,6 +24,16 @@ const router = createRouter({
           name: 'games',
           component: () => import('@/views/GamesView.vue'),
         },
+        {
+          path: 'clanky',
+          name: 'articles',
+          component: () => import('@/views/ArticlesView.vue'),
+        },
+        {
+          path: 'clanky/:id',
+          name: 'article-edit',
+          component: () => import('@/views/ArticleEditView.vue'),
+        },
       ],
     },
     {

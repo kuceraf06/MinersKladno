@@ -18,6 +18,12 @@ public class AppDbContext : TsfwDbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Scoreboard>().HasNoKey();
+        modelBuilder.Entity<Article>()
+            .HasOne(a => a.Image)
+            .WithMany()
+            .HasForeignKey(a => a.GuidImage)
+            .OnDelete(DeleteBehavior.NoAction)
+            .HasConstraintName("fk_tbl_article_guid_image");
     }
 
     public DbSet<Article> Articles { get; set; }

@@ -16,7 +16,7 @@ public class GamesController(AppDbContext db) : ControllerBase
     {
         var query = db.Games.Include(g => g.Category).AsQueryable();
 
-        query = (sortField, sortOrder) switch
+        var ordered = (sortField, sortOrder) switch
         {
             ("gameDate", "asc")       => query.OrderBy(g => g.GameDate),
             ("league", "asc")         => query.OrderBy(g => g.League),
@@ -25,6 +25,7 @@ public class GamesController(AppDbContext db) : ControllerBase
             ("categoryTitle", "desc") => query.OrderByDescending(g => g.Category.Title),
             _                         => query.OrderByDescending(g => g.GameDate),
         };
+        query = ordered.ThenBy(g => g.Id);
 
         var total = await query.CountAsync();
         var items = await query
