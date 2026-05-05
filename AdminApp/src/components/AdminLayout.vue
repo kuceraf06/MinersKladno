@@ -1,6 +1,8 @@
 <template>
   <div class="admin-layout">
-    <aside class="sidebar">
+    <div v-if="isSidebarOpen" class="mobile-overlay" @click="closeSidebar"></div>
+
+    <aside id="admin-sidebar" :class="['sidebar', { 'sidebar-open': isSidebarOpen }]">
       <div class="sidebar-logo-area">
         <div class="logo-icon">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
@@ -21,6 +23,7 @@
           :key="item.to"
           :to="item.to"
           :class="['nav-item', { active: isItemActive(item) }]"
+          @click="closeSidebar"
         >
           <i :class="[item.icon, { 'nav-icon-active': isItemActive(item) }]" class="nav-icon"></i>
           <span>{{ item.label }}</span>
@@ -29,7 +32,7 @@
 
       <div class="sidebar-footer">
         <div class="user-avatar-wrap">
-          <img v-if="auth.user?.picture" :src="auth.user.picture" class="user-avatar" />
+          <img v-if="auth.user?.picture" :src="auth.user.picture" class="user-avatar" alt="User avatar" />
           <div v-else class="user-avatar user-avatar-placeholder">{{ initials }}</div>
         </div>
         <div class="user-texts">
@@ -43,19 +46,33 @@
     </aside>
 
     <main class="content">
+      <header class="mobile-header">
+        <button
+          class="mobile-menu-btn"
+          type="button"
+          aria-label="Otevřít menu"
+          aria-controls="admin-sidebar"
+          :aria-expanded="isSidebarOpen"
+          @click="openSidebar"
+        >
+          <i class="pi pi-bars"></i>
+        </button>
+        <span class="mobile-title">Admin</span>
+      </header>
       <RouterView />
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
 const route = useRoute()
 const router = useRouter()
 const auth = useAuthStore()
+const isSidebarOpen = ref(false)
 
 const menuItems = [
   { to: '/', label: 'Dashboard', icon: 'pi pi-home' },
@@ -78,12 +95,39 @@ function handleLogout() {
   auth.logout()
   router.push('/login')
 }
+
+function openSidebar() {
+  isSidebarOpen.value = true
+}
+
+function closeSidebar() {
+  isSidebarOpen.value = false
+}
+
+watch(
+  () => route.fullPath,
+  () => {
+    isSidebarOpen.value = false
+  }
+)
+
+watch(isSidebarOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
+onBeforeUnmount(() => {
+  document.body.style.overflow = ''
+})
 </script>
 
 <style scoped>
 .admin-layout {
   display: flex;
   min-height: 100vh;
+}
+
+.mobile-overlay {
+  display: none;
 }
 
 .sidebar {
@@ -95,6 +139,10 @@ function handleLogout() {
   position: sticky;
   top: 0;
   height: 100vh;
+}
+
+.mobile-header {
+  display: none;
 }
 
 /* Logo */
@@ -150,9 +198,7 @@ function handleLogout() {
   font-weight: 400;
   color: #8a9099;
   text-decoration: none;
-  border-left: 3px solid transparent;
   transition: all 0.12s;
-  border: none;
   border-left: 3px solid transparent;
 }
 
@@ -248,5 +294,64 @@ function handleLogout() {
   background: #f4f5f7;
   overflow-y: auto;
   min-height: 100vh;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 12, 20, 0.5);
+    z-index: 39;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    z-index: 40;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .sidebar-open {
+    transform: translateX(0);
+  }
+
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 56px;
+    padding: 0 12px;
+    background: #f4f5f7;
+    border-bottom: 1px solid #dde1e7;
+  }
+
+  .mobile-menu-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #cfd5dd;
+    border-radius: 8px;
+    background: #fff;
+    color: #1f2937;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+
+  .mobile-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
 }
 </style>
