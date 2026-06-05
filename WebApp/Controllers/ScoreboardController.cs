@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Miners.Web.BusinessLayer;
 using Miners.Web.BusinessLayer.Entities;
+using Miners.Web.BusinessLayer.Services;
 
 namespace Miners.Web.WebApp.Controllers;
 
@@ -56,6 +57,7 @@ public class ScoreboardController(AppDbContext db) : ControllerBase
         scoreboard.MbId = mbId;
 
         db.SaveAndCommit();
+        MyBallClubScoreboardService.Latest.Clear();
 
         return NoContent();
     }

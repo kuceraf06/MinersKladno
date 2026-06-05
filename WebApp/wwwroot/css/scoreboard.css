@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+}
+
+.scoregrid {
+    font-family: 'Roboto', sans-serif;
+    display: grid;
+    grid-template-columns: auto 6vw 14vw;
+    grid-template-rows: auto auto auto auto;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    border: 2px solid #4a90e2;
+    position: fixed;
+    bottom: 2vh;
+    left: 2vw;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.sb2 .scoregrid {
+    width: 10vw;
+    grid-template-columns: auto 20% 30%;
+}
+
+.teambox {
+    padding-left: 0.8vw;
+    padding-top: 0.4vw;
+    padding-bottom: 0.4vw;
+    background: linear-gradient(45deg, #2c3e50 0%, #34495e 100%);
+    border-bottom: 1px solid #4a90e2;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    font-weight: 700;
+}
+
+.teambox, .scorebox {
+    font-size: 3.2vw;
+}
+
+.scorebox {
+    text-align: center;
+    background: linear-gradient(45deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    font-weight: 900;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    border-left: 0px solid #4a90e2;
+    border-bottom: 1px solid #4a90e2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.bases {
+    grid-row: span 2;
+    position: relative;
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    border-left: 2px solid #4a90e2;
+    padding: 0.5vw;
+    padding-bottom: 2.5vw;
+}
+
+.base {
+    background: linear-gradient(45deg, #34495e 0%, #2c3e50 100%);
+    width: 2.8vw;
+    height: 2.8vw;
+    position: absolute;
+    border: 2px solid #ecf0f1;
+    border-radius: 2px;
+    top: 0.8vw;
+    left: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.base.active {
+    background: linear-gradient(45deg, #27ae60 0%, #2ecc71 100%);
+    border-color: #ffffff;
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.7);
+}
+
+.base-1 {
+    transform: translateX(29%) translateY(79%) rotate(45deg);
+}
+
+.base-2 {
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.base-3 {
+    transform: translateX(-129%) translateY(79%) rotate(45deg);
+}
+
+.count-display {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2vw;
+    font-weight: 900;
+    padding: 0.3vw 0.6vw;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+}
+
+.inning {
+    font-size: 2.5vw;
+    background: linear-gradient(45deg, #2c3e50 0%, #34495e 100%);
+    grid-column: span 2;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0.6vw;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    border-top: 1px solid #4a90e2;
+    border-bottom: 1px solid #4a90e2;
+}
+
+.inning-arrow {
+    fill: white;
+    height: 2vw;
+    width: 2vw;
+    margin-right: 0.4vw;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+    transition: all 0.3s ease;
+}
+
+.inning-arrow-top {
+    transform: rotate(180deg);
+}
+
+#pitcher {
+    padding-right: 0.5vw;
+    font-size: 1vw;
+}
+
+.pitch-info {
+    background: linear-gradient(45deg, #2c3e50 0%, #34495e 100%);
+    border-top: 1px solid #4a90e2;
+    border-bottom: 1px solid #4a90e2;
+    border-left: 2px solid #4a90e2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4vw;
+    grid-column: span 2;
+}
+
+.pitch-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pitch-label {
+    font-size: 1.2vw;
+    font-weight: 700;
+    color: #ecf0f1;
+    margin-bottom: 0.2vw;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.pitch-value {
+    font-size: 2vw;
+    font-weight: 900;
+    color: #f39c12;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(45deg, #34495e 0%, #2c3e50 100%);
+    padding: 0.3vw 0.6vw;
+    border-radius: 6px;
+    border: 2px solid #f39c12;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.outs {
+    font-size: 2.5vw;
+    color: white;
+    text-align: center;
+    background: linear-gradient(45deg, #e74c3c 0%, #c0392b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    border-top: 1px solid #4a90e2;
+    border-left: 2px solid #4a90e2;
+    padding: 0 0.4vw;
+}
+
+.home-title {
+    color: #ecf0f1;
+}
+
+.away-title {
+    color: #ecf0f1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scoregrid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.05) 50%, transparent 51%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.scoregrid > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* =============================================
+   LINESCORE – nahoře uprostřed
+   ============================================= */
+
+.linescore {
+    position: fixed;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Roboto', sans-serif;
+}
+
+.ls-table {
+    border-collapse: collapse;
+    background: rgba(8, 14, 24, 0.92);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+    white-space: nowrap;
+}
+
+.ls-table thead th {
+    background: #0f1923;
+    color: #5a7a9a;
+    font-size: 0.85vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 0.3vw 0.5vw;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.ls-team-col {
+    min-width: 5vw;
+    text-align: left !important;
+    padding-left: 0.8vw !important;
+}
+
+.ls-inning-col {
+    min-width: 1.8vw;
+}
+
+.ls-sep-col {
+    width: 1px;
+    background: rgba(255,255,255,0.12);
+    padding: 0 !important;
+}
+
+.ls-total-col {
+    min-width: 2.2vw;
+    background: #0a1420 !important;
+}
+
+.ls-team-name {
+    color: #d4d8e0;
+    font-size: 1.1vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.35vw 0.8vw;
+}
+
+.ls-inning-val {
+    color: #b0bec8;
+    font-size: 1.1vw;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.35vw 0.4vw;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.ls-inning-val.ls-current {
+    background: rgba(74, 144, 226, 0.15);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.ls-total {
+    color: #c8d4e0;
+    font-size: 1.1vw;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.35vw 0.5vw;
+    background: #0a1420;
+}
+
+.ls-total.ls-runs {
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 1.2vw;
+}
+
+.ls-table tbody tr:first-child td {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* =============================================
+   SCOREBOARD 2 – MLB/ESPN score bug styl
+   ============================================= */
+
+.sb2 {
+    position: fixed;
+    bottom: 2vh;
+    right: 2vw;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* Hlavní řádek */
+.sb2-main {
+    display: flex;
+    align-items: stretch;
+}
+
+/* Barevný accent proužek zcela vlevo */
+.sb2-main::before {
+    content: '';
+    display: block;
+    width: 0.35vw;
+    background: #c8102e;
+    flex-shrink: 0;
+}
+
+/* ---- TÝMY ---- */
+.sb2-teams {
+    display: flex;
+    flex-direction: column;
+    background: #0f1923;
+    min-width: 13vw;
+}
+
+.sb2-team {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3vw 0.8vw 0.3vw 0.7vw;
+    flex: 1;
+    gap: 0.6vw;
+}
+
+.sb2-visitor {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sb2-teamname {
+    color: #d4d8e0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 1.55vw;
+    white-space: nowrap;
+}
+
+.sb2-score {
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 2vw;
+    min-width: 1.8vw;
+    text-align: right;
+    letter-spacing: -0.02em;
+}
+
+.sb2-divider {
+    display: none; /* řeší border-bottom na .sb2-visitor */
+}
+
+/* ---- INNING ---- */
+.sb2-inning {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #1c2836;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 1.8vw;
+    padding: 0 0.7vw;
+    gap: 0;
+    min-width: 2.8vw;
+    border-left: 1px solid rgba(255,255,255,0.07);
+    border-right: 1px solid rgba(255,255,255,0.07);
+    line-height: 1;
+}
+
+.sb2-arrow {
+    fill: #ffffff;
+    width: 1vw;
+    height: 1vw;
+}
+
+#sb2ArrowTop {
+    transform: rotate(180deg);
+    margin-bottom: 0.1vw;
+}
+
+#sb2ArrowBottom {
+    margin-top: 0.1vw;
+}
+
+/* ---- STŘED: základny + BSO ---- */
+.sb2-middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #131e2b;
+    padding: 0.35vw 0.9vw;
+    gap: 0.35vw;
+}
+
+/* Základny – stejný přístup jako originál (společný anchor top+left:50%) */
+.sb2-bases-wrap {
+    position: relative;
+    width: 4.2vw;
+    height: 3vw;
+}
+
+.sb2-base {
+    position: absolute;
+    width: 1.4vw;
+    height: 1.4vw;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.08);
+    top: 0.4vw;
+    left: 50%;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.sb2-base.active {
+    background: linear-gradient(45deg, #27ae60 0%, #2ecc71 100%);
+    border-color: #ffffff;
+    box-shadow: 0 0 8px rgba(39, 174, 96, 0.7);
+}
+
+.sb2-base2 {
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.sb2-base1 {
+    transform: translateX(29%) translateY(79%) rotate(45deg);
+}
+
+.sb2-base3 {
+    transform: translateX(-129%) translateY(79%) rotate(45deg);
+}
+
+/* BSO – balls · strikes · outs */
+.sb2-bso {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25vw;
+    white-space: nowrap;
+}
+
+.sb2-bso-label {
+    color: #6b7a8d;
+    font-size: 0.8vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sb2-bso-val {
+    color: #e8ecf0;
+    font-size: 1.15vw;
+    font-weight: 900;
+    margin-right: 0.15vw;
+}
+
+.sb2-bso-sep {
+    color: #2e3d4f;
+    font-size: 1vw;
+    margin: 0 0.05vw;
+}
+
+/* ---- Spodní pruh: batter vlevo, pitcher vpravo ---- */
+.sb2-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #080e16;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 0.25vw 0.7vw;
+    min-height: 1.5vw;
+    gap: 0.5vw;
+}
+
+.sb2-bottom-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3vw;
+}
+
+.sb2-bottom-spacer {
+    flex: 1;
+}
+
+.sb2-bottom-label {
+    color: #4a5a6a;
+    font-size: 0.75vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+.sb2-bottom-val {
+    color: #ffffff;
+    font-size: 0.9vw;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.sb2-bottom-sub {
+    color: #a0b0c0;
+    font-size: 0.85vw;
+    font-weight: 400;
+}
+
+.sb2-bottom-avg {
+    color: #7ab8f5;
+}

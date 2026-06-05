@@ -1,0 +1,340 @@
+@page
+@model Miners.Web.WebApp.Pages.Scoreboard;
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="~/css/scoreboard.css?v=20261504"/>
+</head>
+<body style="background:transparent;">
+
+<!-- LINESCORE – nahoře uprostřed -->
+<div class="linescore" id="lineScore" style="display:none">
+    <table class="ls-table">
+        <thead>
+            <tr id="ls-header-row">
+                <th class="ls-team-col"></th>
+                <!-- směny se generují JS -->
+                <th class="ls-sep-col"></th>
+                <th class="ls-total-col">R</th>
+                <th class="ls-total-col">H</th>
+                <th class="ls-total-col">E</th>
+                @* <th class="ls-total-col">LOB</th> *@
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="ls-away-row">
+                <td class="ls-team-name" id="ls-away-name"></td>
+                <td class="ls-sep-col"></td>
+                <td class="ls-total ls-runs" id="ls-away-r"></td>
+                <td class="ls-total" id="ls-away-h"></td>
+                <td class="ls-total" id="ls-away-e"></td>
+                @* <td class="ls-total" id="ls-away-lob"></td> *@
+            </tr>
+            <tr id="ls-home-row">
+                <td class="ls-team-name" id="ls-home-name"></td>
+                <td class="ls-sep-col"></td>
+                <td class="ls-total ls-runs" id="ls-home-r"></td>
+                <td class="ls-total" id="ls-home-h"></td>
+                <td class="ls-total" id="ls-home-e"></td>
+                @* <td class="ls-total" id="ls-home-lob"></td> *@
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- SCOREBOARD 2 – MLB/ESPN score bug styl, vpravo dole -->
+<div class="sb2" id="scoreGrid2" style="display:none">
+    <!-- Hlavní řádek -->
+    <div class="sb2-main">
+        <!-- Inning -->
+        <div class="sb2-inning">
+            <svg class="sb2-arrow" id="sb2ArrowTop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.666 81.601"><path d="M8,9.6H98.666L53.333,91.2Z" transform="translate(-8 -9.6)"/></svg>
+            <span id="sb2Inning"></span>
+            <svg class="sb2-arrow" id="sb2ArrowBottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.666 81.601"><path d="M8,9.6H98.666L53.333,91.2Z" transform="translate(-8 -9.6)"/></svg>
+        </div>
+        <!-- Týmy pod sebou -->
+        <div class="sb2-teams">
+            <div class="sb2-team sb2-visitor">
+                <span class="sb2-teamname" id="sb2VisitorName"></span>
+                <span class="sb2-score" id="sb2VisitorScore"></span>
+            </div>
+            <div class="sb2-team sb2-home">
+                <span class="sb2-teamname" id="sb2HomeName"></span>
+                <span class="sb2-score" id="sb2HomeScore"></span>
+            </div>
+        </div>
+        <!-- Základny + BSO -->
+        <div class="sb2-middle" id="sb2Middle">
+            <div class="sb2-bases-wrap">
+                <div class="sb2-base sb2-base2" id="sb2Base2"></div>
+                <div class="sb2-base sb2-base1" id="sb2Base1"></div>
+                <div class="sb2-base sb2-base3" id="sb2Base3"></div>
+            </div>
+            <div class="sb2-bso">
+                <span class="sb2-bso-label">B</span><span class="sb2-bso-val" id="sb2Balls"></span>
+                <span class="sb2-bso-sep">·</span>
+                <span class="sb2-bso-label">S</span><span class="sb2-bso-val" id="sb2Strikes"></span>
+                <span class="sb2-bso-sep">·</span>
+                <span class="sb2-bso-label">O</span><span class="sb2-bso-val" id="sb2Outs"></span>
+            </div>
+        </div>
+    </div>
+    <!-- Spodní pruh: batter vlevo, pitcher vpravo -->
+    <div class="sb2-bottom" id="sb2Bottom">
+        <div class="sb2-bottom-item" id="sb2BatterBar" style="display:none">
+            <span class="sb2-bottom-label">AB</span>
+            <span class="sb2-bottom-val" id="sb2Batter"></span>
+            <span class="sb2-bottom-sub" id="sb2BatterLine"></span>
+            <span class="sb2-bottom-sub sb2-bottom-avg" id="sb2BatterAvg"></span>
+        </div>
+        <div class="sb2-bottom-spacer"></div>
+        <div class="sb2-bottom-item" id="sb2PitcherBar" style="display:none">
+            <span class="sb2-bottom-label">P</span>
+            <span class="sb2-bottom-val" id="sb2Pitcher"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => { update(); });
+
+    function createHeaderCell(cssClass, value){
+        const th = document.createElement('th');
+        th.innerText = value;
+        th.className = cssClass;
+        return th;
+    }
+    
+    function createCell(cssClass, value) {
+        const td = document.createElement("td");
+        td.innerText = (value === null || value === undefined) ? "" : value;
+        td.className = cssClass;
+        return td;
+    }
+
+    function updateLinescore2(game) {
+        if (!game || !game.awayInnings || !game.betweenInnings) {
+            document.getElementById("lineScore").style.display = "none";
+            return;
+        }
+        document.getElementById("lineScore").style.display = "block";
+
+        const headerRow = document.getElementById("ls-header-row");
+        const awayRow = document.getElementById("ls-away-row");
+        const homeRow = document.getElementById("ls-home-row");
+        debugger;
+        
+        headerRow.innerHTML = awayRow.innerHTML = homeRow.innerHTML = "";
+        
+        headerRow.appendChild(createHeaderCell("ls-team-col", ""));
+        awayRow.appendChild(createCell("ls-team-name", decodeURIComponent(game.visitorTeam)));
+        homeRow.appendChild(createCell("ls-team-name", decodeURIComponent(game.homeTeam)));
+
+        const maxInnings = Math.max(game.awayInnings.length, game.homeInnings ? game.homeInnings.length : 0, 9);
+
+        for (let i = 1; i <= maxInnings; i++) {
+            headerRow.appendChild(createHeaderCell("ls-inning-col", i));
+            
+            let val = game.awayInnings[i - 1];
+            let cssClass = (i === game.inning && !game.bottom) ? "ls-inning-val ls-current" : "ls-inning-val";
+            awayRow.appendChild(createCell(cssClass, val));
+
+            val = game.homeInnings ? game.homeInnings[i - 1] : null;
+            cssClass = (i === game.inning && game.bottom) ? "ls-inning-val ls-current" : "ls-inning-val";
+            homeRow.appendChild(createCell(cssClass, val));
+        }
+        
+        headerRow.appendChild(createHeaderCell("ls-sep-col", ""));
+        awayRow.appendChild(createCell("ls-sep-sep", ""));
+        homeRow.appendChild(createCell("ls-sep-sep", ""));
+        
+        headerRow.appendChild(createHeaderCell("ls-total-col", "R"));
+        awayRow.appendChild(createCell("ls-total ls-runs", game.visitorScore));
+        homeRow.appendChild(createCell("ls-total ls-runs", game.homeScore));
+        
+        headerRow.appendChild(createHeaderCell("ls-total-col", "H"));
+        awayRow.appendChild(createCell("ls-total", game.awayHits));
+        homeRow.appendChild(createCell("ls-total", game.homeHits));
+        
+        headerRow.appendChild(createHeaderCell("ls-total-col", "E"));
+        awayRow.appendChild(createCell("ls-total", game.awayErrors));
+        homeRow.appendChild(createCell("ls-total", game.homeErrors));
+        
+        // Přegeneruj záhlaví směn
+        
+        // Smaž staré buňky směn (vše kromě první a posledních 5)
+        /*while (headerRow.children.length > 6) headerRow.removeChild(headerRow.children[1]);
+        const sepTh = headerRow.children[1];
+        for (let i = 1; i <= maxInnings; i++) {
+            const th = document.createElement("th");
+            th.className = "ls-inning-col";
+            th.innerText = i;
+            headerRow.insertBefore(th, sepTh);
+        }
+        
+        // Přegeneruj buňky pro away
+        
+        while (awayRow.children.length > 6) awayRow.removeChild(awayRow.children[1]);
+        const awaySep = awayRow.children[1];
+        for (let i = 1; i <= maxInnings; i++) {
+            const td = document.createElement("td");
+            td.className = "ls-inning-val";
+            const val = game.awayInnings[i - 1];
+            td.innerText = (val === null || val === undefined) ? "" : val;
+            if (i === game.inning && !game.bottom) td.classList.add("ls-current");
+            awayRow.insertBefore(td, awaySep);
+        }
+        
+        // Přegeneruj buňky pro home
+        
+        while (homeRow.children.length > 6) homeRow.removeChild(homeRow.children[1]);
+        const homeSep = homeRow.children[1];
+        for (let i = 1; i <= maxInnings; i++) {
+            const td = document.createElement("td");
+            td.className = "ls-inning-val";
+            const val = game.homeInnings ? game.homeInnings[i - 1] : null;
+            td.innerText = (val === null || val === undefined) ? "" : val;
+            if (i === game.inning && game.bottom) td.classList.add("ls-current");
+            homeRow.insertBefore(td, homeSep);
+        }
+
+        document.getElementById("ls-away-r").innerText = game.visitorScore;
+        document.getElementById("ls-away-h").innerText = game.awayHits;
+        document.getElementById("ls-away-e").innerText = game.awayErrors;
+        //document.getElementById("ls-away-lob").innerText = game.awayLob;
+        document.getElementById("ls-home-r").innerText = game.homeScore;
+        document.getElementById("ls-home-h").innerText = game.homeHits;
+        document.getElementById("ls-home-e").innerText = game.homeErrors;
+        //document.getElementById("ls-home-lob").innerText = game.homeLob;*/
+    }
+    
+    
+    function updateLinescore(game) {
+        if (!game || !game.awayInnings || !game.betweenInnings) {
+            document.getElementById("lineScore").style.display = "none";
+            return;
+        }
+        document.getElementById("lineScore").style.display = "block";
+
+              
+        document.getElementById("ls-away-name").innerText = decodeURIComponent(game.visitorTeam);
+        document.getElementById("ls-home-name").innerText = decodeURIComponent(game.homeTeam);
+
+        const maxInnings = Math.max(game.awayInnings.length, game.homeInnings ? game.homeInnings.length : 0, 9);
+        
+        // Přegeneruj záhlaví směn
+        const headerRow = document.getElementById("ls-header-row");
+        // Smaž staré buňky směn (vše kromě první a posledních 5)
+        while (headerRow.children.length > 6) headerRow.removeChild(headerRow.children[1]);
+        const sepTh = headerRow.children[1];
+        for (let i = 1; i <= maxInnings; i++) {
+            const th = document.createElement("th");
+            th.className = "ls-inning-col";
+            th.innerText = i;
+            headerRow.insertBefore(th, sepTh);
+        }
+        
+        // Přegeneruj buňky pro away
+        const awayRow = document.getElementById("ls-away-row");
+        while (awayRow.children.length > 6) awayRow.removeChild(awayRow.children[1]);
+        const awaySep = awayRow.children[1];
+        for (let i = 1; i <= maxInnings; i++) {
+            const td = document.createElement("td");
+            td.className = "ls-inning-val";
+            const val = game.awayInnings[i - 1];
+            td.innerText = (val === null || val === undefined) ? "" : val;
+            if (i === game.inning && !game.bottom) td.classList.add("ls-current");
+            awayRow.insertBefore(td, awaySep);
+        }
+        
+        // Přegeneruj buňky pro home
+        const homeRow = document.getElementById("ls-home-row");
+        while (homeRow.children.length > 6) homeRow.removeChild(homeRow.children[1]);
+        const homeSep = homeRow.children[1];
+        for (let i = 1; i <= maxInnings; i++) {
+            const td = document.createElement("td");
+            td.className = "ls-inning-val";
+            const val = game.homeInnings ? game.homeInnings[i - 1] : null;
+            td.innerText = (val === null || val === undefined) ? "" : val;
+            if (i === game.inning && game.bottom) td.classList.add("ls-current");
+            homeRow.insertBefore(td, homeSep);
+        }
+
+        document.getElementById("ls-away-r").innerText = game.visitorScore;
+        document.getElementById("ls-away-h").innerText = game.awayHits;
+        document.getElementById("ls-away-e").innerText = game.awayErrors;
+        //document.getElementById("ls-away-lob").innerText = game.awayLob;
+        document.getElementById("ls-home-r").innerText = game.homeScore;
+        document.getElementById("ls-home-h").innerText = game.homeHits;
+        document.getElementById("ls-home-e").innerText = game.homeErrors;
+        //document.getElementById("ls-home-lob").innerText = game.homeLob;
+    }
+
+    function update() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let gameStatus = JSON.parse(this.responseText);
+                updateScoreboard2(gameStatus);
+                //updateLinescore(gameStatus);
+                if(gameStatus.type === "B")
+                {
+                    updateLinescore2(gameStatus);
+                }
+                window.setTimeout(update, 10000);
+            }
+        };
+        xhttp.open("GET", "scoreboard?handler=update", true);
+        xhttp.send();
+    }
+
+    function updateScoreboard2(game) {
+        if (!game) {
+            document.getElementById("scoreGrid2").style.display = "none";
+            return;
+        }
+        if(game.type === "M"){
+            document.getElementById("sb2Middle").style.display = "none";
+            document.getElementById("sb2Bottom").style.display = "none";
+        }
+        
+        document.getElementById("scoreGrid2").style.display = "flex";
+
+        document.getElementById("sb2VisitorName").innerText = decodeURIComponent(game.visitorTeam);
+        document.getElementById("sb2HomeName").innerText = decodeURIComponent(game.homeTeam);
+        document.getElementById("sb2VisitorScore").innerText = game.visitorScore;
+        document.getElementById("sb2HomeScore").innerText = game.homeScore;
+        document.getElementById("sb2Inning").innerText = game.inning;
+        document.getElementById("sb2Balls").innerText = game.balls || 0;
+        document.getElementById("sb2Strikes").innerText = game.strikes || 0;
+        document.getElementById("sb2Outs").innerText = game.outs || 0;
+
+        const hasPitcher = game.pitcher && game.pitchCount != null;
+        const hasBatter = !!game.batter;
+
+        document.getElementById("sb2PitcherBar").style.display = hasPitcher ? "flex" : "none";
+        document.getElementById("sb2BatterBar").style.display = hasBatter ? "flex" : "none";
+
+        if (hasPitcher) {
+            let pitcherText = game.pitcher + " " + game.pitchCount;
+            if (game.pitcherStrikes != null) pitcherText += "-" + game.pitcherStrikes;
+            document.getElementById("sb2Pitcher").innerText = pitcherText;
+        }
+        if (hasBatter) {
+            document.getElementById("sb2Batter").innerText = game.batter;
+            document.getElementById("sb2BatterLine").innerText = game.batterLine ? "· " + game.batterLine : "";
+            document.getElementById("sb2BatterAvg").innerText = game.batterAvg ? "· AVG " + game.batterAvg : "";
+        }
+
+        document.getElementById("sb2ArrowTop").style.visibility = game.bottom ? "hidden" : "visible";
+        document.getElementById("sb2ArrowBottom").style.visibility = game.bottom ? "visible" : "hidden";
+        document.getElementById("sb2Base1").classList.toggle("active", !!game.firstBase);
+        document.getElementById("sb2Base2").classList.toggle("active", !!game.secondBase);
+        document.getElementById("sb2Base3").classList.toggle("active", !!game.thirdBase);
+    }
+</script>
+</body>
+</html>
