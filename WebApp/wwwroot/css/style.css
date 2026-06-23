@@ -343,11 +343,13 @@ header {
 .logo{
     position: absolute;
     top: 5px;
+    transition: top 0.25s ease, transform 0.25s ease;
 }
 
 .logo img{
     width: 100px;
     height: auto;
+    transition: width 0.25s ease;
 }
 
 .navbar-nav {
@@ -1711,5 +1713,18 @@ footer h4 {
         height: 350px;
     }
 
+}
+
+/* Po odscrollování (zafixovaná hlavička) se na mobilu velké přečnívající
+   logo zmenší a vycentruje dovnitř zelené lišty. Světlý horní pruh zůstává. */
+@media (max-width: 991px) {
+    header.scrolled .logo {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    header.scrolled .logo img {
+        width: 44px !important;
+    }
 }
 
