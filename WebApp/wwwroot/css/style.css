@@ -1020,7 +1020,7 @@ footer h4 {
     margin-left: 20px;
 }
 
-.footer-col .social-links a:hover:not(:first-child){
+.footer-col .social-links a:hover{
     color: WHITE;
     background-color: black;
 }
