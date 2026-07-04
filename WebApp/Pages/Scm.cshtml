@@ -1,0 +1,398 @@
+﻿@page
+@model Miners.Web.WebApp.Pages.Scm
+@{
+    ViewData["Title"] = "| SCM";
+}
+
+@section Head{
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <link href="~/css/scm.css" rel="stylesheet"/>
+}
+
+<div class="page-container">
+    <h4>SCM</h4>
+    <div class="box box-white scm">
+        <img src="img/scm/SCM.png" alt="scm logo" class="scm-logo"/>
+        <div class="description">
+            <p>Sportovní centrum mládeže (SCM) bylo založeno 1.11.2018. SCM je zřízeno při baseballovém 
+            a softballovém klubu MINERS KLADNO a vzniká z iniciativy Oddílu MINERS KLADNO a za finanční podpory Středočeského kraje.</p>
+            <p>Přidruženým klubem v roce 2019 byl Piranhas Beroun. Dalším přidruženým klubem je Red Crayfish Rakovník - 10 hráčů, 1 trenér a 4 asistenti.</p>
+            <p>Cíle a úkoly SCM jsou zejména zabezpečení sportovní přípravy talentované mládeže baseballových a softballových klubů zařazených v programu. 
+            Věková kategorie je v rozsahu od 10 do 23let. Součástí odborného vedení sportovní přípravy zařazených sportovců je koordinace činnosti ve spolupracujících 
+            baseballových a softballových oddílech. Jedním z cílů je dovést mládež na takovou úroveň, která zajistí její pozvolný přechod do středisek zřizovaných státem pro 
+            podporu reprezentace
+            ČR na mezinárodní a světové úrovni. Měřítko z hlediska Středočeského kraje bude na dětské Olympiádě dětí a mládeže, kde se střetnou všechny kraje.</p>
+        </div>
+        <img src="img/scm/scm-image.jpg" alt="scm image" class="scm-image"/>
+        <div class="info">
+            <h5>Adresa a fakturační údaje</h5>
+            <p>SPORTOVNÍ CENTRUM MINERS, z.s.<br />
+                U Trati 3489<br />
+            272 01 Kladno<br />
+            <b>IČO:</b> 08286175 <br />
+            <b>Účet:</b> 2901669835/2010</p>
+        </div>
+        <div class="winter-practice">
+            <h5>Tréninky listopad - březen (1.11.2025 - 31.3.2026)</h5>
+            <p><b>PÁ 16:00 - 18:00 -</b> hala Brjanská<br />
+            <b>PÁ 18:30 - 19:30 -</b> posilovna BIOS (pro kategorie U15+)<br />
+            <b>NE 15:00 - 17:00 -</b> Atletická hala Sletiště/plavecký bazén Aquapark Kladno</p>
+        </div>
+        <div class="summer-practice">
+            <h5>Tréninky duben - září (1.4.2026 - 30.9.2026)</h5>
+            <p><b>PÁ 16:00 - 18:00 -</b> hřiště Rozdělov</p>
+        </div>
+    </div>
+    <h4 class="box box-bordered box-scm" id="scm" style="text-transform: uppercase">SCM - Trenéři</h4>
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/baroch.jpg" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Petr Baroch</b><br/>
+                Ředitel SCM/Vedoucí trenér<br/>
+                II. třída licence Master
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:736682453" target="_blank">736 682 453</a><br/>
+            <a href="mailto:baroch@minerskladno.cz" target="_blank">baroch@minerskladno.cz</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/curillova.jpg" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Michaela Čurillová</b><br/>
+                Trenér SCM<br/>
+                II. třída licence Trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:604658667" target="_blank">604 658 667</a><br/>
+            <a href="mailto:curillova@minerskladno.cz" target="_blank">curillova@minerskladno.cz</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Karel Kuklík</b><br/>
+                Trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:722470911" target="_blank">722 470 911</a><br/>
+            <a href="mailto:kuklik@minerskladno.cz" target="_blank">kuklik@minerskladno.cz</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/jakubova.jpg" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Radka Jakubová</b><br/>
+                Trenér<br/>
+                II. třída licence Trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:737272813" target="_blank">737 272 813</a><br/>
+            <a href="mailto:jakubova@minerskladno.cz" target="_blank">jakubova@minerskladno.cz</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/kuceraF.jpg" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Filip Kučera</b><br/>
+                Asistent<br/>
+                III. třída licence Trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:702886541" target="_blank">702 886 541</a><br/>
+            <a href="mailto:filipkucera06@gmail.com" target="_blank">filipkucera06@gmail.com</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/kuklik.jpg" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Vojtěch Kuklík</b><br/>
+                Asistent<br/>
+                III. třída licence Trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:722471007" target="_blank">722 471 007</a><br/>
+            <a href="mailto:vojtakuklik18@email.cz" target="_blank">vojtakuklik18@email.cz</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/vostatek.jpg" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Ondřej Vostatek</b><br/>
+                Asistent<br/>
+                III. třída licence Trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:702185639" target="_blank">702 185 639</a><br/>
+            <a href="mailto:ondrejvostatek@gmail.com" target="_blank">ondrejvostatek@gmail.com</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/kuceraM.jpg" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Martin Kučera</b><br/>
+                Asistent<br/>
+                III. třída licence Trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:724615814" target="_blank">724 615 814</a><br/>
+            <a href="mailto:kucera@minerskladno.cz" target="_blank">kucera@minerskladno.cz</a>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/posselt.jpg" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Martin Posselt</b><br/>
+                Asistent<br/>
+                III. třída licence Trenér
+            </div>
+        </div>
+        <div class="text-end">
+            <a href="tel:732603750" target="_blank">732 603 750</a><br/>
+            <a href="mailto:posselt@minerskladno.cz" target="_blank">posselt@minerskladno.cz</a>
+        </div>
+    </div>
+
+
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Petr Baroch</b><br />
+            ředitel SCM/Vedoucí trenér<br/>
+            II. třída licence Master
+            <div class="contact">
+                <a href="tel:736682453" target="_blank">736 682 453</a><br />
+                <a href="mailto:baroch@minerskladno.cz" target="_blank">baroch@minerskladno.cz</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/baroch.jpg" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Michaela Čurillová</b><br />
+            Trenér SCM<br/>
+            II. třída licence Trenér
+            <div class="contact">
+                <a href="tel:604658667" target="_blank">604 658 667</a><br />
+                <a href="mailto:curillova@minerskladno.cz" target="_blank">curillova@minerskladno.cz</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Karel Kuklík</b><br />
+            Trenér<br />
+            <div class="contact">
+                <a href="tel:722470911" target="_blank">722 470 911</a><br />
+                <a href="mailto:kuklik@minerskladno.cz" target="_blank">kuklik@minerskladno.cz</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Radka Jakubová</b><br />
+            Trenér<br/>
+            II. třída licence Trenér
+            <div class="contact">
+                <a href="tel:737272813" target="_blank">737 272 813</a><br />
+                <a href="mailto:jakubova@minerskladno.cz" target="_blank">jakubova@minerskladno.cz</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/jakubova.jpg" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Filip Kučera</b><br />
+            Asistent<br/>
+            III. třída licence Trenér
+            <div class="contact">
+                <a href="tel:702886541" target="_blank">702 886 541</a><br />
+                <a href="mailto:filipkucera06@gmail.com" target="_blank">filipkucera06@gmail.com</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/kuceraF.jpg" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Vojtěch Kuklík</b><br />
+            Asistent<br/>
+            III. třída licence Trenér
+            <div class="contact">
+                <a href="tel:722471007" target="_blank">722 471 007</a><br />
+                <a href="mailto:vojtakuklik18@email.cz" target="_blank">vojtakuklik18@email.cz</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/kuklik.jpg" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Ondřej Vostatek</b><br />
+            Asistent<br/>
+            III. třída licence Trenér
+            <div class="contact">
+                <a href="tel:702185639" target="_blank">702 185 639</a><br />
+                <a href="mailto:ondrejvostatek@gmail.com" target="_blank">ondrejvostatek@gmail.com</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/vostatek.jpg" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Martin Kučera</b><br />
+            Asistent<br/>
+            III. třída licence Trenér
+            <div class="contact">
+                <a href="tel:724615814" target="_blank">724 615 814</a><br />
+                <a href="mailto:kucera@minerskladno.cz" target="_blank">kucera@minerskladno.cz</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/kuceraM.jpg" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Martin Posselt</b><br />
+            Asistent<br/>
+            III. třída licence Trenér
+            <div class="contact">
+                <a href="tel:732603750" target="_blank">732 603 750</a><br />
+                <a href="mailto:posselt@minerskladno.cz" target="_blank">posselt@minerskladno.cz</a>
+            </div>
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/posselt.jpg" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <h4 class="box box-bordered box-scm box-extra" id="scm" style="text-transform: uppercase">SCM - Externí Trenéři</h4>
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Tomáš Duffek</b><br/>
+                Trenér nadhozu (baseball)
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Tomáš Ondra</b><br/>
+                Trenér nadhozu (baseball)
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Michala Kuchařová</b><br/>
+                Trenér nadhozu (softball)
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between desktop">
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic"/>
+            <div class="profile-text">
+                <b>Michal Borek</b><br/>
+                Trenér plavání
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Tomáš Duffek</b><br />
+            Trenér nadhozu (baseball)<br />
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div> 
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Tomáš Ondra</b><br />
+            Trenér nadhozu (baseball)<br />
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div> 
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Michala Kuchařová</b><br />
+            Trenér nadhozu (softball)<br />
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+
+    <div class="box box-white d-flex justify-content-between align-items-start flex-wrap flex-md-nowrap mobile">
+        <div class="profile-text">
+            <b>Michal Borek</b><br />
+            Trenér plavání<br />
+        </div>
+        <div class="profile">
+            <img src="~/img/kontakty/none.webp" alt="profile" class="profile-pic atletika-pic" />
+        </div>
+    </div>
+</div>

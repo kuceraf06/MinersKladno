@@ -1,0 +1,29 @@
+﻿@model Miners.Web.WebApp.Models.EventsModel
+
+<div class="event-date">@Model.Date.ToString("dddd d.M.yyyy", new System.Globalization.CultureInfo("cs-CZ"))</div>
+
+@if (Model.Events.Count > 0)
+{
+    @foreach (var item in Model.Events)
+    {
+    <div class="oneEvent">
+        <div class="event-team">
+            <div class="text-left">@item.Text</div>
+        </div>
+        <div class="event">
+            @*<div class="event-item">@item.Text</div>*@
+            <div class="event-time">
+                <i class="fas fa-clock"></i>&nbsp;@item.Date
+            </div>
+            @if (!string.IsNullOrEmpty(item.Location))
+            {
+                <div class="event-location"><i class="fas fa-map-marker-alt"></i>&nbsp;@item.Location</div>
+            }
+        </div>
+    </div>
+    }
+}
+else
+{
+    <div class="freeDay">Tento den máme volno.</div>
+}

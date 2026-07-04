@@ -1,0 +1,40 @@
+.contact a, .text-end a{
+    color: #93C11F;
+    font-weight: bold;
+    font-size: .9rem;
+}
+
+.ples img {
+    max-width: 75% !important;
+    margin: 0 auto;
+    height: auto;
+    display: block;
+}
+
+.page-container a {
+    color: #93C11F;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 30s ease;
+}
+
+@media (max-width: 991px) {
+    .page-container a:hover{
+        color: #93C11F;
+    }
+}
+
+@media (max-width: 619px) {
+    .page-container {
+        font-size: .8rem;
+    }
+
+    .page-container a{
+        font-size: .8rem;
+    }
+
+    .page-container h4  {
+        font-size: 1rem;
+    }
+}
+

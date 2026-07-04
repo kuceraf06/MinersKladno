@@ -1,0 +1,15 @@
+﻿@page "{id}"
+@model Miners.Web.WebApp.Pages.Clanek
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "| Článek";
+}
+
+@section Head{
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <link href="~/css/clanky.css" rel="stylesheet"/>
+}
+
+<div class="page-container">
+    <partial name="_Clanek" model="@Model.ClanekModel"/> 
+</div>

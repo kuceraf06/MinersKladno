@@ -1,0 +1,320 @@
+﻿@page
+@model Miners.Web.WebApp.Pages.Kalendar
+@{
+    ViewData["Title"] = "| Kalendář";
+}
+
+@section Head{
+    <link href='~/lib/fullcalendar/core/main.css' rel='stylesheet' />
+    <link href="~/css/kalendar.css" rel="stylesheet"/>
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src='~/lib/fullcalendar/core/main.js'></script>
+    <script src="~/lib/fullcalendar/core/locales/cs.js"></script>
+    <script src="~/lib/fullcalendar/daygrid/main.js"></script>
+    <script src='~/lib/fullcalendar/google-calendar/main.js'></script>
+    <style id="switchStyles">
+    </style>
+}
+<div class="page-container">
+    <h4>KALENDÁŘ</h4>
+    <div  style="background-color: white; box-shadow: 0 4px 11px #00000040;" class="p-2">
+        <h5>Miners kalendáře</h5>
+        <div class="row" id="legend-global">
+        </div><br />
+        <h5>Baseball</h5>
+        <div class="row" id="legend-baseball">
+        </div><br />
+        <h5>Softball</h5>
+        <div class="row" id="legend-softball">
+        </div><br />
+
+        <div class="pt-2">
+            <div id='calendar'></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="switchTemplate">
+    <div class="col-md-1 col-4 switch-<%=id%>">
+        <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="switch-<%=id%>" onchange="switchChange('<%=id%>', this)" <%=selected ? 'checked' : ''%> />
+            <label class="form-check-label text-nowrap" for="switch-<%=id%>"><%=title%></label>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="switchClass">
+    .switch-<%=id%> .form-check-input:checked {
+    color: <%=color%>;
+    border-color: <%=backgroundColor%>;
+    background-color: <%=backgroundColor%>;
+    }
+</script>
+<script type="text/html" id="tooltipTemplate">
+    <div>
+        <div style="white-space:nowrap"><%=title%></div>
+        <div style="white-space:nowrap"><%=date%></div>
+        <div style="white-space:nowrap"><%=place%></div>
+    </div>
+</script>
+
+
+<script>
+        var calendars = [
+            {
+                id: 'MINERS',
+                googleCalendarId: 'support@minerskladno.cz',
+                title: 'MINERS',
+                backgroundColor: '#94c11f',
+                color: '#00202a',
+                selected: true,
+                category: 'global'
+            },
+            {
+                id: 'SCM',
+                googleCalendarId: 'minerskladno.cz_s0falag187hbqdqt61hocc7tho@group.calendar.google.com',
+                title: 'SCM',
+                backgroundColor: '#CC6F21',
+                color: '#000000',
+                selected: false,
+                category: 'global'
+            },
+            {
+                id: 'MUZI',
+                googleCalendarId: 'minerskladno.cz_k3e792p8ps1jigtg54fchn9ve4@group.calendar.google.com',
+                title: 'Muži',
+                backgroundColor: '#000000',
+                color: '#ffffff',
+                selected: false,
+                category: 'baseball'
+            },
+            {
+                id: 'U15',
+                googleCalendarId: 'minerskladno.cz_9s6l3q37ki28akfmqt323l079c@group.calendar.google.com',
+                title: 'U15',
+                backgroundColor: '#539d9d',
+                color: '#000000',
+                selected: false,
+                category: 'baseball'
+            },
+            {
+                id: 'U13',
+                googleCalendarId: 'minerskladno.cz_mgk9dm7q7bm1f4maqcajlsoudg@group.calendar.google.com',
+                title: 'U13',
+                backgroundColor: '#cdcd21',
+                color: '#000000',
+                selected: false,
+                category: 'baseball'
+            },
+            {
+                id: 'U11',
+                googleCalendarId: 'minerskladno.cz_3ajms86gbg1mfvpaqftj3v0ifo@group.calendar.google.com',
+                title: 'U11',
+                backgroundColor: '#224189',
+                color: '#ffffff',
+                selected: false,
+                category: 'baseball'
+            },
+            {
+                id: 'U9',
+                googleCalendarId: 'minerskladno.cz_t7jea2ld7gmbgfmtit3ia9lei4@group.calendar.google.com',
+                title: 'U9',
+                backgroundColor: '#aab4cd',
+                color: '#000000',
+                selected: false,
+                category: 'baseball'
+            },
+            {
+                id: 'U7',
+                googleCalendarId: 'minerskladno.cz_55fnbfsm0t902nj8pj2k3bd2a4@group.calendar.google.com',
+                title: 'U7',
+                backgroundColor: '#ffc046',
+                color: '#000000',
+                selected: false,
+                category: 'baseball'
+            },
+            {
+                id: 'U6',
+                googleCalendarId: 'c_6a462cf9a201376b292e0bbf9b8cc5d1819518b0d390a8c3971fcb0a6192cb7b@group.calendar.google.com',
+                title: 'U6',
+                backgroundColor: '#ff8787',
+                color: '#ffffff',
+                selected: false,
+                category: 'baseball'
+            },
+            {
+                id: 'U5',
+                googleCalendarId: 'minerskladno.cz_ojjj2bi3o07p21qvfrau2r0efc@group.calendar.google.com',
+                title: 'U5',
+                backgroundColor: '#004a2a',
+                color: '#ffffff',
+                selected: false,
+                category: 'baseball'
+            },
+            {
+                id: 'ZENY',
+                googleCalendarId: 'minerskladno.cz_fsck2cauvqsrqe7un4atcjheug@group.calendar.google.com',
+                title: 'Ženy',
+                backgroundColor: '#b30000',
+                color: '#ffffff',
+                selected: false,
+                category: 'softball'
+            },
+            {
+                id: 'KADETKY',
+                googleCalendarId: 'c_hjqkhg0cnk1cn2nhco19lr6qj4@group.calendar.google.com',
+                title: 'Kadetky',
+                backgroundColor: '#ff8787',
+                color: '#000000',
+                selected: false,
+                category: 'softball'
+            },
+            {
+                id: 'U13S',
+                googleCalendarId: 'minerskladno.cz_i62mh3t480ht0lc816f5la21bg@group.calendar.google.com',
+                title: 'Žákyně',
+                backgroundColor: '#ffc046',
+                color: '#000000',
+                selected: false,
+                category: 'softball'
+            },
+            {
+                id: 'U11S',
+                googleCalendarId: 'c_dgj3bk3d5efshcr4idj1oo78vs@group.calendar.google.com',
+                title: 'Mladší žákyně',
+                backgroundColor: '#224189',
+                color: '#ffffff',
+                selected: false,
+                category: 'softball'
+            },
+        ];
+        var calendar;
+
+        function appendLeadingZeroes(n) {
+            if (n <= 9) {
+                return "0" + n;
+            }
+            return n
+        }
+
+        function formatDate(date) {
+            return appendLeadingZeroes(date.getDate()) + "." + (appendLeadingZeroes(date.getMonth() + 1)) + "." + date.getFullYear() + " " + appendLeadingZeroes(date.getHours()) + ":" + appendLeadingZeroes(date.getMinutes());
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid', 'googleCalendar'],
+                googleCalendarApiKey: 'AIzaSyArm-QCSQ3yjE32rOnVw-83o0xhaCfbIxQ',
+                locale: 'cs',
+                eventClick: function (info) {
+                    info.jsEvent.preventDefault(); // don't let the browser navigate
+                },
+                eventRender: function (info) {
+                    $(info.el).tooltip({
+                        html: true,
+                        title: tmpl("tooltipTemplate", {
+                            title: info.event.title,
+                            date: formatDate(info.event.start) + " - " + formatDate(info.event.end),
+                            place: info.event.extendedProps.location
+                        })
+                    });
+                },
+                eventTimeFormat: { // like '14:30:00'
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }
+            });
+
+            var legendGlobal =  $("#legend-global");
+            var legendBaseball = $("#legend-baseball");
+            var legendSoftball = $("#legend-softball");
+            var switchStyles = $("#switchStyles");
+
+            for (var i = 0; i < calendars.length; i++) {
+                var c = calendars[i];
+                var switchControl = tmpl("switchTemplate", c);
+                if (c.category === "global") {
+                    legendGlobal.append(switchControl);
+                }
+                else if (c.category === "baseball") {
+                    legendBaseball.append(switchControl);
+                }
+                else {
+                    legendSoftball.append(switchControl);
+                }
+                switchStyles.append(tmpl("switchClass", c));
+                if (c.selected === true) {
+                    calendar.addEventSource({
+                        id: c.id,
+                        googleCalendarId: c.googleCalendarId,
+                        backgroundColor: c.backgroundColor,
+                        borderColor: c.backgroundColor,
+                        textColor: c.color
+                    });
+                }
+            }
+            calendar.render();
+        });
+
+        function switchChange(id, el) {
+            if ($(el).prop("checked")) {
+                for (var i = 0; i < calendars.length; i++) {
+                    var c = calendars[i];
+                    if (c.id === id) {
+                        calendar.addEventSource({
+                            id: c.id,
+                            googleCalendarId: c.googleCalendarId,
+                            backgroundColor: c.backgroundColor,
+                            borderColor: c.backgroundColor,
+                            textColor: c.color
+                        });
+                    }
+                }
+            }
+            else {
+                calendar.getEventSources().forEach(function (value, index, array) {
+                    if (value.id === id) {
+                        value.remove();
+                    }
+                })
+            }
+        }
+
+        (function () {
+            var cache = {};
+
+            this.tmpl = function tmpl(str, data) {
+                // Figure out if we're getting a template, or if we need to
+                // load the template - and be sure to cache the result.
+                var fn = !/\W/.test(str) ?
+                    cache[str] = cache[str] ||
+                    tmpl(document.getElementById(str).innerHTML) :
+
+                    // Generate a reusable function that will serve as a template
+                    // generator (and which will be cached).
+                    new Function("obj",
+                        "var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+                        // Introduce the data as local variables using with(){}
+                        "with(obj){p.push('" +
+
+                        // Convert the template into pure JavaScript
+                        str
+                            .replace(/[\r\t\n]/g, " ")
+                            .split("<%").join("\t")
+                            .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+                            .replace(/\t=(.*?)%>/g, "',$1,'")
+                            .split("\t").join("');")
+                            .split("%>").join("p.push('")
+                            .split("\r").join("\\'")
+                        + "');}return p.join('');");
+
+                // Provide some basic currying to the user
+                return data ? fn(data) : fn;
+            };
+        })();
+
+    </script>

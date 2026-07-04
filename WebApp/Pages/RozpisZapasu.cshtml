@@ -1,0 +1,462 @@
+﻿@page
+@model Miners.Web.WebApp.Pages.RozpisZapasu
+@{
+    ViewData["Title"] = "| Rozpis & Výsledky";
+}
+
+@section Head{
+    <link href="~/css/pageshared.css" rel="stylesheet"/>
+    <link href="~/css/rozpis.css" rel="stylesheet"/>
+}
+
+<div class="page-container">
+    @* <h4 id="rozpisZapasu">ROZPIS ZÁPASŮ</h4> *@
+    @* <p>V nejbližší době žádné zápasy nehrajeme.</p>  *@
+    <!--<table class="schedule" id="scheduleTable">
+        <thead>
+        <tr>
+            <th>Datum <i class="bi bi-filter"></i></th>
+            <th>Kategorie <i class="bi bi-filter"></i></th>
+            <th>Soutěž <i class="bi bi-filter"></i></th>
+            <th>Domácí <i class="bi bi-filter"></i></th>
+            <th>Hosté <i class="bi bi-filter"></i></th>
+            <th>Hřiště <i class="bi bi-filter"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model.GamesModel)
+            {
+                <tr>
+                    <td>@game.GameDate.ToString("dd.MM.yyyy")</td>
+                    <td>@game.Category</td>
+                    <td>@game.League</td>
+                    <td>@game.HomeTeam</td>
+                    <td>@game.AwayTeam</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>!-->
+
+    @* <br /> *@
+
+    <div class="vysledkyClearFilter">
+        <h4 id="vysledkyZapasu">VÝSLEDKY ZÁPASŮ</h4>
+        <button id="clearFilterBtn" class="clearFilter">
+            Zrušit filtr
+        </button>
+    </div>
+    <table class="scores" id="scoresTable">
+        <thead>
+        <tr>
+            <th id="filterDatumBtn" class="dateFilter">
+                Datum <i class="bi bi-filter"></i>
+                <div id="filterDatumContainer" class="filter-container">
+                    <label>od: <input type="date" id="filterOd"></label>
+                    <label>do: <input type="date" id="filterDo"></label>
+                    <button id="applyFilterBtn">Filtrovat</button>
+                </div>
+            </th>
+            @{
+                var categories = Model.GamesModel
+                    .Select(x => x.Category)
+                    .Distinct()
+                    .OrderBy(cat =>
+                    {
+                        var match = System.Text.RegularExpressions.Regex.Match(cat, @"\d+");
+                        if (match.Success)
+                        {
+                            return int.Parse(match.Value);
+                        }
+                        else if (cat.ToLower().Contains("ženy"))
+                        {
+                            return int.MaxValue - 1;
+                        }
+                        else if (cat.ToLower().Contains("muži"))
+                        {
+                            return int.MaxValue;
+                        }
+                        else
+                        {
+                            return int.MaxValue;
+                        }
+                    })
+                .ToList();
+            }
+            <th id="filterKategorieBtn" class="categoryFilter"> 
+                Kategorie <i class="bi bi-filter"></i>
+                <div id="filterKategorieContainer" class="filter-container">
+                    <div class="filter-items">
+                        @foreach (var cat in categories)
+                        {
+                            <label><input type="checkbox" class="categoryCheckbox filterCheckbox" value="@cat"> @cat</label>
+                        }
+                    </div>
+                    <button id="applyKategorieFilterBtn" class="filter-button">Filtrovat</button>
+                </div>
+            </th>
+            @{
+                var leagues = Model.GamesModel
+                    .Select(x => x.League)
+                    .Distinct()
+                    .OrderBy(l => l)
+                    .ToList();
+            }
+            <th id="filterSoutezBtn" class="leagueFilter"> 
+                Soutěž <i class="bi bi-filter"></i>
+                <div id="filterSoutezContainer" class="filter-container">
+                    <input type="text" id="soutezSearchInput" class="search" placeholder="Hledej soutěž..."/>
+                    <div class="filter-items" id="soutezCheckboxesContainer">
+                        @foreach (var l in leagues)
+                        {
+                            <label><input type="checkbox" class="leagueCheckbox filterCheckbox" value="@l"> @l</label>
+                        }
+                    </div>
+                    <button id="applySoutezFilterBtn" class="filter-button">Filtrovat</button>
+                </div>
+            </th>
+            @{
+                var homeTeams = Model.GamesModel
+                    .Select(x => x.HomeTeam)
+                    .Distinct()
+                    .OrderBy(h => h)
+                    .ToList();
+            }
+            <th id="filterDomaciBtn" class="homeFilter">
+                Domácí <i class="bi bi-filter"></i>
+                <div id="filterDomaciContainer" class="filter-container">
+                    <input type="text" id="homeSearchInput" class="search" placeholder="Hledej tým..."/>
+                    <div class="filter-items" id="homeCheckboxesContainer">
+                        @foreach (var h in homeTeams)
+                        {
+                            <label><input type="checkbox" class="homeCheckbox filterCheckbox" value="@h"> @h</label>
+                        }
+                    </div>
+                    <button id="applyDomaciFilterBtn" class="filter-button">Filtrovat</button>
+                </div>
+            </th>       
+            @{
+                var awayTeams = Model.GamesModel
+                    .Select(x => x.AwayTeam)
+                    .Distinct()
+                    .OrderBy(a => a)
+                    .ToList();
+            }
+            <th id="filterHosteBtn" class="awayFilter">
+                Hosté <i class="bi bi-filter"></i>
+                <div id="filterHosteContainer" class="filter-container">
+                    <input type="text" id="hosteSearchInput" class="search" placeholder="Hledej tým..."/>
+                    <div class="filter-items" id="hosteCheckboxesContainer">
+                        @foreach (var a in awayTeams)
+                        {
+                            <label><input type="checkbox" class="awayCheckbox filterCheckbox" value="@a"> @a</label>
+                        }
+                    </div>
+                    <button id="applyHosteFilterBtn" class="filter-button">Filtrovat</button>
+                </div>
+            </th>
+            <!--<th>Hřiště <i class="bi bi-filter"></i></th>!-->
+            <th>Skóre</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model.GamesModel)
+            {
+                <tr class="score-row" style="display:none">
+                    <td>@game.GameDate.ToString("dd.MM.yyyy")</td>
+                    <td>@game.Category</td>
+                    <td>@game.League</td>
+                    <td>@game.HomeTeam</td>
+                    <td>@game.AwayTeam</td>
+                    <!--<td></td>!-->
+                    @{
+                        bool isHomeMiners = game.HomeTeam?.Contains("Miners") == true;
+                        bool isAwayMiners = game.AwayTeam?.Contains("Miners") == true;
+
+                        int home = game.HomeScore ?? -1;
+                        int away = game.AwayScore ?? -1;
+
+                        bool minersWin = home != -1 && away != -1 && (
+                                            (isHomeMiners && home > away) ||
+                                            (isAwayMiners && away > home)
+                                        );
+
+                        bool minersLose = home != -1 && away != -1 && (
+                                            (isHomeMiners && home < away) ||
+                                            (isAwayMiners && away < home)
+                                        );
+
+                        string resultClass = minersWin ? "miners-win" :
+                                            minersLose ? "miners-loss" : "";
+                    }
+                    <td class="@resultClass evenScore">
+                        @(game.HomeScore.HasValue ? game.HomeScore.ToString() : "-")
+                        :
+                        @(game.AwayScore.HasValue ? game.AwayScore.ToString() : "-")
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button id="loadMoreBtn" class="loadMoreBtn">zobrazit další zápasy</button>
+</div>
+
+<div id="btnRozpis" class="floating-btn" title="Rozpis zápasu">ROZPIS</div>
+<div id="btnVysledky" class="floating-btn" title="Výsledky zápasu">VÝSLEDKY</div>
+
+@section Scripts {
+<script>
+    const rows = document.querySelectorAll('#scoresTable .score-row');
+    let visibleCount = 10;
+    let currentFilter = {
+        od: null,
+        do: null,
+        categories: [],
+        leagues: [],
+        homes: [],
+        guests: []
+    };
+
+    function isRowVisible(row) {
+        const cells = row.querySelectorAll('td');
+
+        const [day, month, year] = cells[0].innerText.split('.');
+        const rowDate = new Date(`${year}-${month}-${day}`);
+
+        if (currentFilter.od && rowDate < new Date(currentFilter.od)) return false;
+        if (currentFilter.do && rowDate > new Date(currentFilter.do)) return false;
+
+        const rowCat = cells[1].innerText;
+        if (currentFilter.categories.length > 0 && !currentFilter.categories.includes(rowCat)) return false;
+
+        const rowLeague = cells[2].innerText;
+        if (currentFilter.leagues.length > 0 && !currentFilter.leagues.includes(rowLeague)) return false;
+
+        const rowHome = cells[3].innerText;
+        if (currentFilter.homes.length > 0 && !currentFilter.homes.includes(rowHome)) return false;
+
+        const rowGuest = cells[4].innerText;
+        if (currentFilter.guests.length > 0 && !currentFilter.guests.includes(rowGuest)) return false;
+
+        return true;
+    }
+
+    function showRows(count) {
+        let shown = 0;
+        let totalVisible = 0;
+
+        for (let i = 0; i < rows.length; i++) {
+            if (isRowVisible(rows[i])) {
+                totalVisible++;
+                if (shown < count) {
+                    rows[i].style.display = '';
+                    shown++;
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            } else {
+                rows[i].style.display = 'none';
+            }
+        }
+
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (totalVisible <= shown) {
+            loadMoreBtn.classList.add('hidden');
+        } else {
+            loadMoreBtn.classList.remove('hidden');
+        }
+    }
+
+    showRows(visibleCount);
+
+    document.getElementById('loadMoreBtn').addEventListener('click', () => {
+        visibleCount += 10;
+        showRows(visibleCount);
+    });
+
+    function scrollToWithOffset(elementId, offset = 120) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+    }
+
+    document.getElementById('btnRozpis').addEventListener('click', () => scrollToWithOffset('rozpisZapasu', 120));
+    document.getElementById('btnVysledky').addEventListener('click', () => scrollToWithOffset('vysledkyZapasu', 120));
+
+    const floatingBtns = [document.getElementById('btnRozpis'), document.getElementById('btnVysledky')];
+    floatingBtns.forEach(btn => btn.style.opacity = '0');
+    window.addEventListener('scroll', () => {
+        floatingBtns.forEach(btn => btn.style.opacity = window.scrollY > 50 ? '1' : '0');
+    });
+    const clearFilterBtn = document.getElementById('clearFilterBtn');
+
+    function checkFilters() {
+        const active =
+            currentFilter.od ||
+            currentFilter.do ||
+            currentFilter.categories.length > 0 ||
+            currentFilter.leagues.length > 0 ||
+            currentFilter.homes.length > 0 ||
+            currentFilter.guests.length > 0;
+
+        clearFilterBtn.style.display = active ? 'inline-block' : 'none';
+    }
+
+    clearFilterBtn.addEventListener('click', () => {
+        currentFilter = {
+            od: null,
+            do: null,
+            categories: [],
+            leagues: [],
+            homes: [],
+            guests: []
+        };
+
+        visibleCount = 10;
+        showRows(visibleCount);
+
+        document.querySelectorAll('.filterCheckbox').forEach(chk => chk.checked = false);
+        document.getElementById('filterOd').value = '';
+        document.getElementById('filterDo').value = '';
+
+        checkFilters();
+    });
+
+    const filterBtn = document.getElementById('filterDatumBtn');
+    const filterContainer = document.getElementById('filterDatumContainer');
+    filterBtn.addEventListener('click', e => {
+        if (e.target.closest('#filterDatumContainer')) return;
+        filterContainer.style.display = (filterContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterBtn.getBoundingClientRect();
+        filterContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterContainer.style.left = rect.left + window.scrollX + 'px';
+    });
+    document.getElementById('applyFilterBtn').addEventListener('click', () => {
+        currentFilter.od = document.getElementById('filterOd').value || null;
+        currentFilter.do = document.getElementById('filterDo').value || null;
+        showRows(visibleCount);
+        filterContainer.style.display = 'none';
+        checkFilters();
+    });
+
+    const filterKategorieBtn = document.getElementById('filterKategorieBtn');
+    const filterKategorieContainer = document.getElementById('filterKategorieContainer');
+    filterKategorieBtn.addEventListener('click', e => {
+        if (e.target.closest('#filterKategorieContainer')) return;
+        filterKategorieContainer.style.display = (filterKategorieContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterKategorieBtn.getBoundingClientRect();
+        filterKategorieContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterKategorieContainer.style.left = rect.left + window.scrollX + 'px';
+    });
+    document.getElementById('applyKategorieFilterBtn').addEventListener('click', () => {
+        currentFilter.categories = Array.from(document.querySelectorAll('.categoryCheckbox:checked')).map(chk => chk.value);
+        showRows(visibleCount);
+        filterKategorieContainer.style.display = 'none';
+        checkFilters();
+    });
+
+    const filterSoutezBtn = document.getElementById('filterSoutezBtn');
+    const filterSoutezContainer = document.getElementById('filterSoutezContainer');
+    filterSoutezBtn.addEventListener('click', e => {
+        if (e.target.closest('#filterSoutezContainer')) return;
+        filterSoutezContainer.style.display = (filterSoutezContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterSoutezBtn.getBoundingClientRect();
+        filterSoutezContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterSoutezContainer.style.left = rect.left + window.scrollX + 'px';
+    });
+    document.getElementById('applySoutezFilterBtn').addEventListener('click', () => {
+        currentFilter.leagues = Array.from(document.querySelectorAll('.leagueCheckbox:checked')).map(chk => chk.value);
+        showRows(visibleCount);
+        filterSoutezContainer.style.display = 'none';
+        checkFilters();
+    });
+
+    const filterDomaciBtn = document.getElementById('filterDomaciBtn');
+    const filterDomaciContainer = document.getElementById('filterDomaciContainer');
+    filterDomaciBtn.addEventListener('click', e => {
+        if (e.target.closest('#filterDomaciContainer')) return;
+        filterDomaciContainer.style.display = (filterDomaciContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterDomaciBtn.getBoundingClientRect();
+        filterDomaciContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterDomaciContainer.style.left = rect.left + window.scrollX + 'px';
+    });
+    document.getElementById('applyDomaciFilterBtn').addEventListener('click', () => {
+        currentFilter.homes = Array.from(document.querySelectorAll('.homeCheckbox:checked')).map(chk => chk.value);
+        showRows(visibleCount);
+        filterDomaciContainer.style.display = 'none';
+        checkFilters();
+    });
+
+    document.addEventListener('click', e => {
+        if (!e.target.closest('#filterDatumBtn') && !e.target.closest('#filterDatumContainer')) filterContainer.style.display = 'none';
+        if (!e.target.closest('#filterKategorieBtn') && !e.target.closest('#filterKategorieContainer')) filterKategorieContainer.style.display = 'none';
+        if (!e.target.closest('#filterSoutezBtn') && !e.target.closest('#filterSoutezContainer')) filterSoutezContainer.style.display = 'none';
+        if (!e.target.closest('#filterDomaciBtn') && !e.target.closest('#filterDomaciContainer')) filterDomaciContainer.style.display = 'none';
+        if (!e.target.closest('#filterHosteBtn') && !e.target.closest('#filterHosteContainer')) filterHosteContainer.style.display = 'none';
+    });
+
+    const homeSearchInput = document.getElementById('homeSearchInput');
+    const homeCheckboxesContainer = document.getElementById('homeCheckboxesContainer');
+
+    homeSearchInput.addEventListener('input', () => {
+        const filterText = homeSearchInput.value.toLowerCase();
+        const labels = homeCheckboxesContainer.querySelectorAll('label');
+
+        labels.forEach(label => {
+            const text = label.innerText.toLowerCase();
+            label.style.display = text.includes(filterText) ? 'flex' : 'none';
+        });
+    });
+
+    const soutezSearchInput = document.getElementById('soutezSearchInput');
+    const soutezCheckboxesContainer = document.getElementById('soutezCheckboxesContainer');
+
+    soutezSearchInput.addEventListener('input', () => {
+        const filterText = soutezSearchInput.value.toLowerCase();
+        const labels = soutezCheckboxesContainer.querySelectorAll('label');
+
+        labels.forEach(label => {
+            const text = label.innerText.toLowerCase();
+            label.style.display = text.includes(filterText) ? 'flex' : 'none';
+        });
+    });
+
+    const filterHosteBtn = document.getElementById('filterHosteBtn');
+    const filterHosteContainer = document.getElementById('filterHosteContainer');
+
+    filterHosteBtn.addEventListener('click', e => {
+        if (e.target.closest('#filterHosteContainer')) return;
+        filterHosteContainer.style.display =
+            (filterHosteContainer.style.display === 'none') ? 'block' : 'none';
+        const rect = filterHosteBtn.getBoundingClientRect();
+        filterHosteContainer.style.top = rect.bottom + window.scrollY + 'px';
+        filterHosteContainer.style.left = rect.left + window.scrollX + 'px';
+    });
+
+    document.getElementById('applyHosteFilterBtn').addEventListener('click', () => {
+        currentFilter.guests = Array.from(
+            document.querySelectorAll('.awayCheckbox:checked')
+        ).map(chk => chk.value);
+        showRows(visibleCount);
+        filterHosteContainer.style.display = 'none';
+        checkFilters();
+    });
+
+    const hosteSearchInput = document.getElementById('hosteSearchInput');
+    const hosteCheckboxesContainer = document.getElementById('hosteCheckboxesContainer');
+
+    hosteSearchInput.addEventListener('input', () => {
+        const filterText = hosteSearchInput.value.toLowerCase();
+        const labels = hosteCheckboxesContainer.querySelectorAll('label');
+
+        labels.forEach(label => {
+            const text = label.innerText.toLowerCase();
+            label.style.display = text.includes(filterText) ? 'flex' : 'none';
+        });
+    });
+
+
+</script>
+}

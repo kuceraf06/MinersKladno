@@ -1,0 +1,16 @@
+@media (min-width: 768px) {
+    .col-md-1 {
+        flex: 0 0 auto;
+        width: 12%;
+    }
+}
+
+h5 {
+    font-weight: bold;
+}
+
+h2 { 
+    text-transform: uppercase;
+    font-family: 'Titan One', sans-serif;
+    font-size: 25px !important;
+}

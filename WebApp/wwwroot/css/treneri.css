@@ -1,0 +1,88 @@
+.box-kategorie{
+    width: 20%;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    font-family: "Titan One", sans-serif;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.box-white {
+    box-shadow: 0 4px 11px #00000040;
+}
+
+h5 {
+    font-family: "Titan One", sans-serif;
+}
+
+.box-kategorie:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.box-pripravka:hover, .box-baseball:hover {
+    color: white;
+}
+
+.box-softball:hover, .box-atletika:hover {
+    color: black;
+}
+
+.box-pripravka{
+    background-color: #464545;
+    color: #fff;
+}
+
+.box-baseball{
+    background-color: #000000;
+    color: #fff;
+}
+
+.box-softball{
+    background-color: #93C11F;
+    color: black;
+}
+
+.box-atletika{
+    background-color: #D9D9D9;
+    color: black;
+}
+
+#pripravka, #baseball, #softball, #atletika {
+    scroll-margin-top: 150px;
+}
+
+@media (max-width: 991px) {
+    .box-kategorie:hover {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 800px) {
+    h4.box {
+        font-size: 1.1rem;
+    }
+
+    .main-kategorie {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem; 
+    }
+
+    .box-kategorie {
+        flex: 0 0 calc(50% - 0.5rem); 
+        text-align: center;
+        font-size: .9rem;
+    }
+}
+
+@media (max-width: 406px) {
+    .profile-pic {
+        margin-top: 1rem;
+    }
+
+    .atletika-pic {
+        margin-top: .6rem !important;
+    }
+}

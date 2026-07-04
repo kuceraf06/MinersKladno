@@ -1,0 +1,8 @@
+﻿@model Miners.Web.WebApp.Models.ClanekModel
+
+<div class="page-container">
+    <h4 style="text-transform: uppercase">@Model.Title</h4>
+    <div class="box box-white box-clanek">
+        @Westwind.AspNetCore.Markdown.Markdown.ParseHtmlString(Model.Text)
+    </div>
+</div>

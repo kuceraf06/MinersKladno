@@ -1,0 +1,118 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --green: #93C11F;
+  --green-dark: #7aa318;
+  --green-light: #f0f7dc;
+  --sidebar-bg: #111318;
+  --sidebar-width: 220px;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 4px 12px rgba(0, 0, 0, .05);
+  --border: #e8eaed;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --danger: #ef4444;
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', system-ui, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f4f5f7;
+  color: #1a1d23;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* Shared page layout */
+.page {
+  padding: 28px 32px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111318;
+}
+
+/* Icon action buttons (edit/delete in tables) */
+.icon-action {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, transform 0.1s;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.icon-action:hover {
+  transform: scale(1.1);
+}
+
+.icon-action.edit {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.icon-action.edit:hover {
+  background: #dbeafe;
+}
+
+.icon-action.delete {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.icon-action.delete:hover {
+  background: #fecaca;
+}
+
+.icon-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+/* ── DataTable structural overrides (pokryté tokeny neřeší vzhled wrapperu) ── */
+.p-datatable {
+  background: #fff;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+}
+
+/* Uppercase + letter-spacing na hlavičkách (tokeny to nepokrývají) */
+.p-datatable .p-datatable-thead > tr > th {
+  font-size: 0.69rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Paginator ── */
