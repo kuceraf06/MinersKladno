@@ -45,6 +45,8 @@ header {
     background-color: #F8F4F4;
     align-items: center;
     padding: 2px 10px;
+    position: relative; /* aby světlý pruh překryl zelenou lištu při jejím schování */
+    z-index: 2;
 }
 
 .topheader div {
@@ -1715,16 +1717,40 @@ footer h4 {
 
 }
 
-/* Po odscrollování (zafixovaná hlavička) se na mobilu velké přečnívající
-   logo zmenší a vycentruje dovnitř zelené lišty. Světlý horní pruh zůstává. */
+/* --- Zmenšovací + schovávací hlavička na menších zařízeních ---
+   Stavy řídí JS třídami na <header>:
+     (bez třídy)   = úplně nahoře na stránce  -> velké přečnívající logo
+     .nav-compact  = odscrollováno            -> malé logo vycentrované v liště
+     .nav-up       = navíc schováno           -> kompaktní lišta zajede za topheader
+   Světlý topheader zůstává vždy nahoře. Výšku lišty (--nav-footprint) měří JS.
+   overflow-anchor:none brání prohlížeči dorovnávat scroll při změně výšky sticky
+   hlavičky (bez toho to při pomalém scrollu poskakuje nahoru/dolů). */
 @media (max-width: 991px) {
-    header.scrolled .logo {
+    html {
+        overflow-anchor: none;
+    }
+
+    .custom-navbar {
+        transition: margin-top .3s ease, margin-bottom .3s ease;
+        will-change: margin-top;
+    }
+
+    /* odscrollováno: malé logo uvnitř lišty + zrušení spodní rezervy pro velké logo */
+    header.nav-compact .custom-navbar {
+        margin-bottom: 0;
+    }
+
+    header.nav-compact .logo {
         top: 50%;
         transform: translateY(-50%);
     }
 
-    header.scrolled .logo img {
+    header.nav-compact .logo img {
         width: 44px !important;
     }
-}
 
+    /* schováno: (už kompaktní) zelená lišta zajede nahoru za topheader */
+    header.nav-up .custom-navbar {
+        margin-top: calc(-1 * var(--nav-footprint, 60px));
+    }
+}
