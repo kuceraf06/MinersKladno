@@ -17,16 +17,31 @@
     font-size: .9rem;
 }
 
+.coach-photo {
+    overflow: hidden;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
 .profile-pic {
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.profile-pic:hover {
+    transform: scale(1.12);
 }
 
 .profile-text {
     font-size: 0.9rem;
     line-height: 1.2;
+}
+
+.profile-text span {
+    color: #777;
 }
 
 .profile {
@@ -65,6 +80,11 @@
 .second-box {
     width: 100%;
     max-width: 400px;
+}
+
+.desktop:hover {
+    box-shadow: rgba(0, 0, 0, .4) 0px 5px 16px;
+    transition: all .3s ease-in-out;
 }
 
 @media (max-width: 740px) {
