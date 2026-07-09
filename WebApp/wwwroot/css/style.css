@@ -1717,12 +1717,11 @@ footer h4 {
 
 }
 
-/* --- Zmenšovací + schovávací hlavička na menších zařízeních ---
-   Stavy řídí JS třídami na <header>:
+/* --- Zmenšovací hlavička na menších zařízeních ---
+   Stavy řídí JS třídou na <header>:
      (bez třídy)   = úplně nahoře na stránce  -> velké přečnívající logo
      .nav-compact  = odscrollováno            -> malé logo vycentrované v liště
-     .nav-up       = navíc schováno           -> kompaktní lišta zajede za topheader
-   Světlý topheader zůstává vždy nahoře. Výšku lišty (--nav-footprint) měří JS.
+   Lišta zůstává na mobilu vždy vidět (schovávání jsme zrušili).
    overflow-anchor:none brání prohlížeči dorovnávat scroll při změně výšky sticky
    hlavičky (bez toho to při pomalém scrollu poskakuje nahoru/dolů). */
 @media (max-width: 991px) {
@@ -1747,10 +1746,5 @@ footer h4 {
 
     header.nav-compact .logo img {
         width: 44px !important;
-    }
-
-    /* schováno: (už kompaktní) zelená lišta zajede nahoru za topheader */
-    header.nav-up .custom-navbar {
-        margin-top: calc(-1 * var(--nav-footprint, 60px));
     }
 }

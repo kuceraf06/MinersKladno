@@ -325,87 +325,48 @@ window.addEventListener("scroll", () => {
   }
 }, { passive: true });
 
-// --- zmenšovací + schovávací hlavička (jen na menších zařízeních) ---
+// --- zmenšovací hlavička (jen na menších zařízeních) ---
+// Lišta zůstává na mobilu vidět pořád; přepínáme jen malé/velké logo (nav-compact).
 (function () {
   const headerEl = document.querySelector('header');
-  const navEl    = document.querySelector('.custom-navbar');
-  if (!headerEl || !navEl) return;
+  if (!headerEl) return;
 
-  const MOBILE_BP  = 991;   // shodné s breakpointem, kde naskakuje hamburger
-  const TOP_ON     = 2;     // y <= TOP_ON  -> úplně nahoře (velké logo)
-  const TOP_OFF    = 24;    // y >= TOP_OFF -> kompaktní (malé logo)
-  const HIDE_AFTER = 50;    // scroll dolů o tolik od zlomu  -> schovej lištu
-  const SHOW_AFTER = 6;     // scroll nahoru o tolik od zlomu -> ukaž lištu
-  const LOCK_MS    = 380;   // po přepnutí chvíli ignoruj scroll (>= délka animace)
+  const MOBILE_BP = 991;   // shodné s breakpointem, kde naskakuje hamburger
+  const TOP_ON    = 2;     // y <= TOP_ON  -> úplně nahoře (velké logo)
+  const TOP_OFF   = 24;    // y >= TOP_OFF -> kompaktní (malé logo)
 
   const mq = window.matchMedia('(max-width: ' + MOBILE_BP + 'px)');
 
-  let lastY   = getY();
-  let turnY   = lastY;   // bod poslední změny směru scrollu
-  let dir     = 0;       // 1 = dolů, -1 = nahoru
-  let atTop   = lastY <= TOP_ON;
-  let locked  = 0;       // performance.now(), do kdy ignorovat scroll
+  let atTop   = getY() <= TOP_ON;
   let ticking = false;
 
   function getY() {
     return window.pageYOffset || document.documentElement.scrollTop || 0;
   }
 
-  // výška zelené lišty (bez absolutně pozicovaného loga) -> o kolik zajet nahoru
-  function measureNav() {
-    document.documentElement.style.setProperty('--nav-footprint', navEl.offsetHeight + 'px');
-  }
-
-  function setHidden(hide) {
-    if (hide === headerEl.classList.contains('nav-up')) return;
-    headerEl.classList.toggle('nav-up', hide);
-    locked = performance.now() + LOCK_MS;  // utlum zpětnou vazbu z reflow/clampu
-  }
-
   function update() {
     ticking = false;
-    const y = getY();
 
-    if (!mq.matches) {                       // desktop: nic neschováváme
-      headerEl.classList.remove('nav-up', 'nav-compact');
-      lastY = y; atTop = true; return;
+    if (!mq.matches) {                 // desktop: žádné zmenšování
+      headerEl.classList.remove('nav-compact');
+      return;
     }
+
+    const y = getY();
 
     // hystereze u horního okraje: velké vs. malé logo (aby to neblikalo na hraně)
     if (y <= TOP_ON) atTop = true;
     else if (y >= TOP_OFF) atTop = false;
 
-    if (atTop) {                             // úplně nahoře -> velké logo, vše vidět
-      setHidden(false);
-      headerEl.classList.remove('nav-compact');
-      lastY = y; turnY = y; dir = 0;
-      return;
-    }
-
-    headerEl.classList.add('nav-compact');   // odscrollováno -> malé logo
-
-    if (performance.now() < locked) { lastY = y; return; }  // utlum po přepnutí
-
-    const nd = y > lastY ? 1 : (y < lastY ? -1 : dir);
-    if (nd !== 0 && nd !== dir) { dir = nd; turnY = lastY; }  // zaznamenej zlom směru
-
-    if (dir === 1 && (y - turnY) >= HIDE_AFTER) setHidden(true);
-    else if (dir === -1 && (turnY - y) >= SHOW_AFTER) setHidden(false);
-
-    lastY = y;
+    headerEl.classList.toggle('nav-compact', !atTop);
   }
 
   window.addEventListener('scroll', function () {
     if (!ticking) { ticking = true; requestAnimationFrame(update); }
   }, { passive: true });
 
-  window.addEventListener('resize', function () {
-    measureNav();
-    if (!mq.matches) headerEl.classList.remove('nav-up', 'nav-compact');
-  });
+  window.addEventListener('resize', update);
 
-  window.addEventListener('load', measureNav);
-  measureNav();
   update();
 })();
 </script>
